@@ -1,18 +1,129 @@
-html {
-  font-size: 14px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    color: white;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
+
+
+.sidebar{
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    left: 0;
+    background: #1b1b1b;
+
+}
+.sidebar .home-btn{
+    position: center;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 65px;
+    background: #272626;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.sidebar .home-btn:hover{
+    color: orangered;
+}
+
+nav ul{
+    background: #1b1b1b;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    margin-left: auto
+}
+
+nav ul li{
+    line-height: 55px;
+    border-bottom: 1px solid rgb(255,255,255,0.1);
+}
+
+nav ul li a{
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 25px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+}
+
+nav ul li a:hover{
+    color:orangered;
+    background: #1e1e1e;
+    border-left-color: orangered;
+}
+
+nav ul li.active a{
+    color:orangered;
+    background: #1e1e1e;
+    border-left-color: orangered;
+}
+
+nav ul ul{
+    position: static;
+    display: none;
+}
+
+nav ul .pizzas-show.showPizzas{
+    display: block;
+}
+
+nav ul .drinks-show.showDrinks{
+    display: block;
+}
+
+nav ul ul li{
+    line-height: 42px;
+    border-bottom: none;
+}
+
+nav ul ul li a{
+    font-size: 13px;
+    color: #e6e6e6;
+    padding-left: 50px;
+}
+
+nav ul li.active ul li a{
+    color:#e6e6e6;
+    background: #1b1b1b;
+    border-left-color: transparent;
+}
+
+nav ul ul li a:hover{
+    color:orangered!important;
+    background: #1e1e1e!important;
+}
+
+nav ul li a span{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
     font-size: 16px;
-  }
+    transition: transform 0.4s;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+nav ul li a:hover span{
+    color: orangered;
 }
 
-body {
-  margin-bottom: 60px;
+nav ul li a:hover span.rotate {
+    transform: translateY(-50%) rotate(-180deg);
 }
+
+
+
+
