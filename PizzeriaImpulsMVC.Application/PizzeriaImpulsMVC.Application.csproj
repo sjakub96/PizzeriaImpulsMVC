@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\Drink\" />
+    <Folder Include="ViewModels\Pizza\" />
   </ItemGroup>
 
   <ItemGroup>
