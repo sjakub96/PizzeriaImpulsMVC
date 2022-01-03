@@ -11,7 +11,7 @@ namespace PizzeriaImpulsMVC.Application.Services
 {
     public class ComponentService : IComponentService
     {
-        private readonly IComponentRepository _componentRepository;
+        private readonly IComponentRepository? _componentRepository;
 
         public int AddNewComponent(NewComponentVm newComponentVm)
         {
