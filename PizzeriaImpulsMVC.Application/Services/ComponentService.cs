@@ -1,6 +1,9 @@
-﻿using PizzeriaImpulsMVC.Application.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,7 @@ namespace PizzeriaImpulsMVC.Application.Services
     public class ComponentService : IComponentService
     {
         private readonly IComponentRepository? _componentRepository;
+        private readonly IMapper? _mapper;
 
         public int AddNewComponent(NewComponentVm newComponentVm)
         {
@@ -25,27 +29,16 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public ListComponentForListVm GetAllComponentsForList()
         {
-            var components = _componentRepository.GetAllComponents();
+            var components = _componentRepository.GetAllComponents()
+                .ProjectTo<ComponentForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            ListComponentForListVm componentsResult = new ListComponentForListVm();
-            componentsResult.Components = new List<ComponentForListVm>();
-
-            foreach (var component in components)
+            var componentsList = new ListComponentForListVm()
             {
-                var componentVm = new ComponentForListVm()
-                {
-                    Id = component.Id,
-                    Name = component.Name,
-                    IsMeat = component.IsMeat,
-                    Price = component.Price,
-                };
+                Components = components,
+                Count = components.Count
+            };
 
-                componentsResult.Components.Add(componentVm);
-            }
-
-            componentsResult.Count = componentsResult.Components.Count();
-
-            return componentsResult;
+            return componentsList;
         }
     }
 }

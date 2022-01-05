@@ -1,4 +1,6 @@
-﻿using PizzeriaImpulsMVC.Application.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Addition;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using System;
@@ -12,6 +14,7 @@ namespace PizzeriaImpulsMVC.Application.Services
     public class AddtionService : IAdditionService
     {
         private readonly IAdditionRepository? _additionRepository;
+        private readonly IMapper? _mapper;
 
         public int AddNewAddition(NewAdditionVm newAdditionVm)
         {
@@ -25,27 +28,17 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public ListAdditionForListVm GetAllAdditionsForList()
         {
-            var additions = _additionRepository.GetAllAdditions();
+            var additions = _additionRepository.GetAllAdditions()
+                .ProjectTo<AdditionForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            ListAdditionForListVm additionResult = new ListAdditionForListVm();
-            additionResult.Additions = new List<AdditionForListVm>();
-
-            foreach (var addition in additions)
+            var additionList = new ListAdditionForListVm()
             {
-                var additionVm = new AdditionForListVm()
-                {
-                    Id = addition.Id,
-                    Name = addition.Name,
-                    Price = addition.Price
-                };
+                Additions = additions,
+                Count = additions.Count
+            };
 
-                additionResult.Additions.Add(additionVm);
-
-            }
-
-            additionResult.Count = additionResult.Additions.Count();
-
-            return additionResult;
+            return additionList;
+            
         }
     }
 }
