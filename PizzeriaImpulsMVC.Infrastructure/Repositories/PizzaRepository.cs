@@ -1,4 +1,5 @@
-﻿using PizzeriaImpulsMVC.Domain.Models;
+﻿using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 {
-    public class PizzaRepository
+    public class PizzaRepository : IPizzaRepository
     {
         private readonly Context _context;
 

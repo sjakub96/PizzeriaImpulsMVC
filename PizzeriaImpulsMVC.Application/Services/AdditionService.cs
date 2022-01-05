@@ -11,10 +11,16 @@ using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.Services
 {
-    public class AddtionService : IAdditionService
+    public class AdditionService : IAdditionService
     {
         private readonly IAdditionRepository? _additionRepository;
         private readonly IMapper? _mapper;
+
+        public AdditionService(IAdditionRepository additionRepository, IMapper mapper)
+        {
+            _additionRepository = additionRepository;
+            _mapper = mapper;
+        }
 
         public int AddNewAddition(NewAdditionVm newAdditionVm)
         {

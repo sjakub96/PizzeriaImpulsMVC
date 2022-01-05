@@ -17,9 +17,18 @@ namespace PizzeriaImpulsMVC.Application.Services
         private readonly IComponentRepository? _componentRepository;
         private readonly IMapper? _mapper;
 
+        public ComponentService(IComponentRepository componentRepository, IMapper mapper)
+        {
+            _componentRepository = componentRepository;
+            _mapper = mapper;
+        }
+
         public int AddNewComponent(NewComponentVm newComponentVm)
         {
-            throw new NotImplementedException();
+            var component = _mapper.Map<Component>(newComponentVm);
+            var id = _componentRepository.AddComponent(component);
+
+            return id;
         }
 
         public void DeleteComponent(int componentId)
