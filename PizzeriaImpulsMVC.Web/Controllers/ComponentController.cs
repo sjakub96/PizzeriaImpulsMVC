@@ -16,7 +16,9 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var components = _componentService.GetAllComponentsForList();
+
+            return View(components);
         }
 
         [HttpGet]
