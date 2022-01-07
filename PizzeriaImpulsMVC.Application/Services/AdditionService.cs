@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Addition;
 using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,10 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public int AddNewAddition(NewAdditionVm newAdditionVm)
         {
-            throw new NotImplementedException();
+            var addition = _mapper.Map<Addition>(newAdditionVm);
+            var id = _additionRepository.AddAddition(addition);
+
+            return id;
         }
 
         public void DeleteAddition(int additionId)
