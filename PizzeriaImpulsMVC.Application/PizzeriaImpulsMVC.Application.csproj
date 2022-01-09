@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Drink\" />
     <Folder Include="ViewModels\Pizza\" />
   </ItemGroup>
 
