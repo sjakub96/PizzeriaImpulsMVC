@@ -1,4 +1,5 @@
 ﻿using PizzeriaImpulsMVC.Application.ViewModels.Drink;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
     {
         int AddNewDrinkSize(NewDrinkSizeVm newDrinkSizeVm);
         int AddDrink(NewDrinkVm newDrinkVm);
+        IQueryable<DrinkSize> GetAllDrinkSizes();
     }
 }

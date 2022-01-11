@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
 {
-    public class DrinkSizeForListVm
-    {
-    }
+    
 }

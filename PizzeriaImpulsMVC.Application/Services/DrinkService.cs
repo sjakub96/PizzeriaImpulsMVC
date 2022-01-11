@@ -37,5 +37,14 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return id;
         }
+
+        public IQueryable<DrinkSize> GetAllDrinkSizes()
+        {
+            var drinkSizes = _drinkRepository.GetAllDrinkSizes();
+
+            return drinkSizes;
+        }
+
+       
     }
 }

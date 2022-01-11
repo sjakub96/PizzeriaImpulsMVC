@@ -18,7 +18,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         }
 
         public int AddDrink(Drink drink)
-        {
+        { 
             _context.Drinks.Add(drink);
             _context.SaveChanges();
 

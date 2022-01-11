@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Drink;
+using PizzeriaImpulsMVC.Domain.Models;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Route("drinksize/add")]
         public IActionResult AddNewDrinkSize()
         {
+            
             return View(new NewDrinkSizeVm());
         }
 
@@ -38,7 +40,13 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Route("drink/add")]
         public IActionResult AddDrink()
         {
-            return View(new NewDrinkVm());
+            var drinkSizes = _drinkService.GetAllDrinkSizes().ToList();
+
+            var viewModel = new NewDrinkVm()
+            {
+                Sizes = drinkSizes
+            };
+            return View(viewModel);
         }
 
         [HttpPost]

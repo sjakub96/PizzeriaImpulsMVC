@@ -14,12 +14,14 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
         public int Id { get; set; }
         public string? Name { get; set; }
         public int Price { get; set; }
-
-        public List<DrinkSize>? Sizes { get; set; }
+        public int DrinkSizeId { get; set; }
+        public ICollection<DrinkSize>? Sizes  { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<NewDrinkVm, PizzeriaImpulsMVC.Domain.Models.Drink>();
+            profile.CreateMap<NewDrinkVm, PizzeriaImpulsMVC.Domain.Models.Drink>()
+                .ForMember(d => d.DrinkSizeDrinks, opt => opt.MapFrom(d => d.DrinkSizeId)).ReverseMap();
+                
         }
 
 

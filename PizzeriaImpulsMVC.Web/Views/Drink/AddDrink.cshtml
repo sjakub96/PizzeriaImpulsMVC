@@ -17,7 +17,11 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            @Html.DropDownList("Drink size", );
+            <div class="form-group">
+                <label asp-for="Sizes" class="control-label">Drink Size</label>
+                <select asp-for="DrinkSizeId" class="form-control" asp-items="@(new SelectList(Model.Sizes,"Id", "Size"))"></select>
+                <span asp-validation-for="Sizes" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
