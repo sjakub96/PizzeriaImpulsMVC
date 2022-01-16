@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Mapping;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
     {
         public int Id { get; set; }
         public int Size { get; set; }
+
+        public ICollection<DrinkSize>? Sizes { get; set; }
 
         public void Mapping(Profile profile)
         {
