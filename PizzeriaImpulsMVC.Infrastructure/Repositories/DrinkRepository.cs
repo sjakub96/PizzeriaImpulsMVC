@@ -18,11 +18,17 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         }
 
         public int AddDrink(Drink drink)
-        {
+        { 
             _context.Drinks.Add(drink);
             _context.SaveChanges();
 
             return drink.Id;
+        }
+
+        public void AddDrinkSizeDrink(DrinkSizeDrink drinkSizeDrink)
+        {
+            _context.DrinkSizeDrink.Add(drinkSizeDrink);
+            _context.SaveChanges();
         }
 
         public void DeleteDrink(int drinkId)
@@ -65,7 +71,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         public IQueryable<DrinkSize> GetAllDrinkSizes()
         {
             var drinkSizes = _context.DrinkSizes;
-
+            
             return drinkSizes;
         }
     }

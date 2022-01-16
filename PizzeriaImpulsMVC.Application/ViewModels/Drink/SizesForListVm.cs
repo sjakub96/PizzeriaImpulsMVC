@@ -9,22 +9,16 @@ using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
 {
-    public class NewDrinkVm :IMapFrom<PizzeriaImpulsMVC.Domain.Models.Drink>
+    public class SizesForListVm : IMapFrom<PizzeriaImpulsMVC.Domain.Models.DrinkSize>
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public int Price { get; set; }
-        public int DrinkSizeId { get; set; }
+        public int Size { get; set; }
 
         public ICollection<DrinkSize>? Sizes { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<NewDrinkVm, PizzeriaImpulsMVC.Domain.Models.Drink>()
-                .ForMember(d => d.DrinkSizeDrinks, opt => opt.Ignore());
-                
+            profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.DrinkSize, SizesForListVm>();
         }
-
-
     }
 }
