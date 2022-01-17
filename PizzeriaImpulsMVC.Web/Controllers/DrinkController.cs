@@ -41,31 +41,17 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Route("drink/add")]
         public IActionResult AddDrink()
         {
-            var drinkSizes = _drinkService.GetAllDrinkSizes().ToList();
-            var drinks = _drinkService.GetAllDrinks();
-
-            ViewBag.Id = new SelectList(drinks, "DrinkId", "DrinkName");
-            ViewBag.DrinkSizes = drinkSizes;
-
-            /*
-            var viewModel = new NewDrinkVm()
-            {
-                Sizes = drinkSizes
-            };
-            */
-            return View();
+            
+            return View(new NewDrinkVm());
         }
 
         [HttpPost]
         [Route("drink/add")]
-        public IActionResult AddDrink(NewDrinkVm newDrinkVm, DrinkSizeDrinkVm drinkSizeDrink)
+        public IActionResult AddDrink(NewDrinkVm newDrinkVm)
         {
 
             int id = _drinkService.AddDrink(newDrinkVm);
 
-            drinkSizeDrink.DrinkId = id;
-
-            //_drinkService.AddDrinkSizeDrink(drinkSizeDrink);
 
             return RedirectToAction("AddDrink");
         }
