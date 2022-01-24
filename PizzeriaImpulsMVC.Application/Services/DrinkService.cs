@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Drink;
 using PizzeriaImpulsMVC.Domain.Interfaces;
@@ -63,6 +64,20 @@ namespace PizzeriaImpulsMVC.Application.Services
             var drinks = _drinkRepository.GetAllDrinks();
 
             return drinks;
+        }
+
+        public ListDrinkForListVm GetAllDrinksForList()
+        {
+            var drinks = _drinkRepository.GetAllDrinks()
+                .ProjectTo<DrinkForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var drinkList = new ListDrinkForListVm()
+            {
+                Drinks = drinks,
+                Count = drinks.Count
+            };
+
+            return drinkList;
         }
 
        

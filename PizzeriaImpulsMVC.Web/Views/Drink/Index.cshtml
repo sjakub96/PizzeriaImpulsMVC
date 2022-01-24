@@ -1,11 +1,11 @@
-﻿@model PizzeriaImpulsMVC.Application.ViewModels.Addition.ListAdditionForListVm
+﻿@model PizzeriaImpulsMVC.Application.ViewModels.Drink.ListDrinkForListVm
 
 <h1>
-    Additions
+    Drinks
 </h1>
 
 <p>
-    <a asp-action="AddAddition">Add Addition</a>
+    <a asp-action="AddDrink">Create New Drink</a>
 </p>
 <table class="table">
     <thead>
@@ -17,7 +17,10 @@
                 Name
             </th>
             <th>
-                Price (zł)
+                Price
+            </th>
+            <th>
+                Available Sizes
             </th>
             <th>
                 Actions
@@ -26,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Additions) {
+@foreach (var item in Model.Drinks) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -37,6 +40,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
+            <td>
+                
+            </td>
+            
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |

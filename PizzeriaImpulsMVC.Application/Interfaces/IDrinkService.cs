@@ -15,5 +15,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         void AddDrinkSizeDrink(int id, int[] DrinkSizeIds);
         IQueryable<Drink> GetAllDrinks();
         IQueryable<DrinkSize> GetAllDrinkSizes();
+        ListDrinkForListVm GetAllDrinksForList();
     }
 }

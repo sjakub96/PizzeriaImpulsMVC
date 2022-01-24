@@ -15,9 +15,11 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             _drinkService = drinkService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var drinks = _drinkService.GetAllDrinksForList();
+            return View(drinks);
         }
 
         [HttpGet]
