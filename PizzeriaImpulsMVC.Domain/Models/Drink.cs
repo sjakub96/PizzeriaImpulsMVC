@@ -12,6 +12,6 @@ namespace PizzeriaImpulsMVC.Domain.Models
         public string? Name { get; set; }
         public int Price { get; set; }
 
-        public ICollection<DrinkSizeDrink>? DrinkSizeDrinks { get; set; }
+        public ICollection<DrinkSize>? DrinkSizes { get; set; }
     }
 }

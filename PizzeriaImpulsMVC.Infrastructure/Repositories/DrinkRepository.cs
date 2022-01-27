@@ -1,4 +1,5 @@
-﻿using PizzeriaImpulsMVC.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             return drink.Id;
         }
 
-        public void AddDrinkSizeDrink(DrinkSizeDrink drinkSizeDrink)
-        {
-            _context.DrinkSizeDrink.Add(drinkSizeDrink);
-            _context.SaveChanges();
-        }
 
         public void DeleteDrink(int drinkId)
         {
@@ -44,7 +40,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<Drink> GetAllDrinks()
         {
-            var drinks = _context.Drinks;
+            var drinks = _context.Drinks.Where(p => p.Id == 4).Include(x => x.DrinkSizes);
 
             return drinks;
         }
@@ -74,5 +70,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             
             return drinkSizes;
         }
+
     }
 }

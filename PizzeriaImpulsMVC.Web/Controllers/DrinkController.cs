@@ -72,12 +72,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("drinksizedrink/add")]
-        public IActionResult AddDrinkSizeDrink(int id, int []DrinkSizeIds)
-        {
-            _drinkService.AddDrinkSizeDrink(id, DrinkSizeIds);
-            return RedirectToAction("AddDrinkSizeDrink");
-        }
+        
     }
 }

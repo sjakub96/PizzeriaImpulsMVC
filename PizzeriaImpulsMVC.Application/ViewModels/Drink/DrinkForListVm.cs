@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Mapping;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
         public string? Name { get; set; }
         public int Price { get; set; }
 
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Drink, DrinkForListVm>();
+            
         }
     }
 }

@@ -10,7 +10,6 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
     public interface IDrinkRepository
     {
         int AddDrink(Drink drink);
-        void AddDrinkSizeDrink(DrinkSizeDrink drinkSizeDrink);
 
         void DeleteDrink(int drinkId);
 
@@ -21,6 +20,7 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
         void DeleteDrinkSize(int drinkSizeId);
 
         IQueryable<DrinkSize> GetAllDrinkSizes();
-       
+
+
     }
 }

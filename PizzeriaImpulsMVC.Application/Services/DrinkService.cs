@@ -32,17 +32,6 @@ namespace PizzeriaImpulsMVC.Application.Services
         }
 
 
-        public void AddDrinkSizeDrink(int id, int[] DrinkSizeIds)
-        {
-            foreach(int drinkSizeId in DrinkSizeIds)
-            {
-                DrinkSizeDrink drinkSizeDrink = new DrinkSizeDrink();
-                drinkSizeDrink.DrinkId = id;
-                drinkSizeDrink.DrinkSizeId = drinkSizeId;
-                _drinkRepository.AddDrinkSizeDrink(drinkSizeDrink);
-            }
-
-        }
 
         public int AddNewDrinkSize(NewDrinkSizeVm newDrinkSizeVm)
         {
@@ -70,6 +59,7 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             var drinks = _drinkRepository.GetAllDrinks()
                 .ProjectTo<DrinkForListVm>(_mapper.ConfigurationProvider).ToList();
+
 
             var drinkList = new ListDrinkForListVm()
             {

@@ -15,7 +15,6 @@ namespace PizzeriaImpulsMVC.Infrastructure
         public DbSet<Component>? Components { get; set; }
         public DbSet<Drink>? Drinks { get; set; }
         public DbSet<DrinkSize>? DrinkSizes { get; set; }
-        public DbSet<DrinkSizeDrink>? DrinkSizeDrink { get; set; }
         public DbSet<Pizza>? Pizzas { get; set; }
         public DbSet<PizzaComponent>? PizzaComponent { get; set; }
         public DbSet<PizzaSize>? PizzaSizes { get; set; }
@@ -32,18 +31,10 @@ namespace PizzeriaImpulsMVC.Infrastructure
                 .Property(d => d.Size)
                 .HasColumnType("decimal(18,2)");
 
-            builder.Entity<DrinkSizeDrink>()
-                .HasKey(dsd => new { dsd.DrinkId, dsd.DrinkSizeId });
-
-            builder.Entity<DrinkSizeDrink>()
-                .HasOne<Drink>(d => d.Drink)
-                .WithMany(d => d.DrinkSizeDrinks)
-                .HasForeignKey(d => d.DrinkId);
-
-            builder.Entity<DrinkSizeDrink>()
-                .HasOne<DrinkSize>(ds => ds.DrinkSize)
-                .WithMany(ds => ds.DrinkSizeDrinks)
-                .HasForeignKey(ds => ds.DrinkSizeId);
+            builder.Entity<Drink>()
+                .HasMany<DrinkSize>(ds => ds.DrinkSizes)
+                .WithMany(d => d.Drinks);
+                
 
 
             builder.Entity<PizzaSizePizza>()
