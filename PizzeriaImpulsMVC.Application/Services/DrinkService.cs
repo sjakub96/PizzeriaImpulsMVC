@@ -57,12 +57,14 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public ListDrinkForListVm GetAllDrinksForList()
         {
+            
             var drinks = _drinkRepository.GetAllDrinks()
                 .ProjectTo<DrinkForListVm>(_mapper.ConfigurationProvider).ToList();
 
-
+            
             var drinkList = new ListDrinkForListVm()
             {
+                
                 Drinks = drinks,
                 Count = drinks.Count
             };

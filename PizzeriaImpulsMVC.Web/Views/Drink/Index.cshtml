@@ -17,10 +17,10 @@
                 Name
             </th>
             <th>
-                Price
+                Price [zł]
             </th>
             <th>
-                Available Sizes
+                Available Sizes [l]
             </th>
             <th>
                 Actions
@@ -41,6 +41,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+                <div>
+                    @Html.DisplayFor(modelItem => item.DrinkSizes)
+                </div> 
             </td>
             
             <td>

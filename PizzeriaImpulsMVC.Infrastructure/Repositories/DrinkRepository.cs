@@ -40,7 +40,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<Drink> GetAllDrinks()
         {
-            var drinks = _context.Drinks.Where(p => p.Id == 4).Include(x => x.DrinkSizes);
+            var drinks = _context.Drinks.Include(x => x.DrinkSizes);
 
             return drinks;
         }

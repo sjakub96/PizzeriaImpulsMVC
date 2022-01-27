@@ -15,7 +15,9 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
         public string? Name { get; set; }
         public int Price { get; set; }
 
+        public ICollection<DrinkSizeForListVm> DrinkSizes { get; set; }
 
+        
         public void Mapping(Profile profile)
         {
             profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Drink, DrinkForListVm>();

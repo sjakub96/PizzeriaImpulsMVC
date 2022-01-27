@@ -58,20 +58,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("AddDrink");
         }
 
-        [HttpGet]
-        [Route("drinksizedrink/add")]
-        public IActionResult AddDrinkSizeDrink()
-        {
-            var drinkSizes = _drinkService.GetAllDrinkSizes();
-            var drinks = _drinkService.GetAllDrinks().AsEnumerable();
-
-            ViewBag.Id = new SelectList(drinks, "Id", "Name");
-            ViewBag.DrinkSizes = drinkSizes;
-
-            
-            return View();
-        }
-
+        
         
     }
 }

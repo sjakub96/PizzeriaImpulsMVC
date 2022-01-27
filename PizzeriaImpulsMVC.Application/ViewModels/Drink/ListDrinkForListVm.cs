@@ -8,8 +8,9 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
 {
     public class ListDrinkForListVm
     {
-        public List<DrinkForListVm>? Drinks { get; set; }
+        public List<DrinkForListVm>? Drinks { get; set; }   
 
         public int Count { get; set; }
+
     }
 }
