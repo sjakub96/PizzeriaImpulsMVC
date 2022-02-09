@@ -43,30 +43,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             return pizzas;
         }
 
-        public int AddPizzaSize(PizzaSize pizzaSize)
-        {
-            _context.PizzaSizes.Add(pizzaSize);
-            _context.SaveChanges();
-
-            return pizzaSize.Id;
-        }
-
-        public void DeletePizzaSize(int pizzaSizeId)
-        {
-            var pizzaSize = _context.PizzaSizes.Find(pizzaSizeId);
-
-            if(pizzaSize != null)
-            {
-                _context.PizzaSizes.Remove(pizzaSize);
-                _context.SaveChanges();
-            }
-        }
-
-        public IQueryable<PizzaSize> GetAllPizzaSizes()
-        {
-            var pizzaSizes = _context.PizzaSizes;
-
-            return pizzaSizes;
-        }
+       
     }
 }

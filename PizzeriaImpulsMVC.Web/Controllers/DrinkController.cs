@@ -22,29 +22,13 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return View(drinks);
         }
 
-        [HttpGet]
-        [Route("drinksize/add")]
-        public IActionResult AddNewDrinkSize()
-        {
-            
-            return View(new NewDrinkSizeVm());
-        }
-
-        [HttpPost]
-        [Route("drinksize/add")]
-        public IActionResult AddNewDrinkSize(NewDrinkSizeVm newDrinkSizeVm)
-        {
-            int id = _drinkService.AddNewDrinkSize(newDrinkSizeVm);
-
-            return RedirectToAction("AddNewDrinkSize");
-        }
 
         [HttpGet]
         [Route("drink/add")]
         public IActionResult AddDrink()
         {
-            
             return View(new NewDrinkVm());
+                
         }
 
         [HttpPost]
@@ -53,7 +37,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
 
             int id = _drinkService.AddDrink(newDrinkVm);
-
 
             return RedirectToAction("AddDrink");
         }

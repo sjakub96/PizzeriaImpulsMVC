@@ -10,10 +10,8 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IDrinkService
     {
-        int AddNewDrinkSize(NewDrinkSizeVm newDrinkSizeVm);
         int AddDrink(NewDrinkVm newDrinkVm);
         IQueryable<Drink> GetAllDrinks();
-        IQueryable<DrinkSize> GetAllDrinkSizes();
         ListDrinkForListVm GetAllDrinksForList();
     }
 }

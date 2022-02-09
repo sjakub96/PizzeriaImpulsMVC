@@ -15,11 +15,6 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
 
         IQueryable<Drink> GetAllDrinks();
 
-        int AddDrinkSize(DrinkSize drinkSize);
-
-        void DeleteDrinkSize(int drinkSizeId);
-
-        IQueryable<DrinkSize> GetAllDrinkSizes();
 
 
     }

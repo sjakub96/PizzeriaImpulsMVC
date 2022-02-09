@@ -40,36 +40,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<Drink> GetAllDrinks()
         {
-            var drinks = _context.Drinks.Include(x => x.DrinkSizes);
+            var drinks = _context.Drinks;
 
             return drinks;
         }
 
-        public int AddDrinkSize(DrinkSize drinkSize)
-        {
-            _context.DrinkSizes.Add(drinkSize);
-            _context.SaveChanges();
-
-            return drinkSize.Id;
-        }
-
-        public void DeleteDrinkSize(int drinkSizeId)
-        {
-            var drinkSize = _context.DrinkSizes.Find(drinkSizeId);
-
-            if(drinkSize != null)
-            {
-                _context.DrinkSizes.Remove(drinkSize);
-                _context.SaveChanges();
-            }
-        }
-
-        public IQueryable<DrinkSize> GetAllDrinkSizes()
-        {
-            var drinkSizes = _context.DrinkSizes;
-            
-            return drinkSizes;
-        }
+        
 
     }
 }

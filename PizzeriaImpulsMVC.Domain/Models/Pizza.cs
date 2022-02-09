@@ -13,7 +13,6 @@ namespace PizzeriaImpulsMVC.Domain.Models
         public int Price { get; set; }
         public bool IsMeat { get; set; }
 
-        public ICollection<PizzaComponent>? PizzaComponents { get; set; }
-        public ICollection<PizzaSizePizza>? PizzaSizePizzas { get; set; }
+        public ICollection<Component>? Components { get; set; }
     }
 }
