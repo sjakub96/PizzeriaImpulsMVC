@@ -15,8 +15,4 @@
     <ProjectReference Include="..\PizzeriaImpulsMVC.Domain\PizzeriaImpulsMVC.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\Pizza\" />
-  </ItemGroup>
-
 </Project>

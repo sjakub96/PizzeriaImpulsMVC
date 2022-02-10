@@ -22,7 +22,6 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
             profile.CreateMap<NewDrinkVm, PizzeriaImpulsMVC.Domain.Models.Drink>()
                 .ReverseMap();
 
-                
         }
 
 

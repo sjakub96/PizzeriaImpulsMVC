@@ -49,5 +49,20 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return componentsList;
         }
+
+        public List<ComponentForListVm> GetAllComponents()
+        {
+            var components = _componentRepository.GetAllComponents()
+                .ProjectTo<ComponentForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var componentList = new List<ComponentForListVm>();
+
+            foreach (var component in components)
+            {
+                componentList.Add(component);
+            }
+            
+            return componentList;
+        }
     }
 }
