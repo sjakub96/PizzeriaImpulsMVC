@@ -36,9 +36,10 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpDelete]
         public IActionResult DeleteAddition(int additionId)
         {
+            _additionService.DeleteAddition(additionId);
+
             return RedirectToAction("Index");
         }
 

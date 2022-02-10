@@ -31,6 +31,10 @@ namespace PizzeriaImpulsMVC.Application.Services
             return id;
         }
 
+        public void DeleteDrink(int drinkId)
+        {
+            _drinkRepository.DeleteDrink(drinkId);
+        }
 
         public IQueryable<Drink> GetAllDrinks()
         {

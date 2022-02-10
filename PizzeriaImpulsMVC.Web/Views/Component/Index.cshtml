@@ -6,7 +6,7 @@
 </h1>
 
 <p>
-    <a asp-action="AddComponent">Add Component</a>
+    <a asp-action="AddComponent" class="btn btn-success">Add Component</a>
 </p>
 <table class="table">
     <thead>
@@ -45,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.IsMeat)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-controller="Component" asp-action="EditComponent" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="Component" asp-action="ComponentDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
+                <a asp-controller="Component" asp-action="DeleteComponent" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

@@ -1,6 +1,11 @@
 ﻿@model PizzeriaImpulsMVC.Application.ViewModels.Addition.NewAdditionVm
 
-<h4>NewAdditionVm</h4>
+<h1>
+    Create Addition
+</h1>
+<h5>
+    Complete the form to create a new addition
+</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,14 +22,15 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 

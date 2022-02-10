@@ -33,7 +33,7 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public void DeleteAddition(int additionId)
         {
-            throw new NotImplementedException();
+            _additionRepository.DeleteAddition(additionId);
         }
 
         public ListAdditionForListVm GetAllAdditionsForList()

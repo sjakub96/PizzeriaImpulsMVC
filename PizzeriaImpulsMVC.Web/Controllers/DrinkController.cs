@@ -38,9 +38,15 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             int id = _drinkService.AddDrink(newDrinkVm);
 
-            return RedirectToAction("AddDrink");
+            return RedirectToAction("Index");
         }
 
+        public IActionResult DeleteDrink(int drinkId)
+        {
+            _drinkService.DeleteDrink(drinkId);
+
+            return RedirectToAction("Index");
+        }
         
         
     }

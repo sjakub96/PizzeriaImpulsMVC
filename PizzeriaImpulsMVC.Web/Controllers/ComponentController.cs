@@ -34,12 +34,13 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             var id = _componentService.AddNewComponent(newComponentVm);
 
-            return View("AddComponent");
+            return View("Index");
         }
 
-        [HttpDelete]
         public IActionResult DeleteComponent(int componentId)
         {
+            _componentService.DeleteComponent(componentId);
+
             return RedirectToAction("Index");
         }
 

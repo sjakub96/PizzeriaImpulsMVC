@@ -33,7 +33,7 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public void DeleteComponent(int componentId)
         {
-            throw new NotImplementedException();
+            _componentRepository.DeleteComponent(componentId);
         }
 
         public ListComponentForListVm GetAllComponentsForList()
