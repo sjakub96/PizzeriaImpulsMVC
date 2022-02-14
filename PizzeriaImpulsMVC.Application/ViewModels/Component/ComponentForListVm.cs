@@ -14,10 +14,12 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Component
         public string? Name { get; set; }
         public int Price { get; set; }
         public bool IsMeat { get; set; }
+        public bool IsChecked { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Component, ComponentForListVm>();
+            profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Component, ComponentForListVm>()
+                .ForMember(x => x.IsChecked, opt => opt.Ignore());
         }
     }
 }

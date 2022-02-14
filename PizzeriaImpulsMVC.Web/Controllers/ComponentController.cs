@@ -16,7 +16,25 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var components = _componentService.GetAllComponentsForList();
+            var components = _componentService.GetAllComponentsForList(5, 1, "");
+
+            return View(components);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNumber, string filterString)
+        {
+            if (!pageNumber.HasValue)
+            {
+                pageNumber = 1;
+            }
+
+            if(filterString is null)
+            {
+                filterString = String.Empty;
+            }
+            //TODO: Center page number in View
+            var components = _componentService.GetAllComponentsForList(pageSize, pageNumber.Value, filterString);
 
             return View(components);
         }

@@ -9,7 +9,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IComponentService
     {
-        ListComponentForListVm GetAllComponentsForList();
+        ListComponentForListVm GetAllComponentsForList(int pageSize, int pageNumber, string filterString);
 
         int AddNewComponent(NewComponentVm newComponentVm);
 

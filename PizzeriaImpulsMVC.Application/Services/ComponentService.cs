@@ -36,14 +36,19 @@ namespace PizzeriaImpulsMVC.Application.Services
             _componentRepository.DeleteComponent(componentId);
         }
 
-        public ListComponentForListVm GetAllComponentsForList()
+        public ListComponentForListVm GetAllComponentsForList(int pageSize, int pageNumber, string filterString)
         {
-            var components = _componentRepository.GetAllComponents()
+            var components = _componentRepository.GetAllComponents().Where(c => c.Name.Contains(filterString.ToLower()))
                 .ProjectTo<ComponentForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var componentsToShow = components.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
 
             var componentsList = new ListComponentForListVm()
             {
-                Components = components,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                FilterString = filterString,
+                Components = componentsToShow,
                 Count = components.Count
             };
 

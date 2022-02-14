@@ -30,7 +30,7 @@
                 @foreach(var component in Model.Components)
                 {
                 <div>
-                    @Html.DisplayFor(modelItem => component.Name)
+                    @Html.CheckBox("isChecked", true)
                 </div>
                 }
             </div>
