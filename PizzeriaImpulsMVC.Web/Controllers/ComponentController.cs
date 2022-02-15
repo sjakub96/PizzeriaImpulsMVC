@@ -33,7 +33,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             {
                 filterString = String.Empty;
             }
-            //TODO: Center page number in View
+            //TODO: Customize page number in View
             var components = _componentService.GetAllComponentsForList(pageSize, pageNumber.Value, filterString);
 
             return View(components);

@@ -54,6 +54,7 @@
                         <a asp-controller="Component" asp-action="EditComponent" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
                         <a asp-controller="Component" asp-action="ComponentDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
                         <a asp-controller="Component" asp-action="DeleteComponent" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
+                        <a asp-controller="Cart" asp-action="AddComponentToCart" asp-route-componentId="@item.Id" class="btn btn-warning">Add To Cart</a>
                     </td>
                 </tr>
         }
@@ -61,25 +62,27 @@
         </table>
     </div>
     <div>
-        <table>
-            <tr>
-                @for(int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
-                {
-                   <td>
-                        @if(i != Model.CurrentPage)
-                        {
-                            <a href="javascript:PagerClick(@i)">@i</a>
-                        }
-                        else
-                        {
-                            <span>@i</span>
-                        }
-                    </td> 
-                }
-            </tr>
-        </table>
-        <input type="hidden" name="pageNumber" id="pageNumber" />
-        <input type="hidden" name="pageSize" id="pageSize" value="5" />
+        <center>
+            <table>
+                <tr>
+                    @for(int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+                    {
+                       <td>
+                            @if(i != Model.CurrentPage)
+                            {
+                                <a href="javascript:PagerClick(@i)">@i</a>
+                            }
+                            else
+                            {
+                                <span>@i</span>
+                            }
+                        </td> 
+                    }
+                </tr>
+            </table>
+            <input type="hidden" name="pageNumber" id="pageNumber" />
+            <input type="hidden" name="pageSize" id="pageSize" value="5" />
+        </center>
     </div>
 </form>
 
