@@ -2,6 +2,9 @@
 
 <h4>NewPizzaVm</h4>
 <hr />
+@using (Html.BeginForm("AddPizza", "Pizza"))
+{
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddPizza">
@@ -27,10 +30,15 @@
                 </label>
             </div>
             <div>
-                @foreach(var component in Model.Components)
+                @for(int i = 0; i < Model.ComponentPizzas.Count; i++)
                 {
                 <div>
-                    @Html.CheckBox("isChecked", true)
+                    @Html.CheckBoxFor(model => Model.ComponentPizzas[i].IsChecked)
+                    @Model.ComponentPizzas[i].Name
+                    @Html.HiddenFor(model => Model.ComponentPizzas[i].Id)
+                    @Html.HiddenFor(model => Model.ComponentPizzas[i].Name)
+                    @Html.HiddenFor(model => Model.ComponentPizzas[i].IsMeat)
+                    @Html.HiddenFor(model => Model.ComponentPizzas[i].Price)
                 </div>
                 }
             </div>
@@ -40,7 +48,7 @@
         </form>
     </div>
 </div>
-
+}
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

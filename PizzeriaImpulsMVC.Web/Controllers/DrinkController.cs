@@ -18,7 +18,23 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var drinks = _drinkService.GetAllDrinksForList();
+            var drinks = _drinkService.GetAllDrinksForList(5, 1, "");
+            return View(drinks);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNumber, string filterString)
+        {
+            if(!pageNumber.HasValue)
+            {
+                pageNumber = 1;
+            }
+            if(filterString is null)
+            {
+                filterString = String.Empty;
+            }
+            //TODO: Customize page number in Drink View
+            var drinks = _drinkService.GetAllDrinksForList(pageSize, pageNumber.Value, filterString);
             return View(drinks);
         }
 

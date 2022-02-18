@@ -25,7 +25,31 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public int AddPizza(NewPizzaVm newPizzaVm)
         {
-            var pizza = _mapper.Map<Pizza>(newPizzaVm);
+            //var pizza = _mapper.Map<Pizza>(newPizzaVm);
+
+            var componentPizzaList = new List<ComponentPizza>();
+
+
+            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            {
+
+                var componentPizza = new ComponentPizza()
+                {
+                    PizzaId = newPizzaVm.Id,
+                    ComponentId = newPizzaVm.ComponentPizzas[i].Id
+                };
+
+                componentPizzaList.Add(componentPizza);
+            }
+
+            var pizza = new Pizza()
+            {
+                Price = newPizzaVm.Price,
+                IsMeat = newPizzaVm.IsMeat,
+                Name = newPizzaVm.Name,
+                ComponentPizzas = componentPizzaList
+            };
+
             var id = _pizzaRepository.AddPizza(pizza);
 
             return id;

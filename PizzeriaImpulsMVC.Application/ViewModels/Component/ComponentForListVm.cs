@@ -19,7 +19,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Component
         public void Mapping(Profile profile)
         {
             profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Component, ComponentForListVm>()
-                .ForMember(x => x.IsChecked, opt => opt.Ignore());
+                .ForMember(x => x.IsChecked, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

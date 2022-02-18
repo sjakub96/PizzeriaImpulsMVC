@@ -33,7 +33,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             {
                 filterString = String.Empty;
             }
-            //TODO: Customize page number in View
+            //TODO: Customize page number in Component View
             var components = _componentService.GetAllComponentsForList(pageSize, pageNumber.Value, filterString);
 
             return View(components);
@@ -52,7 +52,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             var id = _componentService.AddNewComponent(newComponentVm);
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteComponent(int componentId)

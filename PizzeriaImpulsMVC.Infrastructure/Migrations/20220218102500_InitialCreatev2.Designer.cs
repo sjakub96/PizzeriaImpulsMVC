@@ -12,8 +12,8 @@ using PizzeriaImpulsMVC.Infrastructure;
 namespace PizzeriaImpulsMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220127184137_ManyToManyDrink")]
-    partial class ManyToManyDrink
+    [Migration("20220218102500_InitialCreatev2")]
+    partial class InitialCreatev2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,21 +23,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DrinkDrinkSize", b =>
-                {
-                    b.Property<int>("DrinkSizesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DrinksId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DrinkSizesId", "DrinksId");
-
-                    b.HasIndex("DrinksId");
-
-                    b.ToTable("DrinkDrinkSize");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -282,6 +267,21 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                     b.ToTable("Components");
                 });
 
+            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.ComponentPizza", b =>
+                {
+                    b.Property<int>("PizzaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PizzaId", "ComponentId");
+
+                    b.HasIndex("ComponentId");
+
+                    b.ToTable("ComponentPizzas");
+                });
+
             modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.Drink", b =>
                 {
                     b.Property<int>("Id")
@@ -296,25 +296,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Drinks");
-                });
-
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.DrinkSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<decimal>("Size")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DrinkSizes");
+                    b.ToTable("Drinks");
                 });
 
             modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.Pizza", b =>
@@ -337,67 +324,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pizzas");
-                });
-
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaComponent", b =>
-                {
-                    b.Property<int>("PizzaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PizzaId", "ComponentId");
-
-                    b.HasIndex("ComponentId");
-
-                    b.ToTable("PizzaComponent");
-                });
-
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PizzaSizes");
-                });
-
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaSizePizza", b =>
-                {
-                    b.Property<int>("PizzaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PizzaSizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PizzaId", "PizzaSizeId");
-
-                    b.HasIndex("PizzaSizeId");
-
-                    b.ToTable("PizzaSizePizza");
-                });
-
-            modelBuilder.Entity("DrinkDrinkSize", b =>
-                {
-                    b.HasOne("PizzeriaImpulsMVC.Domain.Models.DrinkSize", null)
-                        .WithMany()
-                        .HasForeignKey("DrinkSizesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PizzeriaImpulsMVC.Domain.Models.Drink", null)
-                        .WithMany()
-                        .HasForeignKey("DrinksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -451,16 +377,16 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaComponent", b =>
+            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.ComponentPizza", b =>
                 {
                     b.HasOne("PizzeriaImpulsMVC.Domain.Models.Component", "Component")
-                        .WithMany("PizzaComponents")
+                        .WithMany("ComponentPizzas")
                         .HasForeignKey("ComponentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PizzeriaImpulsMVC.Domain.Models.Pizza", "Pizza")
-                        .WithMany("PizzaComponents")
+                        .WithMany("ComponentPizzas")
                         .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -470,40 +396,14 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                     b.Navigation("Pizza");
                 });
 
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaSizePizza", b =>
-                {
-                    b.HasOne("PizzeriaImpulsMVC.Domain.Models.Pizza", "Pizza")
-                        .WithMany("PizzaSizePizzas")
-                        .HasForeignKey("PizzaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PizzeriaImpulsMVC.Domain.Models.PizzaSize", "PizzaSize")
-                        .WithMany("PizzaSizePizzas")
-                        .HasForeignKey("PizzaSizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pizza");
-
-                    b.Navigation("PizzaSize");
-                });
-
             modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.Component", b =>
                 {
-                    b.Navigation("PizzaComponents");
+                    b.Navigation("ComponentPizzas");
                 });
 
             modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.Pizza", b =>
                 {
-                    b.Navigation("PizzaComponents");
-
-                    b.Navigation("PizzaSizePizzas");
-                });
-
-            modelBuilder.Entity("PizzeriaImpulsMVC.Domain.Models.PizzaSize", b =>
-                {
-                    b.Navigation("PizzaSizePizzas");
+                    b.Navigation("ComponentPizzas");
                 });
 #pragma warning restore 612, 618
         }

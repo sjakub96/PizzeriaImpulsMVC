@@ -84,24 +84,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Drinks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DrinkSizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DrinkSizes", x => x.Id);
+                    table.PrimaryKey("PK_Drinks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,19 +105,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pizzas", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PizzaSizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Size = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PizzaSizes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,31 +214,31 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DrinkSizeDrink",
+                name: "ComponentPizza",
                 columns: table => new
                 {
-                    DrinkId = table.Column<int>(type: "int", nullable: false),
-                    DrinkSizeId = table.Column<int>(type: "int", nullable: false)
+                    ComponentsId = table.Column<int>(type: "int", nullable: false),
+                    PizzasId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DrinkSizeDrink", x => new { x.DrinkId, x.DrinkSizeId });
+                    table.PrimaryKey("PK_ComponentPizza", x => new { x.ComponentsId, x.PizzasId });
                     table.ForeignKey(
-                        name: "FK_DrinkSizeDrink_Drinks_DrinkId",
-                        column: x => x.DrinkId,
-                        principalTable: "Drinks",
+                        name: "FK_ComponentPizza_Components_ComponentsId",
+                        column: x => x.ComponentsId,
+                        principalTable: "Components",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DrinkSizeDrink_DrinkSizes_DrinkSizeId",
-                        column: x => x.DrinkSizeId,
-                        principalTable: "DrinkSizes",
+                        name: "FK_ComponentPizza_Pizzas_PizzasId",
+                        column: x => x.PizzasId,
+                        principalTable: "Pizzas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PizzaComponent",
+                name: "ComponentPizzas",
                 columns: table => new
                 {
                     PizzaId = table.Column<int>(type: "int", nullable: false),
@@ -271,41 +246,17 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PizzaComponent", x => new { x.PizzaId, x.ComponentId });
+                    table.PrimaryKey("PK_ComponentPizzas", x => new { x.PizzaId, x.ComponentId });
                     table.ForeignKey(
-                        name: "FK_PizzaComponent_Components_ComponentId",
+                        name: "FK_ComponentPizzas_Components_ComponentId",
                         column: x => x.ComponentId,
                         principalTable: "Components",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PizzaComponent_Pizzas_PizzaId",
+                        name: "FK_ComponentPizzas_Pizzas_PizzaId",
                         column: x => x.PizzaId,
                         principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PizzaSizePizza",
-                columns: table => new
-                {
-                    PizzaId = table.Column<int>(type: "int", nullable: false),
-                    PizzaSizeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PizzaSizePizza", x => new { x.PizzaId, x.PizzaSizeId });
-                    table.ForeignKey(
-                        name: "FK_PizzaSizePizza_Pizzas_PizzaId",
-                        column: x => x.PizzaId,
-                        principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PizzaSizePizza_PizzaSizes_PizzaSizeId",
-                        column: x => x.PizzaSizeId,
-                        principalTable: "PizzaSizes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -350,19 +301,14 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DrinkSizeDrink_DrinkSizeId",
-                table: "DrinkSizeDrink",
-                column: "DrinkSizeId");
+                name: "IX_ComponentPizza_PizzasId",
+                table: "ComponentPizza",
+                column: "PizzasId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PizzaComponent_ComponentId",
-                table: "PizzaComponent",
+                name: "IX_ComponentPizzas_ComponentId",
+                table: "ComponentPizzas",
                 column: "ComponentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PizzaSizePizza_PizzaSizeId",
-                table: "PizzaSizePizza",
-                column: "PizzaSizeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -386,13 +332,13 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DrinkSizeDrink");
+                name: "ComponentPizza");
 
             migrationBuilder.DropTable(
-                name: "PizzaComponent");
+                name: "ComponentPizzas");
 
             migrationBuilder.DropTable(
-                name: "PizzaSizePizza");
+                name: "Drinks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -401,19 +347,10 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Drinks");
-
-            migrationBuilder.DropTable(
-                name: "DrinkSizes");
-
-            migrationBuilder.DropTable(
                 name: "Components");
 
             migrationBuilder.DropTable(
                 name: "Pizzas");
-
-            migrationBuilder.DropTable(
-                name: "PizzaSizes");
         }
     }
 }

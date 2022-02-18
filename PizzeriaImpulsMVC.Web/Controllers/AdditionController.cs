@@ -16,7 +16,24 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var additions = _additionService.GetAllAdditionsForList();
+            var additions = _additionService.GetAllAdditionsForList(5, 1, "");
+
+            return View(additions);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNumber, string filterString)
+        {
+            if (!pageNumber.HasValue)
+            {
+                pageNumber = 1;
+            }
+            if(filterString is null)
+            {
+                filterString = String.Empty;
+            }
+
+            var additions = _additionService.GetAllAdditionsForList(pageSize, pageNumber.Value, filterString);
 
             return View(additions);
         }

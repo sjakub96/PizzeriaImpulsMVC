@@ -15,8 +15,5 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
 
         IQueryable<Pizza> GetAllPizzas();
 
-
-
-        
     }
 }

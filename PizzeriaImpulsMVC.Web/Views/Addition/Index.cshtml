@@ -7,43 +7,85 @@
 <p>
     <a asp-action="AddAddition"  class="btn btn-success">Add Addition</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Price (zł)
-            </th>
-            <th>
-                Actions
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Additions) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-controller="Addition" asp-action="EditAddition" asp-route-additionId="@item.Id" class="btn btn-primary">Edit</a>
-                <a asp-controller="Addition" asp-action="AdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
-                <a asp-controller="Addition" asp-action="DeleteAddition" asp-route-additionId="@item.Id" class="btn btn-danger">Delete</a>
-                <a asp-controller="Cart" asp-action="AddAdditionToCart" asp-route-additionId="@item.Id" class="btn btn-warning">Add To Cart</a>
-            </td>
-        </tr>
+<form asp-action="Index" asp-controller="Addition" method="post">
+    <p>
+        <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
+        <input type="submit" class="btn-muted" value="Search"/>
+    </p>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Price (zł)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model.Additions) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-controller="Addition" asp-action="EditAddition" asp-route-additionId="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Addition" asp-action="AdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
+                        <a asp-controller="Addition" asp-action="DeleteAddition" asp-route-additionId="@item.Id" class="btn btn-danger">Delete</a>
+                        <a asp-controller="Cart" asp-action="AddAdditionToCart" asp-route-additionId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <center>
+            <table>
+                <tr>
+                    @for(int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+                    {
+                       <td>
+                            @if(i != Model.CurrentPage)
+                            {
+                                <a href="javascript:PagerClick(@i)">@i</a>
+                            }
+                            else
+                            {
+                                <span>@i</span>
+                            }
+                        </td> 
+                    }
+                </tr>
+            </table>
+            <input type="hidden" name="pageNumber" id="pageNumber" />
+            <input type="hidden" name="pageSize" id="pageSize" value="5" />
+        </center>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function PagerClick(index)
+        {
+            document.getElementById("pageNumber").value = index;
+            document.forms[0].submit();
+        }
+    </script>
 }
-    </tbody>
-</table>

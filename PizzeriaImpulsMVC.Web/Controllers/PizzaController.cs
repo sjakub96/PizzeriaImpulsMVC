@@ -27,24 +27,27 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             
             var components = _componentService.GetAllComponents();
-
+            
             return View(new NewPizzaVm()
             {
-                Components = components
+                ComponentPizzas = components
+                
             }); 
         }
          
 
         [HttpPost]
         [Route("pizza/add")]
-        public IActionResult AddPizza(NewPizzaVm newPizzaVm)
+        public IActionResult AddPizza(NewPizzaVm newPizzaVm, ListComponentForListVm componentForListVm)
         {
 
+            //ListComponentForListVm componentForListVm = new ListComponentForListVm();
+            
             int id = _pizzaService.AddPizza(newPizzaVm);
 
             return RedirectToAction("Index");
         }
     }
 
-    //TODO: Add fully working creating pizza
+    //TODO: Add fully working creating pizza(is working, but why all components are added?)
 }

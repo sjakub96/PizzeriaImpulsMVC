@@ -45,16 +45,20 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         
 
-        public ListDrinkForListVm GetAllDrinksForList()
+        public ListDrinkForListVm GetAllDrinksForList(int pageSize, int pageNumber, string filterString)
         {
             
-            var drinks = _drinkRepository.GetAllDrinks()
+            var drinks = _drinkRepository.GetAllDrinks().Where(c => c.Name.Contains(filterString.ToLower()))
                 .ProjectTo<DrinkForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            
+            var drinksToShow = drinks.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
+
             var drinkList = new ListDrinkForListVm()
             {
-                Drinks = drinks,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                FilterString = filterString,
+                Drinks = drinksToShow,
                 Count = drinks.Count
             };
 

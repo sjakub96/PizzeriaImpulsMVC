@@ -36,14 +36,19 @@ namespace PizzeriaImpulsMVC.Application.Services
             _additionRepository.DeleteAddition(additionId);
         }
 
-        public ListAdditionForListVm GetAllAdditionsForList()
+        public ListAdditionForListVm GetAllAdditionsForList(int pageSize, int pageNumber, string filterString)
         {
-            var additions = _additionRepository.GetAllAdditions()
+            var additions = _additionRepository.GetAllAdditions().Where(a => a.Name.Contains(filterString.ToLower()))
                 .ProjectTo<AdditionForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var additionsToShow = additions.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
 
             var additionList = new ListAdditionForListVm()
             {
-                Additions = additions,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                FilterString = filterString,
+                Additions = additionsToShow,
                 Count = additions.Count
             };
 

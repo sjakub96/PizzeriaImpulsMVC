@@ -12,7 +12,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
     {
         int AddDrink(NewDrinkVm newDrinkVm);
         IQueryable<Drink> GetAllDrinks();
-        ListDrinkForListVm GetAllDrinksForList();
+        ListDrinkForListVm GetAllDrinksForList(int pageSize, int pageNumber, string filterString);
         void DeleteDrink(int drinkId);
     }
 }

@@ -15,6 +15,7 @@ namespace PizzeriaImpulsMVC.Infrastructure
         public DbSet<Component>? Components { get; set; }
         public DbSet<Drink>? Drinks { get; set; }
         public DbSet<Pizza>? Pizzas { get; set; }
+        public DbSet<ComponentPizza> ComponentPizzas { get; set; }
         public Context(DbContextOptions options) : base(options)
         {
         }
@@ -22,12 +23,21 @@ namespace PizzeriaImpulsMVC.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.Entity<Pizza>()
-                .HasMany<Component>(c => c.Components)
-                .WithMany(p => p.Pizzas);
-
             
+
+            builder.Entity<ComponentPizza>()
+            .HasKey(t => new { t.PizzaId, t.ComponentId });
+
+            builder.Entity<ComponentPizza>()
+                .HasOne<Pizza>(p => p.Pizza)
+                .WithMany(pc => pc.ComponentPizzas)
+                .HasForeignKey(pt => pt.PizzaId);
+
+            builder.Entity<ComponentPizza>()
+                .HasOne<Component>(pt => pt.Component)
+                .WithMany(t => t.ComponentPizzas)
+                .HasForeignKey(pt => pt.ComponentId);
         }
     }
+    //TODO: Upload all dates to database
 }

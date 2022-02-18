@@ -9,7 +9,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IAdditionService
     {
-        ListAdditionForListVm GetAllAdditionsForList();
+        ListAdditionForListVm GetAllAdditionsForList(int pageSize, int pageNumber, string filterString);
 
         int AddNewAddition(NewAdditionVm newAdditionVm);
 

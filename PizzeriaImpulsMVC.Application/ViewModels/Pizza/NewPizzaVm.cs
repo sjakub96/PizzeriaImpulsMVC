@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Mapping;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
+using AutoMapper.Collection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Pizza
         public int Price { get; set; }
         public bool IsMeat { get; set; }
 
-        public ICollection<ComponentForListVm>? Components { get; set; }
+        public List<ComponentForListVm>? ComponentPizzas { get; set; }
 
         public void Mapping(Profile profile)
         {
+            
             profile.CreateMap<NewPizzaVm, PizzeriaImpulsMVC.Domain.Models.Pizza>()
-                .ForMember(x => x.Components, opt => opt.MapFrom(p => p.Components))
+                .ForPath(x => x.ComponentPizzas, opt => opt.MapFrom(cp => cp.ComponentPizzas))
                 .ReverseMap();
 
         }
