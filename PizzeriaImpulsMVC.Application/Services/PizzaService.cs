@@ -42,10 +42,21 @@ namespace PizzeriaImpulsMVC.Application.Services
                 componentPizzaList.Add(componentPizza);
             }
 
+            bool pizzaIsMeat = false;
+
+            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            {
+                if (newPizzaVm.ComponentPizzas[i].IsMeat)
+                {
+                    pizzaIsMeat = true;
+                    break;
+                }
+            }
+
             var pizza = new Pizza()
             {
                 Price = newPizzaVm.Price,
-                IsMeat = newPizzaVm.IsMeat,
+                IsMeat = pizzaIsMeat,
                 Name = newPizzaVm.Name,
                 ComponentPizzas = componentPizzaList
             };

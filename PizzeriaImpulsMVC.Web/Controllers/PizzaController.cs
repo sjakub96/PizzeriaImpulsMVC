@@ -2,6 +2,7 @@
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.Pizza;
+using PizzeriaImpulsMVC.Domain.Models;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
@@ -18,6 +19,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -38,11 +40,20 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("pizza/add")]
-        public IActionResult AddPizza(NewPizzaVm newPizzaVm, ListComponentForListVm componentForListVm)
+        public IActionResult AddPizza(NewPizzaVm newPizzaVm)
         {
+            var checkedComponents = new List<ComponentForListVm>();
 
-            //ListComponentForListVm componentForListVm = new ListComponentForListVm();
-            
+            for(int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            {
+                if(newPizzaVm.ComponentPizzas[i].IsChecked == true)
+                {
+                    checkedComponents.Add(newPizzaVm.ComponentPizzas[i]);
+                }
+            }
+
+            newPizzaVm.ComponentPizzas = checkedComponents;
+
             int id = _pizzaService.AddPizza(newPizzaVm);
 
             return RedirectToAction("Index");

@@ -1,4 +1,5 @@
-﻿using PizzeriaImpulsMVC.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<Pizza> GetAllPizzas()
         {
-            var pizzas = _context.Pizzas;
+            var pizzas = _context.Pizzas.Include(x => x.ComponentPizzas);
 
             return pizzas;
         }
