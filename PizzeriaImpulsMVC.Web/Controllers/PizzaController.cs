@@ -51,6 +51,4 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
     }
-
-    //TODO: Add fully working creating pizza(is working, but why all components are added?)
-}
+}  //TODO: Add Index view to pizza views with filtering by name and pagination

@@ -39,5 +39,4 @@ namespace PizzeriaImpulsMVC.Infrastructure
                 .HasForeignKey(pt => pt.ComponentId);
         }
     }
-    //TODO: Upload all dates to database
 }

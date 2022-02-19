@@ -30,7 +30,6 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             var componentPizzaList = new List<ComponentPizza>();
 
-
             for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
             {
 
