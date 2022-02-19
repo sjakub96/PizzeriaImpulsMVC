@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Interfaces;
+using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.Pizza;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
@@ -64,6 +65,21 @@ namespace PizzeriaImpulsMVC.Application.Services
             var id = _pizzaRepository.AddPizza(pizza);
 
             return id;
+        }
+
+        public List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm)
+        {
+            var checkedComponents = new List<ComponentForListVm>();
+
+            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            {
+                if (newPizzaVm.ComponentPizzas[i].IsChecked == true)
+                {
+                    checkedComponents.Add(newPizzaVm.ComponentPizzas[i]);
+                }
+            }
+
+            return checkedComponents;
         }
     }
 }

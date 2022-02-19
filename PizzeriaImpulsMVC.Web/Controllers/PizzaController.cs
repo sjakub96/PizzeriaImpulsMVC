@@ -42,15 +42,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Route("pizza/add")]
         public IActionResult AddPizza(NewPizzaVm newPizzaVm)
         {
-            var checkedComponents = new List<ComponentForListVm>();
-
-            for(int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
-            {
-                if(newPizzaVm.ComponentPizzas[i].IsChecked == true)
-                {
-                    checkedComponents.Add(newPizzaVm.ComponentPizzas[i]);
-                }
-            }
+            var checkedComponents = _pizzaService.GetCheckedComponents(newPizzaVm);
 
             newPizzaVm.ComponentPizzas = checkedComponents;
 
