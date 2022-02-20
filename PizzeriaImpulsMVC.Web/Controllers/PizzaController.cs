@@ -19,15 +19,15 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         public IActionResult Index()
         {
+            var pizzas = _pizzaService.GetAllPizzasForList();
 
-            return View();
+            return View(pizzas);
         }
 
         [HttpGet]
         [Route("pizza/add")]
         public IActionResult AddPizza()
         {
-            
             var components = _componentService.GetAllComponents();
             
             return View(new NewPizzaVm()
@@ -37,7 +37,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             }); 
         }
          
-
         [HttpPost]
         [Route("pizza/add")]
         public IActionResult AddPizza(NewPizzaVm newPizzaVm)

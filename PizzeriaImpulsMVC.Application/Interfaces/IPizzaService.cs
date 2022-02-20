@@ -12,5 +12,8 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
     {
         int AddPizza(NewPizzaVm newPizzaVm);
         List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm);
+
+        ListPizzaForListVm GetAllPizzasForList();
+        List<PizzaForListVm> GetAllPizzas();
     }
 }

@@ -1,0 +1,62 @@
+﻿@model PizzeriaImpulsMVC.Application.ViewModels.Pizza.ListPizzaForListVm
+
+<h1>
+    Pizzas
+</h1>
+
+<p>
+    <a asp-action="AddPizza" class="btn btn-success">Add Pizza</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Price (zł)
+            </th>
+            <th>
+                IsMeat
+            </th>
+            <th>
+                Components
+            </th>
+            <th>
+                Actions
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pizzas) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsMeat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Components)
+                </td>
+                <td>
+                    <a asp-controller="Pizza" asp-action="EditPizza" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Pizza" asp-action="PizzaDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
+                    <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
