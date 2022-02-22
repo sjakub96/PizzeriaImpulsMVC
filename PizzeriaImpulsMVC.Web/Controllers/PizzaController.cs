@@ -19,6 +19,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         public IActionResult Index()
         {
+            
             var pizzas = _pizzaService.GetAllPizzasForList();
 
             return View(pizzas);

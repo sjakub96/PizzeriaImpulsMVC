@@ -20,9 +20,7 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Pizza
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Pizza, PizzaForListVm>()
-                .ForMember(c => c.Components, opt => opt.MapFrom(p => p.ComponentPizzas
-                .Where(x => x.PizzaId == Id)));
+            profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.Pizza, PizzaForListVm>();
 
         }
     }

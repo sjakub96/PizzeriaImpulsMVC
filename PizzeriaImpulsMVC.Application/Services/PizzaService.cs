@@ -31,8 +31,6 @@ namespace PizzeriaImpulsMVC.Application.Services
         public ListPizzaForListVm GetAllPizzasForList()
         {
             var pizzas = GetAllPizzas();
-            //var pizzas = _pizzaRepository.GetAllPizzas()
-                //.ProjectTo<PizzaForListVm>(_mapper.ConfigurationProvider).ToList();
 
             var pizzasList = new ListPizzaForListVm()
             {
@@ -42,32 +40,39 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return pizzasList;
         }
-
+         
         public List<PizzaForListVm> GetAllPizzas()
         {
             var pizzas = _pizzaRepository.GetAllPizzas().ToList();
 
-            var componentList = new List<ComponentForListVm>();
-
-            for (int i = 0; i < pizzas.Count; i++)
-            {
-                for (int b = 0; b < pizzas[i].ComponentPizzas.Count; b++)
-                {
-                    var component = new ComponentForListVm()
-                    {
-                        Id = pizzas[i].ComponentPizzas.ToList()[b].ComponentId,
-
-                    };
-                    componentList.Add(component);
-                }
-
-            }
-
-            
             var pizzaList = new List<PizzaForListVm>();
 
+            var components = _componentRepository.GetAllComponents().ToList();
+            
+            
             for (int i = 0; i < pizzas.Count; i++)
             {
+                var componentList = new List<ComponentForListVm>();
+
+                for (int b = 0; b < components.Count; b++)
+                {
+                    for (int c = 0; c < pizzas[i].ComponentPizzas.ToList().Count; c++)
+                    {
+                        if (components[b].Id == pizzas[i].ComponentPizzas.ToList()[c].ComponentId)
+                        {
+                            var component = new ComponentForListVm()
+                            {
+                                Id = components[b].Id,
+                                IsMeat = components[b].IsMeat,
+                                Price = components[b].Price,
+                                Name = components[b].Name,
+                            };
+
+                            componentList.Add(component);
+                        }
+                    }
+                        
+                }
                 var pizzaForList = new PizzaForListVm()
                 {
                     Id = pizzas[i].Id,
@@ -75,20 +80,15 @@ namespace PizzeriaImpulsMVC.Application.Services
                     Price = pizzas[i].Price,
                     IsMeat = pizzas[i].IsMeat,
                     Components = componentList
-
                 };
 
                 pizzaList.Add(pizzaForList);
             }
-            
-
             return pizzaList;
         }
 
         public int AddPizza(NewPizzaVm newPizzaVm)
         {
-            //var pizza = _mapper.Map<Pizza>(newPizzaVm);
-
             var componentPizzaList = new List<ComponentPizza>();
 
             for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
@@ -98,7 +98,6 @@ namespace PizzeriaImpulsMVC.Application.Services
                 {
                     PizzaId = newPizzaVm.Id,
                     ComponentId = newPizzaVm.ComponentPizzas[i].Id
-                    
                 };
 
                 componentPizzaList.Add(componentPizza);
