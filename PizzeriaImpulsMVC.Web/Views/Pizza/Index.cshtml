@@ -55,10 +55,10 @@
                 }
                 </td>
                 <td>
-                    <a asp-controller="Pizza" asp-action="EditPizza" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-controller="Pizza" asp-action="PizzaDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
-                    <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
-                    <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-componentId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                    <a asp-controller="Pizza" asp-action="EditPizza" asp-route-pizzaId="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Pizza" asp-action="PizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
+                    <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-pizzaId="@item.Id" class="btn btn-danger">Delete</a>
+                    <a asp-controller="Pizza" asp-action="AddPizzaToCart" asp-route-pizzaId="@item.Id" class="btn btn-warning">Add To Cart</a>
                 </td>
             </tr>
         }

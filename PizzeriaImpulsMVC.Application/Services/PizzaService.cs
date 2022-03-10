@@ -45,11 +45,10 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             var pizzas = _pizzaRepository.GetAllPizzas().ToList();
 
+            var components = _componentRepository.GetAllComponents().ToList();
+
             var pizzaList = new List<PizzaForListVm>();
 
-            var components = _componentRepository.GetAllComponents().ToList();
-            
-            
             for (int i = 0; i < pizzas.Count; i++)
             {
                 var componentList = new List<ComponentForListVm>();
@@ -73,6 +72,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                     }
                         
                 }
+
                 var pizzaForList = new PizzaForListVm()
                 {
                     Id = pizzas[i].Id,
@@ -140,6 +140,11 @@ namespace PizzeriaImpulsMVC.Application.Services
             }
 
             return checkedComponents;
+        }
+
+        public void DeletePizza(int pizzaId)
+        {
+            _pizzaRepository.DeletePizza(pizzaId);
         }
 
 

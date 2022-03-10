@@ -15,5 +15,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 
         ListPizzaForListVm GetAllPizzasForList();
         List<PizzaForListVm> GetAllPizzas();
+        void DeletePizza(int pizzaId);
     }
 }

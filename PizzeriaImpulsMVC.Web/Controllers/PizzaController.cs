@@ -50,5 +50,12 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult DeletePizza(int pizzaId)
+        {
+            _pizzaService.DeletePizza(pizzaId);
+
+            return RedirectToAction("Index");
+        }
     }
 }  //TODO: Add Index view to pizza views with filtering by name and pagination
