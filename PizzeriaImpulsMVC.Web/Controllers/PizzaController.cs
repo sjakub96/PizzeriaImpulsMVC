@@ -17,10 +17,28 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             _componentService = componentService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             
-            var pizzas = _pizzaService.GetAllPizzasForList();
+            var pizzas = _pizzaService.GetAllPizzasForList(5, 1, "");
+
+            return View(pizzas);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int? pageNumber, string filterString)
+        {
+            if (!pageNumber.HasValue)
+            {
+                pageNumber = 1;
+            }
+            if (filterString is null)
+            {
+                filterString = String.Empty;
+            }
+
+            var pizzas = _pizzaService.GetAllPizzasForList(pageSize, pageNumber.Value, filterString);
 
             return View(pizzas);
         }

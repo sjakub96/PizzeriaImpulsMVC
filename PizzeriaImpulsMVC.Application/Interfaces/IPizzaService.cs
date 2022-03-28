@@ -13,8 +13,8 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         int AddPizza(NewPizzaVm newPizzaVm);
         List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm);
 
-        ListPizzaForListVm GetAllPizzasForList();
-        List<PizzaForListVm> GetAllPizzas();
+        ListPizzaForListVm GetAllPizzasForList(int pageSize, int pageNumber, string filterString);
+        List<PizzaForListVm> GetAllPizzas(string filterString);
         void DeletePizza(int pizzaId);
     }
 }

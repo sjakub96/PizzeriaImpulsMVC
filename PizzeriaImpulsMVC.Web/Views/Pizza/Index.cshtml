@@ -7,60 +7,101 @@
 <p>
     <a asp-action="AddPizza" class="btn btn-success">Add Pizza</a>
 </p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Price (zł)
-            </th>
-            <th>
-                IsMeat
-            </th>
-            <th>
-                Components
-            </th>
-            <th>
-                Actions
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Pizzas) 
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsMeat)
-                </td>
-                <td>
-                @foreach(var component in item.Components)
+<form asp-action="Index" asp-controller="Pizza" method="post">
+    <p>
+        <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
+        <input type="submit" class="btn-muted" value="Search"/>
+    </p>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Price (zł)
+                    </th>
+                    <th>
+                        IsMeat
+                    </th>
+                    <th>
+                        Components
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pizzas) 
                 {
-                    @Html.DisplayFor(modelItem => component.Name) <br />
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsMeat)
+                        </td>
+                        <td>
+                        @foreach(var component in item.Components)
+                        {
+                            @Html.DisplayFor(modelItem => component.Name) <br />
+                        }
+                        </td>
+                        <td>
+                            <a asp-controller="Pizza" asp-action="EditPizza" asp-route-pizzaId="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Pizza" asp-action="PizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-pizzaId="@item.Id" class="btn btn-danger">Delete</a>
+                            <a asp-controller="Pizza" asp-action="AddPizzaToCart" asp-route-pizzaId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        </td>
+                    </tr>
                 }
-                </td>
-                <td>
-                    <a asp-controller="Pizza" asp-action="EditPizza" asp-route-pizzaId="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-controller="Pizza" asp-action="PizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
-                    <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-pizzaId="@item.Id" class="btn btn-danger">Delete</a>
-                    <a asp-controller="Pizza" asp-action="AddPizzaToCart" asp-route-pizzaId="@item.Id" class="btn btn-warning">Add To Cart</a>
-                </td>
-            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <center>
+            <table>
+                <tr>
+                    @for(int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
+                    {
+                       <td>
+                            @if(i != Model.CurrentPage)
+                            {
+                                <a href="javascript:PagerClick(@i)">@i</a>
+                            }
+                            else
+                            {
+                                <span>@i</span>
+                            }
+                        </td> 
+                    }
+                </tr>
+            </table>
+            <input type="hidden" name="pageNumber" id="pageNumber" />
+            <input type="hidden" name="pageSize" id="pageSize" value="5" />
+        </center>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function PagerClick(index)
+        {
+            document.getElementById("pageNumber").value = index;
+            document.forms[0].submit();
         }
-    </tbody>
-</table>
+    </script>
+}

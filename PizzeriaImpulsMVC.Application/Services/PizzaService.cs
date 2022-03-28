@@ -28,22 +28,27 @@ namespace PizzeriaImpulsMVC.Application.Services
             _componentRepository = componentRepository;
         }
 
-        public ListPizzaForListVm GetAllPizzasForList()
+        public ListPizzaForListVm GetAllPizzasForList(int pageSize, int pageNumber, string filterString)
         {
-            var pizzas = GetAllPizzas();
+            var pizzas = GetAllPizzas(filterString);
+
+            var pizzasToShow = pizzas.Skip(pageSize*(pageNumber - 1)).Take(pageSize).ToList();
 
             var pizzasList = new ListPizzaForListVm()
             {
-                Pizzas = pizzas,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                FilterString = filterString,
+                Pizzas = pizzasToShow,
                 Count = pizzas.Count
             };
 
             return pizzasList;
         }
          
-        public List<PizzaForListVm> GetAllPizzas()
+        public List<PizzaForListVm> GetAllPizzas(string filterString)
         {
-            var pizzas = _pizzaRepository.GetAllPizzas().ToList();
+            var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower())).ToList();
 
             var components = _componentRepository.GetAllComponents().ToList();
 
@@ -98,6 +103,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                 {
                     PizzaId = newPizzaVm.Id,
                     ComponentId = newPizzaVm.ComponentPizzas[i].Id
+                    
                 };
 
                 componentPizzaList.Add(componentPizza);
