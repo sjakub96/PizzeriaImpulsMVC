@@ -15,7 +15,7 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
 
         IQueryable<Drink> GetAllDrinks();
 
-
-
+        Drink GetDrink(int drinkId);
+        void EditDrink(Drink editedDrink);
     }
 }

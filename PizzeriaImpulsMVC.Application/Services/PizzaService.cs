@@ -102,7 +102,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                 var componentPizza = new ComponentPizza()
                 {
                     PizzaId = newPizzaVm.Id,
-                    ComponentId = newPizzaVm.ComponentPizzas[i].Id
+                    ComponentId = newPizzaVm.ComponentPizzas[i].Id,
                     
                 };
 

@@ -63,7 +63,22 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return RedirectToAction("Index");
         }
-        
-        
+
+        [HttpGet]
+        public IActionResult EditDrink(int drinkId)
+        {
+            var drink = _drinkService.GetDrinkForEdit(drinkId);
+            return View(drink);
+        }
+
+        [HttpPost]
+        public IActionResult EditDrink(NewDrinkVm editDrinkVm)
+        {
+            _drinkService.EditDrink(editDrinkVm);
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

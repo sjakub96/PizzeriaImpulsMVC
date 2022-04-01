@@ -43,8 +43,6 @@ namespace PizzeriaImpulsMVC.Application.Services
             return drinks;
         }
 
-        
-
         public ListDrinkForListVm GetAllDrinksForList(int pageSize, int pageNumber, string filterString)
         {
             
@@ -65,6 +63,19 @@ namespace PizzeriaImpulsMVC.Application.Services
             return drinkList;
         }
 
-       
+        public NewDrinkVm GetDrinkForEdit(int drinkId)
+        {
+            var drink = _drinkRepository.GetDrink(drinkId);
+            var drinkVm = _mapper.Map<NewDrinkVm>(drink);
+
+            return drinkVm;
+        }
+
+        public void EditDrink(NewDrinkVm editDrinkVm)
+        {
+            var editedDrink = _mapper.Map<Drink>(editDrinkVm);
+            _drinkRepository.EditDrink(editedDrink);
+        }
+
     }
 }

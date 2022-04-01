@@ -14,5 +14,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         IQueryable<Drink> GetAllDrinks();
         ListDrinkForListVm GetAllDrinksForList(int pageSize, int pageNumber, string filterString);
         void DeleteDrink(int drinkId);
+        NewDrinkVm GetDrinkForEdit(int drinkId);
+        void EditDrink(NewDrinkVm editDrinkVm);
     }
 }

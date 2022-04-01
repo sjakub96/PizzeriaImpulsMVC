@@ -45,7 +45,21 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             return drinks;
         }
 
-        
+        public Drink GetDrink(int drinkId)
+        {
+            var drink = _context.Drinks.FirstOrDefault(d => d.Id == drinkId);
+            return drink;
+        }
+
+        public void EditDrink(Drink editedDrink)
+        {
+            _context.Attach(editedDrink);
+            _context.Entry(editedDrink).Property("Name").IsModified = true;
+            _context.Entry(editedDrink).Property("Price").IsModified = true;
+            _context.Entry(editedDrink).Property("Size").IsModified = true;
+
+            _context.SaveChanges();
+        }
 
     }
 }
