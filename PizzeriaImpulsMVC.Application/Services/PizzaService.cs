@@ -110,14 +110,10 @@ namespace PizzeriaImpulsMVC.Application.Services
             }
 
             bool pizzaIsMeat = false;
-
-            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            
+            if (newPizzaVm.ComponentPizzas.Any(p => p.IsMeat == true))
             {
-                if (newPizzaVm.ComponentPizzas[i].IsMeat)
-                {
-                    pizzaIsMeat = true;
-                    break;
-                }
+                pizzaIsMeat = true;
             }
 
             var pizza = new Pizza()
