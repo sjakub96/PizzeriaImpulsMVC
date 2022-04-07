@@ -17,7 +17,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Component
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<NewComponentVm, PizzeriaImpulsMVC.Domain.Models.Component>();
+            profile.CreateMap<NewComponentVm, PizzeriaImpulsMVC.Domain.Models.Component>()
+                .ReverseMap();
         }
     }
 }

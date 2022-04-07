@@ -94,31 +94,43 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public int AddPizza(NewPizzaVm newPizzaVm)
         {
+            bool pizzaIsMeat = false;
+            int componentsPrice = 0;
+
+            //Creating an intermediate table
             var componentPizzaList = new List<ComponentPizza>();
 
             for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
             {
-
                 var componentPizza = new ComponentPizza()
                 {
                     PizzaId = newPizzaVm.Id,
                     ComponentId = newPizzaVm.ComponentPizzas[i].Id,
                     
                 };
-
                 componentPizzaList.Add(componentPizza);
             }
+            //TODO: Add automatically calculating price off pizza dependet on components and size
 
-            bool pizzaIsMeat = false;
-            
-            if (newPizzaVm.ComponentPizzas.Any(p => p.IsMeat == true))
+            //Checking if pizza is meat
+            if (newPizzaVm.ComponentPizzas.Any(c => c.IsMeat == true))
             {
                 pizzaIsMeat = true;
             }
 
+            //Calculating the price off components
+            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            {
+                componentsPrice += newPizzaVm.ComponentPizzas[i].Price;
+            }
+
+            //Final price of pizza
+            int pizzaPrice = componentsPrice + newPizzaVm.Price;
+
+            //Final pizza
             var pizza = new Pizza()
             {
-                Price = newPizzaVm.Price,
+                Price = pizzaPrice,
                 IsMeat = pizzaIsMeat,
                 Name = newPizzaVm.Name,
                 ComponentPizzas = componentPizzaList
