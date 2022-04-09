@@ -14,6 +14,8 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
         void DeleteAddition(int additionId);
 
         IQueryable<Addition> GetAllAdditions();
-        
+
+        Addition GetAddition(int additionId);
+        void EditAddition(Addition editedAddition);
     }
 }

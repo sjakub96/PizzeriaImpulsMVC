@@ -16,7 +16,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Addition
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<NewAdditionVm, PizzeriaImpulsMVC.Domain.Models.Addition>();
+            profile.CreateMap<NewAdditionVm, PizzeriaImpulsMVC.Domain.Models.Addition>()
+                .ReverseMap();
         }
     }
 }

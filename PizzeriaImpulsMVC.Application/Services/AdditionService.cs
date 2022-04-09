@@ -55,5 +55,19 @@ namespace PizzeriaImpulsMVC.Application.Services
             return additionList;
             
         }
+
+        public NewAdditionVm GetAdditionForEdit(int additionId)
+        {
+            var addition = _additionRepository.GetAddition(additionId);
+            var additionVm = _mapper.Map<NewAdditionVm>(addition);
+
+            return additionVm;
+        }
+
+        public void EditAddition(NewAdditionVm additionForEdit)
+        {
+            var editedAddition = _mapper.Map<Addition>(additionForEdit);
+            _additionRepository.EditAddition(editedAddition);
+        }
     }
 }

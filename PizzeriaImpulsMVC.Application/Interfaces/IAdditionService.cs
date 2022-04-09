@@ -14,5 +14,9 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         int AddNewAddition(NewAdditionVm newAdditionVm);
 
         void DeleteAddition(int additionId);
+
+        NewAdditionVm GetAdditionForEdit(int additionId);
+
+        void EditAddition(NewAdditionVm additionForEdit);
     }
 }
