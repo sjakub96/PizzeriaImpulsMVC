@@ -39,9 +39,22 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<Pizza> GetAllPizzas()
         {
-            var pizzas = _context.Pizzas.Include(t => t.ComponentPizzas);
+            var pizzas = _context.Pizzas.Include(t => t.ComponentPizzas).ThenInclude(c => c.Component);
 
             return pizzas;
+        }
+
+        public Pizza GetPizzaById(int pizzaId)
+        {
+            var pizza = _context.Pizzas
+                .Include(t => t.ComponentPizzas)
+                .ThenInclude(c => c.Component)
+                .FirstOrDefault(x => x.Id == pizzaId);
+                
+
+            return pizza;
+
+
         }
 
        

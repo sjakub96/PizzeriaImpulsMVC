@@ -48,15 +48,35 @@ namespace PizzeriaImpulsMVC.Application.Services
          
         public List<PizzaForListVm> GetAllPizzas(string filterString)
         {
-            var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower())).ToList();
+            var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower()));
+            //var components = _componentRepository.GetAllComponents().ToList();
 
-            var components = _componentRepository.GetAllComponents().ToList();
+            var pizza = _pizzaRepository.GetPizzaById(8);
+            var pizzasList = new List<PizzaForListVm>();
+               
+                var pizzaForListVm = new PizzaForListVm()
+                {
+                    Id = pizza.Id,
+                    Price = pizza.Price,
+                    Name = pizza.Name,
+                    IsMeat = pizza.IsMeat,
+                    //Components = pizza.ComponentPizzas
+                };
 
-            var pizzaList = new List<PizzaForListVm>();
+                pizzasList.Add(pizzaForListVm);
+            
 
+            
+
+            //var pizzaList = new List<PizzaForListVm>();
+
+            /*
             for (int i = 0; i < pizzas.Count; i++)
             {
-                var componentList = new List<ComponentForListVm>();
+
+                
+                
+                
 
                 for (int b = 0; b < components.Count; b++)
                 {
@@ -77,19 +97,20 @@ namespace PizzeriaImpulsMVC.Application.Services
                     }
                         
                 }
-
+                
                 var pizzaForList = new PizzaForListVm()
                 {
                     Id = pizzas[i].Id,
                     Name = pizzas[i].Name,
                     Price = pizzas[i].Price,
                     IsMeat = pizzas[i].IsMeat,
-                    Components = componentList
+                    Components = pizzas[i].ComponentPizzas
                 };
 
                 pizzaList.Add(pizzaForList);
             }
-            return pizzaList;
+                */
+            return pizzasList;
         }
 
         public int AddPizza(NewPizzaVm newPizzaVm)
