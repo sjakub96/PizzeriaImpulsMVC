@@ -49,21 +49,34 @@ namespace PizzeriaImpulsMVC.Application.Services
         public List<PizzaForListVm> GetAllPizzas(string filterString)
         {
             var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower()));
-            //var components = _componentRepository.GetAllComponents().ToList();
+            
 
-            var pizza = _pizzaRepository.GetPizzaById(8);
+            //var pizza = _pizzaRepository.GetPizzaById(8);
             var pizzasList = new List<PizzaForListVm>();
-               
+
+            foreach (var item in pizzas)
+            {
+
                 var pizzaForListVm = new PizzaForListVm()
                 {
-                    Id = pizza.Id,
-                    Price = pizza.Price,
-                    Name = pizza.Name,
-                    IsMeat = pizza.IsMeat,
-                    //Components = pizza.ComponentPizzas
-                };
+                    Id = item.Id,
+                    Price = item.Price,
+                    Name = item.Name,
+                    IsMeat = item.IsMeat,
+                    Components = item.ComponentPizzas
+                    .Select(c => new ComponentForListVm()
+                    {
+                        Id = c.Component.Id,
+                        Name = c.Component.Name,
+                        IsMeat = c.Component.IsMeat,
+                        Price = c.Component.Price,
+                    }).ToList()
 
+                };
                 pizzasList.Add(pizzaForListVm);
+            }
+
+                
             
 
             
