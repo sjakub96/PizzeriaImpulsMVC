@@ -58,5 +58,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
             _context.SaveChanges();
         }
+
+        public Component GetComponentById(int componentId)
+        {
+            var component = _context.Components.FirstOrDefault(c => c.Id == componentId);
+
+            return component;
+        }
     }
 }

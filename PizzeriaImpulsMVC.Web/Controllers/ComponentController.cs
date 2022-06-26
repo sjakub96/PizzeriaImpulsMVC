@@ -78,5 +78,13 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult GetComponentDetails(int componentId)
+        {
+            var componentDetails = _componentService.GetComponentDetails(componentId);
+
+            return View(componentDetails);
+        }
+
     }
 }

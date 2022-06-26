@@ -17,6 +17,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         List<ComponentForListVm> GetAllComponents();
         NewComponentVm GetComponentForEdit(int componentId);
         void EditComponent(NewComponentVm editComponentVm);
+        ComponentForListVm GetComponentDetails(int componentId);
 
     }
 }

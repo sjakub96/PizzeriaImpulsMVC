@@ -51,7 +51,6 @@ namespace PizzeriaImpulsMVC.Application.Services
             var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower()));
             
 
-            //var pizza = _pizzaRepository.GetPizzaById(8);
             var pizzasList = new List<PizzaForListVm>();
 
             foreach (var item in pizzas)
@@ -76,53 +75,6 @@ namespace PizzeriaImpulsMVC.Application.Services
                 pizzasList.Add(pizzaForListVm);
             }
 
-                
-            
-
-            
-
-            //var pizzaList = new List<PizzaForListVm>();
-
-            /*
-            for (int i = 0; i < pizzas.Count; i++)
-            {
-
-                
-                
-                
-
-                for (int b = 0; b < components.Count; b++)
-                {
-                    for (int c = 0; c < pizzas[i].ComponentPizzas.ToList().Count; c++)
-                    {
-                        if (components[b].Id == pizzas[i].ComponentPizzas.ToList()[c].ComponentId)
-                        {
-                            var component = new ComponentForListVm()
-                            {
-                                Id = components[b].Id,
-                                IsMeat = components[b].IsMeat,
-                                Price = components[b].Price,
-                                Name = components[b].Name,
-                            };
-
-                            componentList.Add(component);
-                        }
-                    }
-                        
-                }
-                
-                var pizzaForList = new PizzaForListVm()
-                {
-                    Id = pizzas[i].Id,
-                    Name = pizzas[i].Name,
-                    Price = pizzas[i].Price,
-                    IsMeat = pizzas[i].IsMeat,
-                    Components = pizzas[i].ComponentPizzas
-                };
-
-                pizzaList.Add(pizzaForList);
-            }
-                */
             return pizzasList;
         }
 
@@ -194,6 +146,7 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             _pizzaRepository.DeletePizza(pizzaId);
         }
+        //TODO: Get pizza details
 
 
     }

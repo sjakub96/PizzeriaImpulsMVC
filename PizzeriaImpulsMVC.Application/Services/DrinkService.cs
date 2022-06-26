@@ -77,5 +77,13 @@ namespace PizzeriaImpulsMVC.Application.Services
             _drinkRepository.EditDrink(editedDrink);
         }
 
+        public DrinkForListVm GetDrinkDetails(int drinkId)
+        {
+            var drink = _drinkRepository.GetDrinkById(drinkId);
+            var drinkVm = _mapper.Map<DrinkForListVm>(drink);
+
+            return drinkVm;
+        }
+
     }
 }

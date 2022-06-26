@@ -16,5 +16,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         void DeleteDrink(int drinkId);
         NewDrinkVm GetDrinkForEdit(int drinkId);
         void EditDrink(NewDrinkVm editDrinkVm);
+        DrinkForListVm GetDrinkDetails(int drinkId);
     }
 }

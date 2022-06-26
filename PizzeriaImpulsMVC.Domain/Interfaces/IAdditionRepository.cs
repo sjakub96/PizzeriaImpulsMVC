@@ -17,5 +17,7 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
 
         Addition GetAddition(int additionId);
         void EditAddition(Addition editedAddition);
+
+        public Addition GetAdditionById(int additionId);
     }
 }

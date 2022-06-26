@@ -16,6 +16,8 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
         IQueryable<Component> GetAllComponents();
         Component GetComponent(int componentId);
         void EditComponent(Component editedComponent);
-        
+        Component GetComponentById(int componentId);
+
+
     }
 }

@@ -23,10 +23,10 @@
                         Name
                     </th>
                     <th>
-                        Price [zł]
+                        Price [ZŁ]
                     </th>
                     <th>
-                        Size [l]
+                        Size [L]
                     </th>
                     <th>
                         Actions
@@ -52,7 +52,7 @@
             
                     <td>
                         <a asp-controller="Drink" asp-action="EditDrink" asp-route-drinkId="@item.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Drink" asp-action="DrinkDetails" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>
+                        <a asp-controller="Drink" asp-action="GetDrinkDetails" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>
                         <a asp-controller="Drink" asp-action="DeleteDrink" asp-route-drinkId="@item.Id" class="btn btn-danger">Delete</a>
                         <a asp-controller="Cart" asp-action="AddDrinkToCart" asp-route-drinkId="@item.Id" class="btn btn-warning">Add To Cart</a>
                     </td>
