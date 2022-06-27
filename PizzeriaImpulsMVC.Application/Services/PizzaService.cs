@@ -59,7 +59,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                 var pizzaForListVm = new PizzaForListVm()
                 {
                     Id = item.Id,
-                    Price = item.Price,
+                    Price = item.TotalPrice,
                     Name = item.Name,
                     IsMeat = item.IsMeat,
                     Components = item.ComponentPizzas
@@ -110,13 +110,18 @@ namespace PizzeriaImpulsMVC.Application.Services
                 componentsPrice += newPizzaVm.ComponentPizzas[i].Price;
             }
 
-            //Final price of pizza
-            int pizzaPrice = componentsPrice + newPizzaVm.Price;
+            //User pirce
+            int userPrice = newPizzaVm.Price;
+
+            //Total price
+            int totalPrice = componentsPrice + userPrice;
 
             //Final pizza
             var pizza = new Pizza()
             {
-                Price = pizzaPrice,
+                UserPrice = userPrice,
+                ComponentsPrice = componentsPrice,
+                TotalPrice = totalPrice,
                 IsMeat = pizzaIsMeat,
                 Name = newPizzaVm.Name,
                 ComponentPizzas = componentPizzaList
