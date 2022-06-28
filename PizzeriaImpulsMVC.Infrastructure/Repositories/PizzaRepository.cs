@@ -51,9 +51,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .ThenInclude(c => c.Component)
                 .FirstOrDefault(x => x.Id == pizzaId);
                 
-
             return pizza;
-
 
         }
 

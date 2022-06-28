@@ -20,7 +20,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            
+
             var pizzas = _pizzaService.GetAllPizzasForList(5, 1, "");
 
             return View(pizzas);
@@ -48,14 +48,14 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult AddPizza()
         {
             var components = _componentService.GetAllComponents();
-            
+
             return View(new NewPizzaVm()
             {
                 ComponentPizzas = components
-                
-            }); 
+
+            });
         }
-         
+
         [HttpPost]
         [Route("pizza/add")]
         public IActionResult AddPizza(NewPizzaVm newPizzaVm)
@@ -75,5 +75,12 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult GetPizzaDetails(int pizzaId)
+        {
+            var pizza = _pizzaService.GetPizzaDetails(pizzaId);
+
+            return View(pizza);
+        }
     }
-}  //TODO: Add Index view to pizza views with filtering by name and pagination
+}

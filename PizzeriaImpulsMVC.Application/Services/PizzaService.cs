@@ -55,24 +55,8 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             foreach (var item in pizzas)
             {
-
-                var pizzaForListVm = new PizzaForListVm()
-                {
-                    Id = item.Id,
-                    Price = item.TotalPrice,
-                    Name = item.Name,
-                    IsMeat = item.IsMeat,
-                    Components = item.ComponentPizzas
-                    .Select(c => new ComponentForListVm()
-                    {
-                        Id = c.Component.Id,
-                        Name = c.Component.Name,
-                        IsMeat = c.Component.IsMeat,
-                        Price = c.Component.Price,
-                    }).ToList()
-
-                };
-                pizzasList.Add(pizzaForListVm);
+                var pizzaForListVm = PizzaToPizzaVmMapper(item);
+                pizzasList.Add(pizzaForListVm);               
             }
 
             return pizzasList;
@@ -151,8 +135,33 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             _pizzaRepository.DeletePizza(pizzaId);
         }
-        //TODO: Get pizza details
+        
+        public PizzaForListVm GetPizzaDetails(int pizzaId)
+        {
+            var pizza = _pizzaRepository.GetPizzaById(pizzaId);
+            var pizzaVm = PizzaToPizzaVmMapper(pizza);
+            return pizzaVm;
+        }
 
-
+        public PizzaForListVm PizzaToPizzaVmMapper(Pizza pizza)
+        {
+            var pizzaVm = new PizzaForListVm()
+            {
+                Id = pizza.Id,
+                Price = pizza.TotalPrice,
+                Name = pizza.Name,
+                IsMeat = pizza.IsMeat,
+                Components = pizza.ComponentPizzas
+                    .Select(c => new ComponentForListVm()
+                    {
+                        Id = c.Component.Id,
+                        Name = c.Component.Name,
+                        IsMeat = c.Component.IsMeat,
+                        Price = c.Component.Price,
+                    }).ToList()
+            };
+            return pizzaVm;
+        }
+       
     }
 }
