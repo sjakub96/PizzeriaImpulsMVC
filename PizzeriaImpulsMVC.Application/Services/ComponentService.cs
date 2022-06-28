@@ -82,6 +82,7 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             var editedComponent = _mapper.Map<Component>(editComponentVm);
             _componentRepository.EditComponent(editedComponent);
+
         }
 
         public ComponentForListVm GetComponentDetails(int componentId)

@@ -16,6 +16,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         ListPizzaForListVm GetAllPizzasForList(int pageSize, int pageNumber, string filterString);
         List<PizzaForListVm> GetAllPizzas(string filterString);
         void DeletePizza(int pizzaId);
+        NewPizzaVm GetPizzaForEdit(int pizzaId);
         PizzaForListVm GetPizzaDetails(int pizzaId);
     }
 }

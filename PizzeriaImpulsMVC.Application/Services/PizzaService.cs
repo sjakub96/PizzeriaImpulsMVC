@@ -136,6 +136,29 @@ namespace PizzeriaImpulsMVC.Application.Services
             _pizzaRepository.DeletePizza(pizzaId);
         }
         
+        public NewPizzaVm GetPizzaForEdit(int pizzaId)
+        {
+            var pizza = _pizzaRepository.GetPizzaById(pizzaId);
+
+
+            var pizzaForEdit = new NewPizzaVm()
+            {
+                Id = pizza.Id,
+                Price = pizza.UserPrice,
+                IsMeat = pizza.IsMeat,
+                Name = pizza.Name,
+                ComponentPizzas = pizza.ComponentPizzas.Select(c => new ComponentForListVm()
+                {
+                    Id = c.Component.Id,
+                    Name = c.Component.Name,
+                    IsMeat = c.Component.IsMeat,
+                    Price = c.Component.Price,
+                }).ToList()
+            };
+
+            return pizzaForEdit;
+        }
+
         public PizzaForListVm GetPizzaDetails(int pizzaId)
         {
             var pizza = _pizzaRepository.GetPizzaById(pizzaId);
