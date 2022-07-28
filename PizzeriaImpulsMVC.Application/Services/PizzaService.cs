@@ -139,7 +139,8 @@ namespace PizzeriaImpulsMVC.Application.Services
         public NewPizzaVm GetPizzaForEdit(int pizzaId)
         {
             var pizza = _pizzaRepository.GetPizzaById(pizzaId);
-
+            var components = _componentRepository.GetAllComponents()
+                .ProjectTo<ComponentForListVm>(_mapper.ConfigurationProvider).ToList();
 
             var pizzaForEdit = new NewPizzaVm()
             {
@@ -147,16 +148,19 @@ namespace PizzeriaImpulsMVC.Application.Services
                 Price = pizza.UserPrice,
                 IsMeat = pizza.IsMeat,
                 Name = pizza.Name,
-                ComponentPizzas = pizza.ComponentPizzas.Select(c => new ComponentForListVm()
-                {
-                    Id = c.Component.Id,
-                    Name = c.Component.Name,
-                    IsMeat = c.Component.IsMeat,
-                    Price = c.Component.Price,
-                }).ToList()
+                ComponentPizzas = components
             };
 
             return pizzaForEdit;
+        }
+
+        public void EditPizza(NewPizzaVm editPizzaVm, int pizzaId)
+        {
+            bool pizzaIsMeat = false;
+            int componentsPrice = 0;
+
+            _pizzaRepository.DeleteComponentPizzas(pizzaId);
+            
         }
 
         public PizzaForListVm GetPizzaDetails(int pizzaId)

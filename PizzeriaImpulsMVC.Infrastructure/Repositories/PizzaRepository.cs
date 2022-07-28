@@ -55,6 +55,39 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         }
 
-       
+        public void DeleteComponentPizzas(int pizzaId)
+        {
+            var componentsPizzasToDelete = _context.ComponentPizzas.Where(x => x.PizzaId == pizzaId);
+
+            _context.RemoveRange(componentsPizzasToDelete);
+            _context.SaveChanges();
+        }
+
+        public void EditPizza(Pizza editedPizza)
+        {
+            _context.Attach(editedPizza);
+            _context.Entry(editedPizza).Property("Name").IsModified = true;
+            _context.Entry(editedPizza).Property("IsMeat").IsModified = true;
+            _context.Entry(editedPizza).Property("UserPrice").IsModified = true;
+            _context.Entry(editedPizza).Property("ComponentsPrice").IsModified = true;
+            _context.Entry(editedPizza).Property("TotalPrice").IsModified = true;
+            _context.Entry(editedPizza).Property("ComponentPizzas").IsModified = true;
+            /*
+             declare @componentId int;
+
+             set @componentId = 3
+
+
+             select * from Pizzas 
+             where Id in (
+	             select PizzaId  from ComponentPizzas
+	             where ComponentId = @componentId)
+              */
+
+
+            _context.SaveChanges();
+        }
+
+
     }
 }
