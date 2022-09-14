@@ -53,11 +53,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void EditDrink(Drink editedDrink)
         {
-            _context.Attach(editedDrink);
-            _context.Entry(editedDrink).Property("Name").IsModified = true;
-            _context.Entry(editedDrink).Property("Price").IsModified = true;
-            _context.Entry(editedDrink).Property("Size").IsModified = true;
-
+            _context.Update(editedDrink);
             _context.SaveChanges();
         }
 

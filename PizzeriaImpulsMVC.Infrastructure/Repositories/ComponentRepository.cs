@@ -51,11 +51,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void EditComponent(Component editedComponent)
         {
-            _context.Attach(editedComponent);
-            _context.Entry(editedComponent).Property("Name").IsModified = true;
-            _context.Entry(editedComponent).Property("IsMeat").IsModified = false;
-            _context.Entry(editedComponent).Property("Price").IsModified = true;
-
+            _context.Update(editedComponent);
             _context.SaveChanges();
         }
 

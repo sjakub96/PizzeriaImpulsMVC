@@ -62,24 +62,42 @@ namespace PizzeriaImpulsMVC.Application.Services
             return pizzasList;
         }
 
-        public int AddPizza(NewPizzaVm newPizzaVm)
+        public int AddPizza(NewPizzaVm newPizzaVm, int pizzaId)
         {
             bool pizzaIsMeat = false;
             int componentsPrice = 0;
 
             //Creating an intermediate table
             var componentPizzaList = new List<ComponentPizza>();
-
-            for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+            if (pizzaId == 0)
             {
-                var componentPizza = new ComponentPizza()
+                for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
                 {
-                    PizzaId = newPizzaVm.Id,
-                    ComponentId = newPizzaVm.ComponentPizzas[i].Id,
-                    
-                };
-                componentPizzaList.Add(componentPizza);
+                    var componentPizza = new ComponentPizza()
+                    {
+                        PizzaId = newPizzaVm.Id,
+                        ComponentId = newPizzaVm.ComponentPizzas[i].Id,
+
+                    };
+                    componentPizzaList.Add(componentPizza);
+                }
             }
+            else
+            {
+                _pizzaRepository.DeleteComponentPizzas(pizzaId);
+
+                for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
+                {
+                    var componentPizza = new ComponentPizza()
+                    {
+                        PizzaId = newPizzaVm.Id,
+                        ComponentId = newPizzaVm.ComponentPizzas[i].Id,
+
+                    };
+                    componentPizzaList.Add(componentPizza);
+                }
+            }
+            
             //TODO: Add automatically calculating price off pizza dependet on components and size
 
             //Checking if pizza is meat
@@ -100,20 +118,42 @@ namespace PizzeriaImpulsMVC.Application.Services
             //Total price
             int totalPrice = componentsPrice + userPrice;
 
+            int id;
+
             //Final pizza
-            var pizza = new Pizza()
+            if (pizzaId == 0)
             {
-                UserPrice = userPrice,
-                ComponentsPrice = componentsPrice,
-                TotalPrice = totalPrice,
-                IsMeat = pizzaIsMeat,
-                Name = newPizzaVm.Name,
-                ComponentPizzas = componentPizzaList
-            };
+                var pizza = new Pizza()
+                {
+                    UserPrice = userPrice,
+                    ComponentsPrice = componentsPrice,
+                    TotalPrice = totalPrice,
+                    IsMeat = pizzaIsMeat,
+                    Name = newPizzaVm.Name,
+                    ComponentPizzas = componentPizzaList
+                };
 
-            var id = _pizzaRepository.AddPizza(pizza);
+                id = _pizzaRepository.AddPizza(pizza);
+                return id;
+            }
+            else
+            {
+                var pizza = new Pizza()
+                {
+                    Id = pizzaId,
+                    UserPrice = userPrice,
+                    ComponentsPrice = componentsPrice,
+                    TotalPrice = totalPrice,
+                    IsMeat = pizzaIsMeat,
+                    Name = newPizzaVm.Name,
+                    ComponentPizzas = componentPizzaList
+                };
 
-            return id;
+                 _pizzaRepository.EditPizza(pizza);
+            }
+            return 0;
+  
+            
         }
 
         public List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm)
@@ -139,8 +179,8 @@ namespace PizzeriaImpulsMVC.Application.Services
         public NewPizzaVm GetPizzaForEdit(int pizzaId)
         {
             var pizza = _pizzaRepository.GetPizzaById(pizzaId);
-            var components = _componentRepository.GetAllComponents()
-                .ProjectTo<ComponentForListVm>(_mapper.ConfigurationProvider).ToList();
+
+
 
             var pizzaForEdit = new NewPizzaVm()
             {
@@ -148,7 +188,14 @@ namespace PizzeriaImpulsMVC.Application.Services
                 Price = pizza.UserPrice,
                 IsMeat = pizza.IsMeat,
                 Name = pizza.Name,
-                ComponentPizzas = components
+                ComponentPizzas = pizza.ComponentPizzas
+                    .Select(c => new ComponentForListVm()
+                    {
+                        Id = c.Component.Id,
+                        Name = c.Component.Name,
+                        IsMeat = c.Component.IsMeat,
+                        Price = c.Component.Price,
+                    }).ToList()
             };
 
             return pizzaForEdit;
@@ -156,11 +203,9 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public void EditPizza(NewPizzaVm editPizzaVm, int pizzaId)
         {
-            bool pizzaIsMeat = false;
-            int componentsPrice = 0;
 
-            _pizzaRepository.DeleteComponentPizzas(pizzaId);
-            
+            AddPizza(editPizzaVm, pizzaId);
+
         }
 
         public PizzaForListVm GetPizzaDetails(int pizzaId)

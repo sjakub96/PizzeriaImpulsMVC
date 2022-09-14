@@ -64,7 +64,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             newPizzaVm.ComponentPizzas = checkedComponents;
 
-            int id = _pizzaService.AddPizza(newPizzaVm);
+            int id = _pizzaService.AddPizza(newPizzaVm, 0);
 
             return RedirectToAction("Index");
         }
@@ -80,14 +80,20 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult EditPizza(int pizzaId)
         {
             var pizza = _pizzaService.GetPizzaForEdit(pizzaId);
+            var components = _componentService.GetAllComponents();
+
+            pizza.ComponentPizzas = components;
 
             return View(pizza);
         }
         //TODO: Finish pizza editing
         [HttpPost]
-        public IActionResult EditPizza(NewPizzaVm newPizzaVm, int pizzaId)
+        public IActionResult EditPizza(NewPizzaVm newPizzaVm)
         {
-            _pizzaService.EditPizza(newPizzaVm, pizzaId);
+            var checkedComponents = _pizzaService.GetCheckedComponents(newPizzaVm);
+            newPizzaVm.ComponentPizzas = checkedComponents;
+
+            _pizzaService.EditPizza(newPizzaVm, newPizzaVm.Id);
 
             return RedirectToAction("Index");
         }

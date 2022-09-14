@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.Sql;
+using Microsoft.Data.SqlClient;
 
 namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 {
@@ -20,8 +22,11 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public int AddPizza(Pizza pizza)
         {
+            //_context.Database.ExecuteSqlInterpolated("SET IDENTITY_INSERT [dbo].[Pizzas] ON");
             _context.Pizzas.Add(pizza);
             _context.SaveChanges();
+            //_context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Pizzas] OFF");
+
 
             return pizza.Id;
         }
@@ -65,26 +70,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void EditPizza(Pizza editedPizza)
         {
-            _context.Attach(editedPizza);
-            _context.Entry(editedPizza).Property("Name").IsModified = true;
-            _context.Entry(editedPizza).Property("IsMeat").IsModified = true;
-            _context.Entry(editedPizza).Property("UserPrice").IsModified = true;
-            _context.Entry(editedPizza).Property("ComponentsPrice").IsModified = true;
-            _context.Entry(editedPizza).Property("TotalPrice").IsModified = true;
-            _context.Entry(editedPizza).Property("ComponentPizzas").IsModified = true;
-            /*
-             declare @componentId int;
+            _context.Pizzas.Update(editedPizza);
 
-             set @componentId = 3
-
-
-             select * from Pizzas 
-             where Id in (
-	             select PizzaId  from ComponentPizzas
-	             where ComponentId = @componentId)
-              */
-
-
+            foreach (var item in editedPizza.ComponentPizzas)
+            {
+                _context.ComponentPizzas.Add(item);
+            }
             _context.SaveChanges();
         }
 

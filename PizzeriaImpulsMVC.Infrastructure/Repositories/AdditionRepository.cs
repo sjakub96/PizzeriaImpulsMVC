@@ -53,10 +53,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void EditAddition(Addition editedAddition)
         {
-            _context.Attach(editedAddition);
-            _context.Entry(editedAddition).Property("Name").IsModified = true;
-            _context.Entry(editedAddition).Property("Price").IsModified = true;
-
+            _context.Update(editedAddition);
             _context.SaveChanges();
         }
 

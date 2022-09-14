@@ -10,7 +10,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IPizzaService
     {
-        int AddPizza(NewPizzaVm newPizzaVm);
+        int AddPizza(NewPizzaVm newPizzaVm, int pizzaId);
         List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm);
 
         ListPizzaForListVm GetAllPizzasForList(int pageSize, int pageNumber, string filterString);
