@@ -70,12 +70,15 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void EditPizza(Pizza editedPizza)
         {
-            _context.Pizzas.Update(editedPizza);
+            List<ComponentPizza> componentPizzas = new List<ComponentPizza>();
 
             foreach (var item in editedPizza.ComponentPizzas)
             {
-                _context.ComponentPizzas.Add(item);
+                componentPizzas.Add(item);
             }
+
+            _context.Pizzas.Update(editedPizza);
+            _context.ComponentPizzas.AddRange(componentPizzas);
             _context.SaveChanges();
         }
 
