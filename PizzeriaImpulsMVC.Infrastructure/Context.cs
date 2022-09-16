@@ -1,21 +1,24 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace PizzeriaImpulsMVC.Infrastructure
 {
-    public class Context : IdentityDbContext
+    public class Context : IdentityDbContext<UserAccount>
     {
         public DbSet<Addition>? Additions { get; set; }
         public DbSet<Component>? Components { get; set; }
         public DbSet<Drink>? Drinks { get; set; }
         public DbSet<Pizza>? Pizzas { get; set; }
         public DbSet<ComponentPizza> ComponentPizzas { get; set; }
+        public DbSet<UserAddress> UserAddresses { get; set; }
+        
         public Context(DbContextOptions options) : base(options)
         {
         }
@@ -38,5 +41,6 @@ namespace PizzeriaImpulsMVC.Infrastructure
                 .WithMany(t => t.ComponentPizzas)
                 .HasForeignKey(pt => pt.ComponentId);
         }
+
     }
 }

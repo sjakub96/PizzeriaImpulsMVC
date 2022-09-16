@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PizzeriaImpulsMVC.Application;
 using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 using PizzeriaImpulsMVC.Infrastructure;
 using PizzeriaImpulsMVC.Infrastructure.Repositories;
 
@@ -13,7 +15,7 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<Context>();
 
 builder.Services.AddApplication();

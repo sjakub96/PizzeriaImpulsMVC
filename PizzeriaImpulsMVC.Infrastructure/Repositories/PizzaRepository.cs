@@ -22,11 +22,8 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public int AddPizza(Pizza pizza)
         {
-            //_context.Database.ExecuteSqlInterpolated("SET IDENTITY_INSERT [dbo].[Pizzas] ON");
             _context.Pizzas.Add(pizza);
             _context.SaveChanges();
-            //_context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Pizzas] OFF");
-
 
             return pizza.Id;
         }
@@ -57,7 +54,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .FirstOrDefault(x => x.Id == pizzaId);
                 
             return pizza;
-
+            
         }
 
         public void DeleteComponentPizzas(int pizzaId)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzeriaImpulsMVC.Infrastructure;
 
@@ -11,9 +12,10 @@ using PizzeriaImpulsMVC.Infrastructure;
 namespace PizzeriaImpulsMVC.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220916204442_IdentityDBUser")]
+    partial class IdentityDBUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,12 +369,16 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserAccountId")
+                    b.Property<int>("UserAccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserAccountId1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserAccountId");
+                    b.HasIndex("UserAccountId1");
 
                     b.ToTable("UserAddresses");
                 });
@@ -451,7 +457,9 @@ namespace PizzeriaImpulsMVC.Infrastructure.Migrations
                 {
                     b.HasOne("PizzeriaImpulsMVC.Domain.Models.UserAccount", "UserAccount")
                         .WithMany()
-                        .HasForeignKey("UserAccountId");
+                        .HasForeignKey("UserAccountId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("UserAccount");
                 });
