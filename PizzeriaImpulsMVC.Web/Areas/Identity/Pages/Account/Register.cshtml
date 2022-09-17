@@ -42,6 +42,31 @@
                 <label asp-for="Input.DateOfBirth"></label>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
+            <div class="form-floating">
+                <input asp-for="Input.Country" class="form-control"  aria-required="true" />
+                <label asp-for="Input.Country"></label>
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.City" class="form-control"  aria-required="true" />
+                <label asp-for="Input.City"></label>
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Street" class="form-control"  aria-required="true" />
+                <label asp-for="Input.Street"></label>
+                <span asp-validation-for="Input.Street" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.HomeNumber" class="form-control"  aria-required="true" />
+                <label asp-for="Input.HomeNumber"></label>
+                <span asp-validation-for="Input.HomeNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.ApartmentNumber" class="form-control"  aria-required="true" />
+                <label asp-for="Input.ApartmentNumber"></label>
+                <span asp-validation-for="Input.ApartmentNumber" class="text-danger"></span>
+            </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>

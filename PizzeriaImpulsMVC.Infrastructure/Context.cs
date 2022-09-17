@@ -40,6 +40,9 @@ namespace PizzeriaImpulsMVC.Infrastructure
                 .HasOne<Component>(pt => pt.Component)
                 .WithMany(t => t.ComponentPizzas)
                 .HasForeignKey(pt => pt.ComponentId);
+
+            //builder.Entity<UserAddress>()
+               // .Property(x => x.UserAccountId).HasColumnType("nvarchar(450)");
         }
 
     }

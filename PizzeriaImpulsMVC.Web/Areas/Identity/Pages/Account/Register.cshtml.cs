@@ -102,6 +102,11 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public DateTime DateOfBirth { get; set; }
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Street { get; set; }
+            public int HomeNumber { get; set; }
+            public int ApartmentNumber { get; set; }
         }
 
 
@@ -119,11 +124,20 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
             {
                 //var user = CreateUser();
 
-                var user = new UserAccount 
+                var user = new UserAccount
                 {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    DateOfBirth = Input.DateOfBirth
+                    DateOfBirth = Input.DateOfBirth,
+                    UserAddress = new UserAddress()
+                    {
+                        Country = Input.Country,
+                        City = Input.City,
+                        Street = Input.Street,
+                        HomeNumber = Input.HomeNumber,
+                        ApartmentNumber = Input.ApartmentNumber
+
+                    }
                 };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

@@ -14,7 +14,7 @@ namespace PizzeriaImpulsMVC.Domain.Models
         public string Street { get; set; }
         public int HomeNumber { get; set; }
         public int ApartmentNumber { get; set; }
-
+        //public Guid UserAccountId { get; set; }
         public UserAccount UserAccount { get; set; }
     }
 }
