@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using PizzeriaImpulsMVC.Domain.Models;
+using PizzeriaImpulsMVC.Domain.Interfaces;
 
 namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
 {
@@ -22,11 +23,15 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<UserAccount> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUserManagmentRepository _userManagmentRepository;
 
-        public LoginModel(SignInManager<UserAccount> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<UserAccount> signInManager, 
+                        ILogger<LoginModel> logger, 
+                        IUserManagmentRepository userManagmentRepository)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManagmentRepository = userManagmentRepository;
         }
 
         /// <summary>
@@ -104,10 +109,11 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            bool isActive = _userManagmentRepository.IsUserActive(Input.Email);
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
+            
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -115,6 +121,11 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    if (!isActive)
+                    {
+                        ModelState.AddModelError(string.Empty, "This account has been deleted");
+                        return Page();
+                    }
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
@@ -132,7 +143,9 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
-            }
+            }           
+            
+            
 
             // If we got this far, something failed, redisplay form
             return Page();
