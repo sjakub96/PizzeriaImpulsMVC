@@ -20,20 +20,13 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
 
-            if(user != null)
+            if(user == null || user.IsActive == false )
             {
-                if (user.IsActive == true)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
             
         }

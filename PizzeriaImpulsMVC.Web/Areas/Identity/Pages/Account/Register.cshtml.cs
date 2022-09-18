@@ -129,6 +129,7 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     DateOfBirth = Input.DateOfBirth,
+                    IsActive = true,
                     UserAddress = new UserAddress()
                     {
                         Country = Input.Country,
@@ -136,6 +137,7 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
                         Street = Input.Street,
                         HomeNumber = Input.HomeNumber,
                         ApartmentNumber = Input.ApartmentNumber
+                        
 
                     }
                 };
