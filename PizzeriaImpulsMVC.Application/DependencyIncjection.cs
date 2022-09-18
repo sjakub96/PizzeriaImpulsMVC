@@ -18,6 +18,7 @@ namespace PizzeriaImpulsMVC.Application
             services.AddTransient<IComponentService, ComponentService>();
             services.AddTransient<IDrinkService, DrinkService>();
             services.AddTransient<IPizzaService, PizzaService>();
+            services.AddTransient<IUserManagmentService, UserManagmentService>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;

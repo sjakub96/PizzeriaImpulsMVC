@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzeriaImpulsMVC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
 {
     public interface IUserManagmentRepository
     {
-        public bool IsUserActive(string userEmail);
+       IQueryable<UserAccount> GetAllUsers();
+       bool IsUserActive(string userEmail);
     }
 }

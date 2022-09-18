@@ -1,4 +1,6 @@
-﻿using PizzeriaImpulsMVC.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,12 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         public UserManagmentRepository(Context context)
         {
             _context = context;
+        }
+
+        public IQueryable<UserAccount> GetAllUsers()
+        {
+            var users = _context.Users.Include(u => u.UserAddress);
+            return users;
         }
 
         public bool IsUserActive(string userEmail)
