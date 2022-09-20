@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PizzeriaImpulsMVC.Application.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
 {
-    public class UserForListVm
+    public class UserForListVm : IMapFrom<PizzeriaImpulsMVC.Domain.Models.UserAccount>
     {
         public string Id { get; set; }
         public string Email { get; set; }
