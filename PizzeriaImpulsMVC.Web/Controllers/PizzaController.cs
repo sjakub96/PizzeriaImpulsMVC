@@ -82,6 +82,17 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             var pizza = _pizzaService.GetPizzaForEdit(pizzaId);
             var components = _componentService.GetAllComponents();
 
+            foreach (var item in pizza.ComponentPizzas)
+            {
+                for (int i = 0; i < components.Count; i++)
+                {
+                    if (components[i].Id == item.Id)
+                    {
+                        components[i].IsChecked = true;
+                    }
+                }
+            }
+
             pizza.ComponentPizzas = components;
 
             return View(pizza);
