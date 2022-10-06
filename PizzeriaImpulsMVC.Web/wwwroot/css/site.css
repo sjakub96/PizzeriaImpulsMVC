@@ -1,46 +1,18 @@
 html {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
 }
 
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    margin-bottom: 60px;
-}
-
-header{
-    width: 200px;
-}
-
-.side-nav{
-    width: 250px;
-    height: 100%;
-    background: #0d74f5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 20px 30px;
-}
-.nav-links{
-    color:red;
-}
-a{
-    color:black;
-}
-
-.nav-item{
-    color:white;
-}
-
-.nav-link{
-    color: white;
+  margin-bottom: 60px;
 }
