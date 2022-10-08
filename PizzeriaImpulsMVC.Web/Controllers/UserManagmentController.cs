@@ -16,7 +16,33 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult Index()
         {
             var users = _userManagmentService.GetAllUsersForList();
+
             return View(users);
         }
+
+        [HttpGet]
+        public IActionResult GetUserDetails(string userId)
+        {
+            var user = _userManagmentService.GetUserDetails(userId);
+
+            return View(user);
+        }
+        //TODO: Add User registration date to model
+        [HttpGet]
+        public IActionResult DeleteUser(string userId)
+        {
+            _userManagmentService.DeleteUser(userId);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult RestoreUser(string userId)
+        {
+            _userManagmentService.RestoreUser(userId);
+
+            return RedirectToAction("Index");
+        }
+        
     }
 }

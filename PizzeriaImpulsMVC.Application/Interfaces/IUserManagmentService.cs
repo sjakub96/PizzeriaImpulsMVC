@@ -9,6 +9,9 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IUserManagmentService
     {
+        void DeleteUser(string userId);
+        void RestoreUser(string userId);
         ListUserForListVm GetAllUsersForList();
+        UserForListVm GetUserDetails(string userId);
     }
 }

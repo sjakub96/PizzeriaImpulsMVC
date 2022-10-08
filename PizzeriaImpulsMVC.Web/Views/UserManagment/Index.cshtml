@@ -43,9 +43,20 @@
                             @Html.DisplayFor(modelItem => item.IsActive)
                         </td>
                         <td>
-                            <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-drinkId="@item.Id" class="btn btn-primary">Manage User Roles</a>
-                            <a asp-controller="UserManagment" asp-action="Details" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>                    
-                            <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-drinkId="@item.Id" class="btn btn-danger">Delete User</a>
+                            @if (item.IsActive == false)
+                            {
+                                <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
+                                <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+                                <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
+                                <a asp-controller="UserManagment" asp-action="RestoreUser" asp-route-userId="@item.Id" class="btn btn-success">Restore User</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
+                                <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+                                <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
+                            }
+                            
                         </td>
                     </tr>
                 }

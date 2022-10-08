@@ -97,7 +97,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(pizza);
         }
-        //TODO: Finish pizza editing
+
         [HttpPost]
         public IActionResult EditPizza(NewPizzaVm newPizzaVm)
         {

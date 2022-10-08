@@ -20,7 +20,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<UserAccount> GetAllUsers()
         {
-            var users = _context.Users.Include(u => u.UserAddress);
+            var users = _context.Users.Include(u => u.UserAddress).OrderBy(e => e.Email).OrderByDescending(a => a.IsActive);
             return users;
         }
 
@@ -37,6 +37,34 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 return true;
             }
             
+        }
+
+        public UserAccount GetUserById(string userId)
+        {
+            var user = _context.Users.Include(u => u.UserAddress).FirstOrDefault(us => us.Id == userId);
+
+            return user;
+
+        }
+
+        public void DeleteUser(string userId)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+            user.IsActive = false;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+        public void RestoreUser(string userId)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+            user.IsActive = true;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

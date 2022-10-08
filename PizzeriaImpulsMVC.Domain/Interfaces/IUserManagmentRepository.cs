@@ -11,5 +11,9 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
     {
        IQueryable<UserAccount> GetAllUsers();
        bool IsUserActive(string userEmail);
+       UserAccount GetUserById(string userId);
+       void DeleteUser(string userId);
+       void RestoreUser(string userId);
+
     }
 }

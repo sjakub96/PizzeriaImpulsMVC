@@ -15,7 +15,12 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsActive { get; set; }
-
+        public DateTime DateOfBirth { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public int HomeNumber { get; set; }
+        public int ApartmentNumber { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.UserAccount, UserForListVm>();
