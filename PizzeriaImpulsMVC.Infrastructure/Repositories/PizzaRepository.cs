@@ -46,6 +46,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             return pizzas;
         }
 
+
         public Pizza GetPizzaById(int pizzaId)
         {
             var pizza = _context.Pizzas
@@ -57,12 +58,30 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             
         }
 
-        public void DeleteComponentPizzas(int pizzaId)
+        public IQueryable<ComponentPizza> GetComponentPizzasByComponentId(int componentId)
         {
-            var componentsPizzasToDelete = _context.ComponentPizzas.Where(x => x.PizzaId == pizzaId);
+            var componentsPizzas = _context.ComponentPizzas.Where(x => x.ComponentId == componentId);
 
-            _context.RemoveRange(componentsPizzasToDelete);
-            _context.SaveChanges();
+            return componentsPizzas;
+        }
+
+        public void DeleteComponentPizzas(int pizzaId, int componentId)
+        {
+            if (componentId == 0 && pizzaId != 0)
+            {
+                var componentsPizzasToDelete = _context.ComponentPizzas.Where(x => x.PizzaId == pizzaId);
+
+                _context.RemoveRange(componentsPizzasToDelete);
+                _context.SaveChanges();
+            }
+            else
+            {
+                var componentsPizzasToDelete = _context.ComponentPizzas.Where(x => x.ComponentId == componentId);
+
+                _context.RemoveRange(componentsPizzasToDelete);
+                _context.SaveChanges();
+            }
+            
         }
 
         public void EditPizza(Pizza editedPizza)
@@ -78,6 +97,24 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             _context.ComponentPizzas.AddRange(componentPizzas);
             _context.SaveChanges();
         }
+
+        public void UpdatePizzaPrice(List<int> pizzaIds, Component component)
+        {
+
+            foreach (var item in pizzaIds)
+            {
+                var pizza = _context.Pizzas.FirstOrDefault(x => x.Id == item);
+
+                pizza.ComponentsPrice = pizza.ComponentsPrice - component.Price;
+                pizza.TotalPrice = pizza.TotalPrice - component.Price;
+
+                _context.Pizzas.Update(pizza);
+                _context.SaveChanges();
+            }
+            
+
+        }
+
 
 
     }

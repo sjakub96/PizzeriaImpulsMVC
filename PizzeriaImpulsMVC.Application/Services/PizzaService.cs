@@ -84,7 +84,7 @@ namespace PizzeriaImpulsMVC.Application.Services
             }
             else
             {
-                _pizzaRepository.DeleteComponentPizzas(pizzaId);
+                _pizzaRepository.DeleteComponentPizzas(pizzaId, 0);
 
                 for (int i = 0; i < newPizzaVm.ComponentPizzas.Count; i++)
                 {

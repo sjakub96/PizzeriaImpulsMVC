@@ -16,7 +16,9 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
         IQueryable<Pizza> GetAllPizzas();
 
         Pizza GetPizzaById(int pizzaId);
-        void DeleteComponentPizzas(int pizzaId);
+        IQueryable<ComponentPizza> GetComponentPizzasByComponentId(int componentId);
+        void UpdatePizzaPrice(List<int> pizzaIds, Component component);
+        void DeleteComponentPizzas(int pizzaId, int componentId);
         void EditPizza(Pizza editedPizza);
     }
 }
