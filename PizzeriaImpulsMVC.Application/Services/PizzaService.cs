@@ -98,7 +98,6 @@ namespace PizzeriaImpulsMVC.Application.Services
                 }
             }
             
-            //TODO: Add automatically calculating price off pizza dependet on components and size
 
             //Checking if pizza is meat
             if (newPizzaVm.ComponentPizzas.Any(c => c.IsMeat == true))
