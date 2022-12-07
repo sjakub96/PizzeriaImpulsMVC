@@ -13,5 +13,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         void RestoreUser(string userId);
         ListUserForListVm GetAllUsersForList();
         UserForListVm GetUserDetails(string userId);
+        ListRolesForListVm GetRoles();
     }
 }

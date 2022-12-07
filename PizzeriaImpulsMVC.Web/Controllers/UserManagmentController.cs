@@ -43,6 +43,14 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult GetRoles()
+        {
+            var roles =_userManagmentService.GetRoles();
+
+            return View(roles);
+        }
         
     }
 }

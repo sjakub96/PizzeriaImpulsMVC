@@ -68,5 +68,19 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             _userManagmentRepository.RestoreUser(userId);
         }
+
+        public ListRolesForListVm GetRoles()
+        {
+            var roles = _userManagmentRepository.GetRoles()
+                .ProjectTo<RolesForListVm>(_mapper.ConfigurationProvider)
+                .ToList();
+
+            var rolesList = new ListRolesForListVm()
+            {
+                Roles = roles
+            };
+
+            return rolesList;
+        }
     }
 }

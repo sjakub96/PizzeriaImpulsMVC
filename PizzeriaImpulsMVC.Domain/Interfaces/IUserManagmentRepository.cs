@@ -1,4 +1,6 @@
-﻿using PizzeriaImpulsMVC.Domain.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using PizzeriaImpulsMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
        UserAccount GetUserById(string userId);
        void DeleteUser(string userId);
        void RestoreUser(string userId);
+       DbSet<IdentityRole> GetRoles();
 
     }
 }

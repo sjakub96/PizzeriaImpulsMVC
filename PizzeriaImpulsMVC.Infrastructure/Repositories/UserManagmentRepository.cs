@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
 using System;
@@ -20,7 +21,10 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public IQueryable<UserAccount> GetAllUsers()
         {
-            var users = _context.Users.Include(u => u.UserAddress).OrderBy(e => e.Email).OrderByDescending(a => a.IsActive);
+            var users = _context.Users
+                .Include(u => u.UserAddress)
+                .OrderBy(e => e.Email)
+                .OrderByDescending(a => a.IsActive);
             return users;
         }
 
@@ -41,7 +45,9 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public UserAccount GetUserById(string userId)
         {
-            var user = _context.Users.Include(u => u.UserAddress).FirstOrDefault(us => us.Id == userId);
+            var user = _context.Users
+                .Include(u => u.UserAddress)
+                .FirstOrDefault(us => us.Id == userId);
 
             return user;
 
@@ -66,5 +72,13 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             _context.Users.Update(user);
             _context.SaveChanges();
         }
+
+        public DbSet<IdentityRole> GetRoles()
+        {
+            var roles = _context.Roles;
+
+            return roles;
+        }
+
     }
 }
