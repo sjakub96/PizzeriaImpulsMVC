@@ -33,7 +33,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             {
                 filterString = String.Empty;
             }
-            //TODO: Customize page number in Drink View
+
             var drinks = _drinkService.GetAllDrinksForList(pageSize, pageNumber.Value, filterString);
             return View(drinks);
         }
