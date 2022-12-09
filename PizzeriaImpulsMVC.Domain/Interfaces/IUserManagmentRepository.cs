@@ -17,6 +17,6 @@ namespace PizzeriaImpulsMVC.Domain.Interfaces
        void DeleteUser(string userId);
        void RestoreUser(string userId);
        DbSet<IdentityRole> GetRoles();
-
+       void AddRole(IdentityRole identityRole);
     }
 }

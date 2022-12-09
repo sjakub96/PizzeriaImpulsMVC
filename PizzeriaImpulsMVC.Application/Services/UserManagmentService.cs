@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Identity;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.UserManagment;
 using PizzeriaImpulsMVC.Domain.Interfaces;
@@ -81,6 +82,19 @@ namespace PizzeriaImpulsMVC.Application.Services
             };
 
             return rolesList;
+        }
+
+        public void AddRole(NewRoleVm newRoleVm)
+        {
+            var newRole = new IdentityRole
+            {
+                Id = newRoleVm.Name,
+                Name = newRoleVm.Name,
+                NormalizedName = newRoleVm.Name.ToUpper(),
+                ConcurrencyStamp = null
+            };
+
+            _userManagmentRepository.AddRole(newRole);
         }
     }
 }

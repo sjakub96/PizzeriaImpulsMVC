@@ -80,5 +80,11 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             return roles;
         }
 
+        public void AddRole(IdentityRole identityRole)
+        {
+            _context.Roles.Add(identityRole);
+            _context.SaveChanges();
+        }
+
     }
 }

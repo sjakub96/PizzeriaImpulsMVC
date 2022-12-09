@@ -7,13 +7,9 @@
     <UserSecretsId>aspnet-PizzeriaImpulsMVC.Web-7DF4032C-2B29-4D0F-BDFA-F25C9D6C5D5C</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Views\UserManagment\GetRoles.cshtml" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
-    <None Include="Views\UserManagment\GetRoles.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,12 +30,5 @@
     <ProjectReference Include="..\PizzeriaImpulsMVC.Infrastructure\PizzeriaImpulsMVC.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\UserManagment\GetRoles.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\UserManagment\GetRoles.cshtml" />
-  </ItemGroup>
 
 </Project>

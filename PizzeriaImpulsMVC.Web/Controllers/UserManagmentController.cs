@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
+using PizzeriaImpulsMVC.Application.Services;
+using PizzeriaImpulsMVC.Application.ViewModels.Component;
+using PizzeriaImpulsMVC.Application.ViewModels.UserManagment;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
@@ -51,6 +54,21 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(roles);
         }
-        
+
+        [HttpGet]
+        [Route("rolesManagment/add")]
+        public IActionResult AddRole()
+        {
+            return View(new NewRoleVm());
+        }
+
+        [HttpPost]
+        [Route("rolesManagment/add")]
+        public IActionResult AddRole(NewRoleVm newRoleVm)
+        {
+            _userManagmentService.AddRole(newRoleVm);
+
+            return RedirectToAction("GetRoles");
+        }
     }
 }
