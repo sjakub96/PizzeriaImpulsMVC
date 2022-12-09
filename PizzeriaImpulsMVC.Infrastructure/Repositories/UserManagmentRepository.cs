@@ -86,5 +86,11 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public IQueryable<IdentityUserRole<string>> GetUserRoles(string userId)
+        {
+            var userRoles = _context.UserRoles.Where(u => u.UserId == userId);
+
+            return userRoles;
+        }
     }
 }

@@ -96,5 +96,31 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             _userManagmentRepository.AddRole(newRole);
         }
+
+        public ListUserRolesVm GetUserRoles(string userId)
+        {
+            var userRoles = _userManagmentRepository.GetUserRoles(userId);
+
+            var userRolesList = new List<UserRolesVm>();
+
+            foreach (var userRole in userRoles)
+            {
+                UserRolesVm userRolesVm = new UserRolesVm()
+                {
+                    UserId = userRole.UserId,
+                    RoleId = userRole.RoleId,
+                    IsChecked = true
+                };
+
+                userRolesList.Add(userRolesVm);
+            }
+
+            var listUserRoles = new ListUserRolesVm()
+            {
+                UserRoles = userRolesList
+            };
+
+            return listUserRoles;
+        }
     }
 }

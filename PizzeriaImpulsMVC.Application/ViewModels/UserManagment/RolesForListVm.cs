@@ -16,6 +16,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
         public string NormalizedName { get; set; }
         public string ConcurrencyStamp { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<IdentityRole, RolesForListVm>();

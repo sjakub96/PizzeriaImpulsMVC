@@ -70,5 +70,40 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return RedirectToAction("GetRoles");
         }
+
+        [HttpGet]
+        public IActionResult ManageUserRoles(string userId) 
+        {
+            var roles = _userManagmentService.GetRoles();
+            var userRoles = _userManagmentService.GetUserRoles(userId);
+            /*
+            for (int i = 0; i < userRoles.UserRoles.Count; i++)
+            {
+
+                if (roles.Roles.Any(x => x.Id == userRoles.UserRoles[i].RoleId))
+                {
+                    roles.Roles[i].IsChecked = true;
+                }
+
+                
+                if (userRoles.UserRoles[i].RoleId == roles.Roles[i].Id)
+                {
+                    roles.Roles[i].IsChecked = true;
+                }
+                
+            }
+            */
+
+            foreach (var item in roles.Roles)
+            {
+                if (userRoles.UserRoles.Where(x => x.RoleId == item.Id).ToString() == item.Id)
+                {
+                    item.IsChecked = true;
+                }
+            }
+
+
+            return View(roles);
+        }
     }
 }
