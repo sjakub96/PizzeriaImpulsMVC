@@ -74,21 +74,9 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [HttpGet]
         public IActionResult ManageUserRoles(string userId) 
         {
-            var roles = _userManagmentService.GetRoles();
-            var userRoles = _userManagmentService.GetUserRoles(userId);
+            var rolesView = _userManagmentService.GenerateRolesView(userId);
 
-            foreach (var item in roles.Roles)
-            {
-                for (int i = 0; i < userRoles.UserRoles.Count; i++)
-                {
-                    if (item.Id == userRoles.UserRoles[i].RoleId)
-                    {
-                        item.IsChecked = true;
-                    }
-                }
-            }
-
-            return View(roles);
+            return View(rolesView);
         }
     }
 }

@@ -122,5 +122,24 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return listUserRoles;
         }
+
+        public ListRolesForListVm GenerateRolesView(string userId)
+        {
+            var roles = GetRoles();
+            var userRoles = GetUserRoles(userId);
+
+            foreach (var item in roles.Roles)
+            {
+                for (int i = 0; i < userRoles.UserRoles.Count; i++)
+                {
+                    if (item.Id == userRoles.UserRoles[i].RoleId)
+                    {
+                        item.IsChecked = true;
+                    }
+                }
+            }
+
+            return roles;
+        }
     }
 }

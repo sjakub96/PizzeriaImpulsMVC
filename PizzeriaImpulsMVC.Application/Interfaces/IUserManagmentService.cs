@@ -16,5 +16,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         ListRolesForListVm GetRoles();
         void AddRole(NewRoleVm newRoleVm);
         ListUserRolesVm GetUserRoles(string userId);
+        ListRolesForListVm GenerateRolesView(string userId);
     }
 }
