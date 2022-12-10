@@ -48,7 +48,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             var user = _context.Users
                 .Include(u => u.UserAddress)
                 .FirstOrDefault(us => us.Id == userId);
-
+            
             return user;
 
         }

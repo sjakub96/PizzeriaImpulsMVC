@@ -42,7 +42,7 @@ namespace PizzeriaImpulsMVC.Application.Services
         public UserForListVm GetUserDetails(string userId)
         {
             var user = _userManagmentRepository.GetUserById(userId);
-
+            
             var userVm = new UserForListVm
             {
                 Email = user.Email,
