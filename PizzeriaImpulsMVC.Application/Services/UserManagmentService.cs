@@ -117,7 +117,8 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             var listUserRoles = new ListUserRolesVm()
             {
-                UserRoles = userRolesList
+                UserRoles = userRolesList,
+                
             };
 
             return listUserRoles;
@@ -139,7 +140,28 @@ namespace PizzeriaImpulsMVC.Application.Services
                 }
             }
 
+            roles.UserId = userId;
+
             return roles;
+        }
+
+        public void UpdateUserRoles(string userId, List<RolesForListVm> userRolesVm)
+        {
+            var userRolesList = new List<IdentityUserRole<string>>();
+
+            foreach (var role in userRolesVm)
+            {
+                var userRole = new IdentityUserRole<string>
+                {
+                    RoleId = role.Id,
+                    UserId = userId
+                };
+
+                userRolesList.Add(userRole);
+            }
+
+
+            _userManagmentRepository.UpdateUserRoles(userId, userRolesList);
         }
     }
 }

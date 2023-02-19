@@ -78,5 +78,14 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(rolesView);
         }
+
+        [HttpPost]
+        public IActionResult ManageUserRoles(string userId, ListRolesForListVm userRolesVm)
+        {
+            var userRoles = userRolesVm.Roles.Where(u => u.IsChecked == true).ToList();
+            _userManagmentService.UpdateUserRoles(userId, userRoles);
+
+            return RedirectToAction("Index");
+        }
     }
 }

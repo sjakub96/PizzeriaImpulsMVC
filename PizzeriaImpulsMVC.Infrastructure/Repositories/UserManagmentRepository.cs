@@ -92,5 +92,14 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
             return userRoles;
         }
+
+        public void UpdateUserRoles(string userId, List<IdentityUserRole<string>> userRolesList)
+        {
+            var userRoles = _context.UserRoles.Where(u => u.UserId == userId);
+            _context.UserRoles.RemoveRange(userRoles);
+            _context.AddRange(userRolesList);
+            _context.SaveChanges();
+
+        }
     }
 }

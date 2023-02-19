@@ -16,6 +16,8 @@
                 @for (int i = 0; i < Model.Roles.Count; i++)
                 {  
                     @Html.CheckBoxFor(model => Model.Roles[i].IsChecked)
+                    @Html.HiddenFor(model => Model.Roles[i].Id)
+                    @Html.HiddenFor(model => Model.UserId)
                     @Html.DisplayFor(model => Model.Roles[i].Id) 
                     <br />
                 }                               
