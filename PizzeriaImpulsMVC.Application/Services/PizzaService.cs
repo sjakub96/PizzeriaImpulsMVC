@@ -233,6 +233,23 @@ namespace PizzeriaImpulsMVC.Application.Services
             };
             return pizzaVm;
         }
-       
+
+        public List<ComponentForListVm> UpdateIsCheckStatus(NewPizzaVm pizza, List<ComponentForListVm> components)
+        {
+            foreach (var item in pizza.ComponentPizzas)
+            {
+                for (int i = 0; i < components.Count; i++)
+                {
+                    if (components[i].Id == item.Id)
+                    {
+                        components[i].IsChecked = true;
+                    }
+                }
+            }
+
+            return components;
+        }
+
+
     }
 }

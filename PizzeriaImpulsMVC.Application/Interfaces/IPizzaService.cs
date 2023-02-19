@@ -19,5 +19,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
         NewPizzaVm GetPizzaForEdit(int pizzaId);
         PizzaForListVm GetPizzaDetails(int pizzaId);
         void EditPizza(NewPizzaVm newPizzaVm, int pizzaId);
+        List<ComponentForListVm> UpdateIsCheckStatus(NewPizzaVm pizza, List<ComponentForListVm> components);
     }
 }
