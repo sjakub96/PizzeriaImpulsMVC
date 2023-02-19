@@ -15,7 +15,8 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsActive { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
+        public DateTime RegistrationDate { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string Street { get; set; }

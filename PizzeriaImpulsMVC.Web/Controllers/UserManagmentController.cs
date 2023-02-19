@@ -28,6 +28,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             var user = _userManagmentService.GetUserDetails(userId);
 
+
             return View(user);
         }
         //TODO: Add User registration date to model

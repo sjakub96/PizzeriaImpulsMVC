@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.DateOfBirth)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfBirth)
+            @Html.DisplayFor(model => model.DateOfBirth.Day)-@Html.DisplayFor(model => model.DateOfBirth.Month)-@Html.DisplayFor(model => model.DateOfBirth.Year) 
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Country)
@@ -63,6 +63,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ApartmentNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationDate)
         </dd>
 
     </dl>
