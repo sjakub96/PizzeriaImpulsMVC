@@ -54,7 +54,8 @@ namespace PizzeriaImpulsMVC.Application.Services
                 City = user.UserAddress.City,
                 Street = user.UserAddress.Street,
                 HomeNumber = user.UserAddress.HomeNumber,
-                ApartmentNumber = user.UserAddress.ApartmentNumber
+                ApartmentNumber = user.UserAddress.ApartmentNumber,
+                RegistrationDate = user.RegistrationDate
             };
 
             return userVm;
