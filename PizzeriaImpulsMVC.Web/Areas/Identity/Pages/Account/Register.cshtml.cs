@@ -101,7 +101,8 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
 
             public string FirstName { get; set; }
             public string LastName { get; set; }
-            public DateOnly DateOfBirth { get; set; }
+            [DataType(DataType.DateTime)]
+            public DateTime DateOfBirth { get; set; }
             public string Country { get; set; }
             public string City { get; set; }
             public string Street { get; set; }
@@ -128,7 +129,7 @@ namespace PizzeriaImpulsMVC.Web.Areas.Identity.Pages.Account
                 {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    DateOfBirth = Input.DateOfBirth,
+                    DateOfBirth = DateOnly.FromDateTime(Input.DateOfBirth),
                     RegistrationDate = DateTime.Now,
                     IsActive = true,
                     UserAddress = new UserAddress()

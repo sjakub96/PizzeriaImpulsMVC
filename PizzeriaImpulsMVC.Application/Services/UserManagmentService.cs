@@ -42,13 +42,32 @@ namespace PizzeriaImpulsMVC.Application.Services
         public UserForListVm GetUserDetails(string userId)
         {
             var user = _userManagmentRepository.GetUserById(userId);
-            
+
+            var modyfiedDate = string.Empty;
+
+            if (user.DateOfBirth.Day < 10 && user.DateOfBirth.Month < 10)
+            {
+                modyfiedDate = $"0{user.DateOfBirth.Day}.0{user.DateOfBirth.Month}.{user.DateOfBirth.Year}";
+            }
+            else if(user.DateOfBirth.Day < 10 && user.DateOfBirth.Month > 9)
+            {
+                modyfiedDate = $"0{user.DateOfBirth.Day}.{user.DateOfBirth.Month}.{user.DateOfBirth.Year}";
+            }
+            else if(user.DateOfBirth.Day > 9 && user.DateOfBirth.Month < 10)
+            {
+                modyfiedDate = $"{user.DateOfBirth.Day}.0{user.DateOfBirth.Month}.{user.DateOfBirth.Year}";
+            }
+            else
+            {
+                modyfiedDate = $"{user.DateOfBirth.Day}.{user.DateOfBirth.Month}.{user.DateOfBirth.Year}";
+            }
+
             var userVm = new UserForListVm
             {
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                DateOfBirth = user.DateOfBirth,
+                DateOfBirth = modyfiedDate,
                 IsActive = user.IsActive,
                 Country = user.UserAddress.Country,
                 City = user.UserAddress.City,
