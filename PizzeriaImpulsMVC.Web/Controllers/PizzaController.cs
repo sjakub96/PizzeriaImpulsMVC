@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.Pizza;
@@ -18,6 +19,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
 
@@ -27,6 +29,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(int pageSize, int? pageNumber, string filterString)
         {
             if (!pageNumber.HasValue)
@@ -45,6 +48,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpGet]
         [Route("pizza/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddPizza()
         {
             var components = _componentService.GetAllComponents();
@@ -58,6 +62,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("pizza/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddPizza(NewPizzaVm newPizzaVm)
         {
             var checkedComponents = _pizzaService.GetCheckedComponents(newPizzaVm);
@@ -69,6 +74,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Manager")]
         public IActionResult DeletePizza(int pizzaId)
         {
             _pizzaService.DeletePizza(pizzaId);
@@ -77,6 +83,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditPizza(int pizzaId)
         {
             var pizza = _pizzaService.GetPizzaForEdit(pizzaId);
@@ -90,6 +97,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditPizza(NewPizzaVm newPizzaVm)
         {
             var checkedComponents = _pizzaService.GetCheckedComponents(newPizzaVm);
@@ -101,6 +109,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetPizzaDetails(int pizzaId)
         {
             var pizza = _pizzaService.GetPizzaDetails(pizzaId);

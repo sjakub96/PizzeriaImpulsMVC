@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Addition;
 
@@ -14,6 +15,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var additions = _additionService.GetAllAdditionsForList(5, 1, "");
@@ -22,6 +24,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(int pageSize, int? pageNumber, string filterString)
         {
             if (!pageNumber.HasValue)
@@ -40,6 +43,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpGet]
         [Route("addition/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddAddition()
         {
             return View(new NewAdditionVm());
@@ -47,12 +51,14 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("addition/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddAddition(NewAdditionVm newAdditionVm)
         {
             var id = _additionService.AddNewAddition(newAdditionVm);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Manager")]
         public IActionResult DeleteAddition(int additionId)
         {
             _additionService.DeleteAddition(additionId);
@@ -61,6 +67,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditAddition(int additionId)
         {
             var addition = _additionService.GetAdditionForEdit(additionId);
@@ -68,6 +75,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditAddition(NewAdditionVm editAdditionVm)
         {
             _additionService.EditAddition(editAdditionVm);
@@ -76,6 +84,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAdditionDetails(int additionId)
         {
             var additionDetails = _additionService.GetAdditionDetails(additionId);

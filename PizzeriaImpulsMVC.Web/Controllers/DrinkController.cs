@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Drink;
@@ -16,6 +17,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var drinks = _drinkService.GetAllDrinksForList(5, 1, "");
@@ -23,6 +25,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(int pageSize, int? pageNumber, string filterString)
         {
             if(!pageNumber.HasValue)
@@ -41,6 +44,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpGet]
         [Route("drink/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddDrink()
         {
             return View(new NewDrinkVm());
@@ -49,6 +53,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("drink/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddDrink(NewDrinkVm newDrinkVm)
         {
 
@@ -57,6 +62,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Manager")]
         public IActionResult DeleteDrink(int drinkId)
         {
             _drinkService.DeleteDrink(drinkId);
@@ -65,6 +71,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditDrink(int drinkId)
         {
             var drink = _drinkService.GetDrinkForEdit(drinkId);
@@ -72,6 +79,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditDrink(NewDrinkVm editDrinkVm)
         {
             _drinkService.EditDrink(editDrinkVm);
@@ -80,6 +88,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetDrinkDetails(int drinkId)
         {
             var drink = _drinkService.GetDrinkDetails(drinkId);

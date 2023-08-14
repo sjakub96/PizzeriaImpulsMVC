@@ -4,9 +4,13 @@
     Drinks
 </h1>
 
+@if(User.IsInRole("Manager"))
+{
 <p>
     <a asp-action="AddDrink" class="btn btn-success">Add Drink</a>
 </p>
+}
+
 <form asp-action="Index" asp-controller="Drink" method="post">
     <p>
         <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
@@ -49,12 +53,18 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Size)
                     </td>
-            
                     <td>
-                        <a asp-controller="Drink" asp-action="EditDrink" asp-route-drinkId="@item.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Drink" asp-action="GetDrinkDetails" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>
-                        <a asp-controller="Drink" asp-action="DeleteDrink" asp-route-drinkId="@item.Id" class="btn btn-danger">Delete</a>
-                        <a asp-controller="Cart" asp-action="AddDrinkToCart" asp-route-drinkId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        @if(User.IsInRole("Manager"))
+                        {
+                            <a asp-controller="Drink" asp-action="EditDrink" asp-route-drinkId="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Drink" asp-action="GetDrinkDetails" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Drink" asp-action="DeleteDrink" asp-route-drinkId="@item.Id" class="btn btn-danger">Delete</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Drink" asp-action="GetDrinkDetails" asp-route-drinkId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Cart" asp-action="AddDrinkToCart" asp-route-drinkId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        }
                     </td>
                 </tr>
         }

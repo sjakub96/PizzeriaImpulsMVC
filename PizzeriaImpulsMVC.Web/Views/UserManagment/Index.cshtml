@@ -4,9 +4,12 @@
     User Managment
 </h1>
 
+@if(User.IsInRole("Admin"))
+{
 <p>
     <a asp-action="GetRoles" class="btn btn-success">Manage Roles</a>
 </p>
+}
 
 <form asp-action="Index" asp-controller="UserManagment" method="post">
     <div class="row">
@@ -49,16 +52,34 @@
                         <td>
                             @if (item.IsActive == false)
                             {
-                                <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
-                                <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
-                                <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
-                                <a asp-controller="UserManagment" asp-action="RestoreUser" asp-route-userId="@item.Id" class="btn btn-success">Restore User</a>
+                                @if(User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
+                                    <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+                                    <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
+                                    <a asp-controller="UserManagment" asp-action="RestoreUser" asp-route-userId="@item.Id" class="btn btn-success">Restore User</a>
+                                }
+                                else if(User.IsInRole("Manager"))
+                                {
+                                    <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+
+                                }
+                                
                             }
                             else
                             {
-                                <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
-                                <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
-                                <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
+                                @if(User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="UserManagment" asp-action="ManageUserRoles" asp-route-userId="@item.Id" class="btn btn-primary">Manage User Roles</a>
+                                    <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+                                    <a asp-controller="UserManagment" asp-action="DeleteUser" asp-route-userId="@item.Id" class="btn btn-danger">Delete User</a>
+                                }
+                                else if(User.IsInRole("Manager")) 
+                                {
+                                    <a asp-controller="UserManagment" asp-action="GetUserDetails" asp-route-userId="@item.Id" class="btn btn-info">Details</a>                    
+
+                                }
+                                
                             }
                             
                         </td>

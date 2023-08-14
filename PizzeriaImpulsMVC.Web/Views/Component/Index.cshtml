@@ -5,9 +5,13 @@
     Components
 </h1>
 
+@if(User.IsInRole("Manager"))
+{
 <p>
     <a asp-action="AddComponent" class="btn btn-success">Add Component</a>
 </p>
+}
+
 <form asp-action="Index" asp-controller="Component" method="post">
     <p>
         <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
@@ -51,10 +55,17 @@
                         @Html.DisplayFor(modelItem => item.IsMeat)
                     </td>
                     <td>
-                        <a asp-controller="Component" asp-action="EditComponent" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Component" asp-action="GetComponentDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
-                        <a asp-controller="Component" asp-action="DeleteComponent" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
-                        <a asp-controller="Cart" asp-action="AddComponentToCart" asp-route-componentId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        @if(User.IsInRole("Manager"))
+                        {
+                            <a asp-controller="Component" asp-action="EditComponent" asp-route-componentId="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Component" asp-action="GetComponentDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Component" asp-action="DeleteComponent" asp-route-componentId="@item.Id" class="btn btn-danger">Delete</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Component" asp-action="GetComponentDetails" asp-route-componentId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Cart" asp-action="AddComponentToCart" asp-route-componentId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        }
                     </td>
                 </tr>
         }

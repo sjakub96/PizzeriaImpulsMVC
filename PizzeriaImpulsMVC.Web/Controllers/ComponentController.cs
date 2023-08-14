@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
 
@@ -14,6 +15,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var components = _componentService.GetAllComponentsForList(5, 1, "");
@@ -22,6 +24,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(int pageSize, int? pageNumber, string filterString)
         {
             if (!pageNumber.HasValue)
@@ -41,6 +44,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpGet]
         [Route("component/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddComponent()
         {
             return View(new NewComponentVm());
@@ -48,6 +52,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("component/add")]
+        [Authorize(Roles = "Manager")]
         public IActionResult AddComponent(NewComponentVm newComponentVm)
         {
             var id = _componentService.AddNewComponent(newComponentVm);
@@ -55,6 +60,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Manager")]
         public IActionResult DeleteComponent(int componentId)
         {
             _componentService.DeleteComponent(componentId);
@@ -63,6 +69,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditComponent(int componentId)
         {
             var component = _componentService.GetComponentForEdit(componentId);
@@ -71,6 +78,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public IActionResult EditComponent(NewComponentVm newComponentVm)
         {
             _componentService.EditComponent(newComponentVm);
@@ -79,6 +87,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetComponentDetails(int componentId)
         {
             var componentDetails = _componentService.GetComponentDetails(componentId);

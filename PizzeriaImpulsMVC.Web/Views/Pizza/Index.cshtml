@@ -4,9 +4,14 @@
     Pizzas
 </h1>
 
+@if(User.IsInRole("Manager"))
+{
 <p>
     <a asp-action="AddPizza" class="btn btn-success">Add Pizza</a>
 </p>
+}
+
+
 <form asp-action="Index" asp-controller="Pizza" method="post">
     <p>
         <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
@@ -60,10 +65,17 @@
                         }
                         </td>
                         <td>
-                            <a asp-controller="Pizza" asp-action="EditPizza" asp-route-pizzaId="@item.Id" class="btn btn-primary">Edit</a>
-                            <a asp-controller="Pizza" asp-action="GetPizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
-                            <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-pizzaId="@item.Id" class="btn btn-danger">Delete</a>
-                            <a asp-controller="Pizza" asp-action="AddPizzaToCart" asp-route-pizzaId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                            @if(User.IsInRole("Manager"))
+                            {
+                                <a asp-controller="Pizza" asp-action="EditPizza" asp-route-pizzaId="@item.Id" class="btn btn-primary">Edit</a>
+                                <a asp-controller="Pizza" asp-action="GetPizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
+                                <a asp-controller="Pizza" asp-action="DeletePizza" asp-route-pizzaId="@item.Id" class="btn btn-danger">Delete</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Pizza" asp-action="GetPizzaDetails" asp-route-pizzaId="@item.Id" class="btn btn-info">Details</a>
+                                <a asp-controller="Pizza" asp-action="AddPizzaToCart" asp-route-pizzaId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                            }
                         </td>
                     </tr>
                 }

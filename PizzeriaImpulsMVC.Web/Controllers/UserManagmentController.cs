@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.Services;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
@@ -16,6 +17,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
         public IActionResult Index()
         {
             var users = _userManagmentService.GetAllUsersForList();
@@ -24,6 +26,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
         public IActionResult GetUserDetails(string userId)
         {
             var user = _userManagmentService.GetUserDetails(userId);
@@ -31,8 +34,10 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(user);
         }
-        //TODO: Add User registration date to model
+
+
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteUser(string userId)
         {
             _userManagmentService.DeleteUser(userId);
@@ -41,6 +46,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult RestoreUser(string userId)
         {
             _userManagmentService.RestoreUser(userId);
@@ -49,6 +55,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetRoles()
         {
             var roles =_userManagmentService.GetRoles();
@@ -58,6 +65,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpGet]
         [Route("rolesManagment/add")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddRole()
         {
             return View(new NewRoleVm());
@@ -65,6 +73,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Route("rolesManagment/add")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddRole(NewRoleVm newRoleVm)
         {
             _userManagmentService.AddRole(newRoleVm);
@@ -73,6 +82,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ManageUserRoles(string userId) 
         {
             var rolesView = _userManagmentService.GenerateRolesView(userId);
@@ -81,6 +91,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult ManageUserRoles(string userId, ListRolesForListVm userRolesVm)
         {
             var userRoles = userRolesVm.Roles.Where(u => u.IsChecked == true).ToList();

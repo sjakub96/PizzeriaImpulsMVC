@@ -4,9 +4,13 @@
     Additions
 </h1>
 
+@if(User.IsInRole("Manager"))
+{
 <p>
     <a asp-action="AddAddition"  class="btn btn-success">Add Addition</a>
 </p>
+}
+
 <form asp-action="Index" asp-controller="Addition" method="post">
     <p>
         <input type="text" asp-for="FilterString" name="filterString" id="filterString" />
@@ -44,10 +48,18 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        <a asp-controller="Addition" asp-action="EditAddition" asp-route-additionId="@item.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Addition" asp-action="GetAdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
-                        <a asp-controller="Addition" asp-action="DeleteAddition" asp-route-additionId="@item.Id" class="btn btn-danger">Delete</a>
-                        <a asp-controller="Cart" asp-action="AddAdditionToCart" asp-route-additionId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        @if(User.IsInRole("Manager"))
+                        {
+                            <a asp-controller="Addition" asp-action="GetAdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Addition" asp-action="EditAddition" asp-route-additionId="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Addition" asp-action="DeleteAddition" asp-route-additionId="@item.Id" class="btn btn-danger">Delete</a>
+
+                        }
+                        else
+                        {
+                            <a asp-controller="Addition" asp-action="GetAdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Cart" asp-action="AddAdditionToCart" asp-route-additionId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                        }
                     </td>
                 </tr>
         }
