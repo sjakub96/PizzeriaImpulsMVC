@@ -5,6 +5,7 @@ using PizzeriaImpulsMVC.Application.ViewModels.Addition;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
+    //Gitbash test
     public class AdditionController : Controller
     {
         private readonly IAdditionService _additionService;
