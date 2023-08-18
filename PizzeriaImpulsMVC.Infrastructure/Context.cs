@@ -18,7 +18,9 @@ namespace PizzeriaImpulsMVC.Infrastructure
         public DbSet<Pizza>? Pizzas { get; set; }
         public DbSet<ComponentPizza> ComponentPizzas { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
-        
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public Context(DbContextOptions options) : base(options)
         {
         }
