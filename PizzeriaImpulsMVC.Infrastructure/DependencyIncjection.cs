@@ -18,6 +18,7 @@ namespace PizzeriaImpulsMVC.Infrastructure
             services.AddTransient<IDrinkRepository, DrinkRepository>();
             services.AddTransient<IPizzaRepository, PizzaRepository>();
             services.AddTransient<IUserManagmentRepository, UserManagmentRepository>();
+            services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>();
 
             return services;
         }
