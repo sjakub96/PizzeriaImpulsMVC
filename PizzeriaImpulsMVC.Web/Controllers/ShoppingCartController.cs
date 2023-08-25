@@ -13,7 +13,7 @@ public class ShoppingCartController : Controller
     
     public ShoppingCartController(IShoppingCartService shoppingCartService)
     {
-        shoppingCartService = _shoppingCartService;
+        _shoppingCartService = shoppingCartService;
 
     }
     [HttpGet]
@@ -24,12 +24,14 @@ public class ShoppingCartController : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
+    //[HttpPost]
     public IActionResult AddAdditionToCart(int additionId)
     {
-        var userId = HttpContext.User.Identity.Name;
+        //var userId = HttpContext.User.Identity.Name;
 
-        var id = _shoppingCartService.AddToCart(additionId, ProductType.Addition, userId);
+        var userId = "test";
+
+        _shoppingCartService.AddToCart(additionId, ProductType.Addition.ToString(), userId);
 
         return RedirectToAction("Index");
     }

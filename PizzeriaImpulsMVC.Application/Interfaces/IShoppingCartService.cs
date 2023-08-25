@@ -7,5 +7,5 @@ public interface IShoppingCartService
 {
     ListShoppingCartVm GetShoppingCart(string userId);
     void DeleteFromShoppingCart(int recordId);
-    int AddToCart(int productId, ProductType productType, string userId);
+    int AddToCart(int productId, string productType, string userId);
 }
