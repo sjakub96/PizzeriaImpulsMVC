@@ -6,6 +6,6 @@ public interface IShoppingCartRepository
 {
     List<ShoppingCart> GetShoppingCart(string userId);
     void DeleteFromShoppingCart(int recordId);
-    int AddToCart(ShoppingCart shoppingCart);
+    int AddToCart(int productId, string productType, string userId);
 
 }
