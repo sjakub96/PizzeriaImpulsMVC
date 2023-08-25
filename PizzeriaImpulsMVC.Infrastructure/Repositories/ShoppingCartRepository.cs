@@ -36,10 +36,24 @@ public class ShoppingCartRepository : IShoppingCartRepository
         }
         else if(productType == "Addition")
         {
-            var cartId = _context.ShoppingCarts.FirstOrDefault(u => u.UserId == userId).CartId;
+
+            var cartId = 0;
+            var cart = _context.ShoppingCarts.Where(sc => sc.UserId == userId)
+                                                .FirstOrDefault();
+
+            if (cart != null)
+            {
+                cartId = cart.CartId;
+            }
+
+            /*
+            var cartId = _context.ShoppingCarts.Where(sc => sc.UserId == userId)
+                                                .Select(c => c.CartId)
+                                                .FirstOrDefault();
+            */
             var addition = _context.Additions.FirstOrDefault(a => a.Id == productId);
 
-            if (cartId == null)
+            if (cartId == 0)
             {
                 var shoppingCart = new ShoppingCart()
                 {

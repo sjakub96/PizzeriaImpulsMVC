@@ -13,7 +13,7 @@ public class ShoppingCartService : IShoppingCartService
     
     public ShoppingCartService(IShoppingCartRepository shoppingCartRepository)
     {
-        shoppingCartRepository = _shoppingCartRepository;
+        _shoppingCartRepository = shoppingCartRepository;
     }
     public ListShoppingCartVm GetShoppingCart(string userId)
     {
@@ -29,7 +29,7 @@ public class ShoppingCartService : IShoppingCartService
 
     public int AddToCart(int productId, string productType, string userId)
     {
-        var id = _shoppingCartRepository.AddToCart(productId, productType.ToString(), userId);
+        var id = _shoppingCartRepository.AddToCart(productId, productType, userId);
 
         return id;
     }
