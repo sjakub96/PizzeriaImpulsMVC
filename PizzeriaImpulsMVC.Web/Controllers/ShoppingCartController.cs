@@ -17,6 +17,7 @@ public class ShoppingCartController : Controller
 
     }
     [HttpGet]
+    [Authorize(Roles = "User")]
     public IActionResult Index()
     {
         var userName = HttpContext.User.Identity.Name;
@@ -25,6 +26,7 @@ public class ShoppingCartController : Controller
     }
 
     //[HttpPost]
+    [Authorize(Roles = "User")]
     public IActionResult AddAdditionToCart(int additionId)
     {
         var userName = HttpContext.User.Identity.Name;
@@ -34,6 +36,7 @@ public class ShoppingCartController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "User")]
     public IActionResult AddDrinkToCart(int drinkId)
     {
         var userName = HttpContext.User.Identity.Name;
@@ -44,6 +47,7 @@ public class ShoppingCartController : Controller
 
     }
 
+    [Authorize(Roles = "User")]
     public IActionResult AddPizzaToCart(int pizzaId)
     {
         var userName = HttpContext.User.Identity.Name;
@@ -53,6 +57,7 @@ public class ShoppingCartController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "User")]
     public IActionResult DeleteProductFromCart(int recordId)
     {
         _shoppingCartService.DeleteRecord(recordId);
