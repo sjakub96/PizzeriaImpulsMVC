@@ -254,4 +254,97 @@ public class ShoppingCartRepository : IShoppingCartRepository
         }
         
     }
+
+    /*
+
+    //TODO:
+    private void AddToCartFunc(int productId, string productType, string userName)
+    {
+        object product = null;
+
+        switch (productType)
+        {
+            case "Pizza":
+                product  = _context.Pizzas.FirstOrDefault(a => a.Id == productId);
+                break;
+
+            case "Drink":
+                product = _context.Drinks.FirstOrDefault(a => a.Id == productId);
+                break;
+
+            case "Addition":
+                product = _context.Additions.FirstOrDefault(a => a.Id == productId);
+                break;
+            default:
+                break;
+        }
+
+        var cartId = _context.ShoppingCarts.Where(sc => sc.UserId == userName)
+                                                .Select(c => c.CartId)
+                                                .FirstOrDefault();
+
+        if (cartId == 0)
+        {
+            var shoppingCart = new ShoppingCart()
+            {
+                UserId = userName,
+                ProductId = productId,
+                ProductName = product.Name,
+                ProductCount = 1,
+                ProductType = productType,
+                UnitPrice = addition.Price,
+                Price = addition.Price,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.ShoppingCarts.Add(shoppingCart);
+            _context.SaveChanges();
+
+            var shoppingCartForUpdate = _context.ShoppingCarts.FirstOrDefault(u => u.UserId == userName);
+            var id = shoppingCart.RecordId;
+
+            shoppingCartForUpdate.CartId = id;
+
+            _context.Update(shoppingCartForUpdate);
+            _context.SaveChanges();
+
+        }
+        else
+        {
+            var shoppingCartProducts = _context.ShoppingCarts.Where(c => c.CartId == cartId);
+
+            if (shoppingCartProducts.Any(scp => scp.ProductId == productId && scp.ProductType == productType))
+            {
+                var shoppingCartForUpdate = _context.ShoppingCarts.FirstOrDefault(scp =>
+                    scp.ProductId == productId && scp.ProductType == productType);
+
+                shoppingCartForUpdate.ProductCount += 1;
+                shoppingCartForUpdate.Price += addition.Price;
+
+                _context.Update(shoppingCartForUpdate);
+                _context.SaveChanges();
+
+            }
+            else
+            {
+                var shoppingCart = new ShoppingCart()
+                {
+                    CartId = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userName).CartId,
+                    UserId = userName,
+                    ProductId = productId,
+                    ProductName = addition.Name,
+                    ProductCount = 1,
+                    ProductType = productType,
+                    UnitPrice = addition.Price,
+                    Price = addition.Price,
+                    CreatedAt = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userName).CreatedAt
+                };
+
+                _context.ShoppingCarts.Add(shoppingCart);
+                _context.SaveChanges();
+
+            }
+        }
+    }
+    */
 }
