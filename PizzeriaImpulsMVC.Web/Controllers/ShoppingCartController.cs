@@ -6,7 +6,7 @@ using PizzeriaImpulsMVC.Application.ViewModels.ShoppingCart;
 
 namespace PizzeriaImpulsMVC.Web.Controllers;
 
-
+[Authorize]
 public class ShoppingCartController : Controller
 {
     private readonly IShoppingCartService _shoppingCartService;
@@ -49,6 +49,13 @@ public class ShoppingCartController : Controller
         var userName = HttpContext.User.Identity.Name;
 
         _shoppingCartService.AddToCart(pizzaId, ProductType.Pizza.ToString(), userName);
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult DeleteProductFromCart(int recordId)
+    {
+        _shoppingCartService.DeleteRecord(recordId);
 
         return RedirectToAction("Index");
     }

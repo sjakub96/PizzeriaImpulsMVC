@@ -49,15 +49,14 @@ public class ShoppingCartService : IShoppingCartService
         return listShoppingCartVm;
     }
 
-    public void DeleteFromShoppingCart(int recordId)
+    public void DeleteRecord(int recordId)
     {
-        
+        _shoppingCartRepository.DeleteRecord(recordId);
     }
 
-    public int AddToCart(int productId, string productType, string userName)
+    public void AddToCart(int productId, string productType, string userName)
     {
-        var id = _shoppingCartRepository.AddToCart(productId, productType, userName);
+        _shoppingCartRepository.AddToCart(productId, productType, userName);
 
-        return id;
     }
 }

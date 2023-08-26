@@ -19,12 +19,18 @@ public class ShoppingCartRepository : IShoppingCartRepository
         return shoppingCart;
     }
 
-    public void DeleteFromShoppingCart(int recordId)
+    public void DeleteRecord(int recordId)
     {
-        
+        var shoppingCartRow = _context.ShoppingCarts.Find(recordId);
+
+        if (shoppingCartRow != null)
+        {
+            _context.ShoppingCarts.Remove(shoppingCartRow);
+            _context.SaveChanges();
+        }
     }
 
-    public int AddToCart(int productId, string productType, string userName)
+    public void AddToCart(int productId, string productType, string userName)
     {
         if (productType == "Pizza")
         {
@@ -59,8 +65,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 _context.Update(shoppingCartForUpdate);
                 _context.SaveChanges();
 
-                return shoppingCartForUpdate.CartId;
-
 
             }
             else
@@ -77,8 +81,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
 
                     _context.Update(shoppingCartForUpdate);
                     _context.SaveChanges();
-
-                    return shoppingCartForUpdate.CartId;
 
                 }
                 else
@@ -99,7 +101,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                     _context.ShoppingCarts.Add(shoppingCart);
                     _context.SaveChanges();
 
-                    return shoppingCart.CartId;
                 }
             }
         }
@@ -137,8 +138,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 _context.Update(shoppingCartForUpdate);
                 _context.SaveChanges();
 
-                return shoppingCartForUpdate.CartId;
-
 
             }
             else
@@ -155,8 +154,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
 
                     _context.Update(shoppingCartForUpdate);
                     _context.SaveChanges();
-
-                    return shoppingCartForUpdate.CartId;
 
                 }
                 else
@@ -178,7 +175,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                     _context.ShoppingCarts.Add(shoppingCart);
                     _context.SaveChanges();
 
-                    return shoppingCart.CartId;
                 }
             }
         }
@@ -216,9 +212,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 _context.Update(shoppingCartForUpdate);
                 _context.SaveChanges();
 
-                return shoppingCartForUpdate.CartId;
-
-
             }
             else
             {
@@ -234,8 +227,6 @@ public class ShoppingCartRepository : IShoppingCartRepository
                     
                     _context.Update(shoppingCartForUpdate);
                     _context.SaveChanges();
-                    
-                    return shoppingCartForUpdate.CartId;
                     
                 }
                 else
@@ -256,13 +247,11 @@ public class ShoppingCartRepository : IShoppingCartRepository
                     _context.ShoppingCarts.Add(shoppingCart);
                     _context.SaveChanges();
 
-                    return shoppingCart.CartId;
                 }
             }
             
             
         }
         
-        return 0;
     }
 }

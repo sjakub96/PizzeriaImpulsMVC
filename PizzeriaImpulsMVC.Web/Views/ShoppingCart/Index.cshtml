@@ -4,7 +4,16 @@
     ShoppingCart
 </h1>
 
-
+@if(Model.ShoppingCartRows.Count == 0)
+{
+    <h4>
+        Your shopping cart is empty.
+        <br>
+        Go through the product menus and come back again.
+    </h4>
+}
+else
+{
 
 <form asp-action="Index" asp-controller="ShoppingCart" method="post">
     <div class="row">
@@ -15,13 +24,16 @@
                         Name
                     </th>
                     <th>
+                        Size [l]
+                    </th>
+                    <th>
                         Count
                     </th>
                     <th>
-                        UnitPrice
+                        UnitPrice [$]
                     </th>
                     <th>
-                        TotalPrice 
+                        TotalPrice [$]
                     </th>
                     <th>
                         Actions
@@ -36,6 +48,9 @@
                         @Html.DisplayFor(modelItem => item.ProductName)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.ProductSize)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ProductCount)
                     </td>
                     <td>
@@ -44,17 +59,42 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TotalPrice)
                     </td>
+                    <td>
+                        @if (User.IsInRole("User"))
+                        {
+                            <a asp-controller="ShoppingCart" asp-action="DeleteProductFromCart" asp-route-recordId="@item.RecordId" class="btn btn-danger">Delete</a>
+                        }
+                    </td>
                 </tr>
         }
         <tr>
+            <th>
+                Summary
+            </th>
             <td>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+
+            </td>
+            <th>
                 @Html.DisplayFor(modelItem => modelItem.SummaryPrice)
+            </th>
+            <td>
+                @if (User.IsInRole("User"))
+                {
+                    <a asp-controller="ShoppingCart" asp-action="MakeOrder"  class="btn btn-success">Make Order</a>
+                }
             </td>
         </tr>
             </tbody>
         </table>
     </div>
 </form>
+}
 
 @section Scripts
 {
