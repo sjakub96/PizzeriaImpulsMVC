@@ -4,12 +4,13 @@ public class OrderDetail
 {
     public int Id { get; set; }
     public int OrderId { get; set; }
-    public int AdditionId { get; set; }
-    public int DrinkId { get; set; }
-    public int PizzaId { get; set; }
+    public string UserId { get; set; }
+    public int ProductId { get; set; }
+    public string ProductName { get; set; }
+    public decimal? ProductSize { get; set; }
+    public int ProductCount { get; set; }
+    public string ProductType { get; set; }
     public decimal UnitPrice { get; set; }
-    public Order Order { get; set; }
-    public Addition Addition { get; set; }
-    public Drink Drink { get; set; }
-    public Pizza Pizza { get; set; }
+    public decimal Price { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

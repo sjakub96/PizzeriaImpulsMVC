@@ -8,7 +8,7 @@ public class Order
     public string LastName { get; set; }
     public string City { get; set; }
     public string Street { get; set; }
-    public string HombeNumber { get; set; }
+    public string HomeNumber { get; set; }
     public string ApartmentNumber { get; set; }
     public string PhoneNumber { get; set; }
     public decimal Total { get; set; }
