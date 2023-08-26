@@ -19,9 +19,9 @@ public class ShoppingCartController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var userId = HttpContext.User.Identity.Name;
-        var shoppingCart = _shoppingCartService.GetShoppingCart(userId);
-        return RedirectToAction("Index");
+        var userName = HttpContext.User.Identity.Name;
+        var shoppingCartVm = _shoppingCartService.GetShoppingCart(userName);
+        return View(shoppingCartVm);
     }
 
     //[HttpPost]
@@ -29,9 +29,26 @@ public class ShoppingCartController : Controller
     {
         var userName = HttpContext.User.Identity.Name;
 
-        //var userId = "test";
-
         _shoppingCartService.AddToCart(additionId, ProductType.Addition.ToString(), userName);
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult AddDrinkToCart(int drinkId)
+    {
+        var userName = HttpContext.User.Identity.Name;
+
+        _shoppingCartService.AddToCart(drinkId, ProductType.Drink.ToString(), userName);
+
+        return RedirectToAction("Index");
+
+    }
+
+    public IActionResult AddPizzaToCart(int pizzaId)
+    {
+        var userName = HttpContext.User.Identity.Name;
+
+        _shoppingCartService.AddToCart(pizzaId, ProductType.Pizza.ToString(), userName);
 
         return RedirectToAction("Index");
     }

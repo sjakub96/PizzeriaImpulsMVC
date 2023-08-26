@@ -18,8 +18,35 @@ public class ShoppingCartService : IShoppingCartService
     public ListShoppingCartVm GetShoppingCart(string userId)
     {
         List<ShoppingCartVm> shoppingCartRows = new List<ShoppingCartVm>();
+       
+
         var shoppingCart = _shoppingCartRepository.GetShoppingCart(userId);
-        return new ListShoppingCartVm();
+
+        foreach (var shoppingCartRow in shoppingCart)
+        {
+            var shoppingCartVm = new ShoppingCartVm()
+            {
+                RecordId = shoppingCartRow.RecordId,
+                CartId = shoppingCartRow.CartId,
+                ProductCount = shoppingCartRow.ProductCount,
+                ProductId = shoppingCartRow.ProductId,
+                ProductName = shoppingCartRow.ProductName,
+                ProductSize = shoppingCartRow.ProductSize,
+                UnitPrice = shoppingCartRow.UnitPrice,
+                TotalPrice = shoppingCartRow.Price,
+                ProductType = shoppingCartRow.ProductType
+            };
+
+            shoppingCartRows.Add(shoppingCartVm);
+
+        }
+
+        var listShoppingCartVm = new ListShoppingCartVm();
+
+        listShoppingCartVm.ShoppingCartRows = shoppingCartRows;
+        listShoppingCartVm.SummaryPrice = shoppingCartRows.Sum(p => p.TotalPrice);
+
+        return listShoppingCartVm;
     }
 
     public void DeleteFromShoppingCart(int recordId)

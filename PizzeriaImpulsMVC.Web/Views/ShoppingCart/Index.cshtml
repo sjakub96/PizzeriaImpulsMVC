@@ -1,0 +1,68 @@
+﻿@model PizzeriaImpulsMVC.Application.ViewModels.ShoppingCart.ListShoppingCartVm
+
+<h1>
+    ShoppingCart
+</h1>
+
+
+
+<form asp-action="Index" asp-controller="ShoppingCart" method="post">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        UnitPrice
+                    </th>
+                    <th>
+                        TotalPrice 
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model.ShoppingCartRows) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                </tr>
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.SummaryPrice)
+            </td>
+        </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function PagerClick(index)
+        {
+            document.getElementById("pageNumber").value = index;
+            document.forms[0].submit();
+        }
+    </script>
+}

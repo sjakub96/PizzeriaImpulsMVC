@@ -5,7 +5,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces;
 
 public interface IShoppingCartService
 {
-    ListShoppingCartVm GetShoppingCart(string userId);
+    ListShoppingCartVm GetShoppingCart(string userName);
     void DeleteFromShoppingCart(int recordId);
     int AddToCart(int productId, string productType, string userName);
 }
