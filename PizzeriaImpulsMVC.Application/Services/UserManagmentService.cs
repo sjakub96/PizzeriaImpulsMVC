@@ -80,6 +80,25 @@ namespace PizzeriaImpulsMVC.Application.Services
             return userVm;
         }
 
+        public UserForListVm GetUserByUserName(string userName)
+        {
+            var user = _userManagmentRepository.GetUserByUserName(userName);
+
+            var userVm = new UserForListVm
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Country = user.UserAddress.Country,
+                City = user.UserAddress.City,
+                Street = user.UserAddress.Street,
+                HomeNumber = user.UserAddress.HomeNumber,
+                ApartmentNumber = user.UserAddress.ApartmentNumber
+            };
+
+            return userVm;
+        }
+
         public void DeleteUser(string userId)
         {
             _userManagmentRepository.DeleteUser(userId);

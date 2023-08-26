@@ -8,4 +8,5 @@ public interface IShoppingCartService
     ListShoppingCartVm GetShoppingCart(string userName);
     void DeleteRecord(int recordId);
     void AddToCart(int productId, string productType, string userName);
+    OrderVm MakeOrder(string userName);
 }

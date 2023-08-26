@@ -10,10 +10,12 @@ namespace PizzeriaImpulsMVC.Application.Services;
 public class ShoppingCartService : IShoppingCartService
 {
     private readonly IShoppingCartRepository _shoppingCartRepository;
+    private readonly IUserManagmentService _userManagmentService;
     
-    public ShoppingCartService(IShoppingCartRepository shoppingCartRepository)
+    public ShoppingCartService(IShoppingCartRepository shoppingCartRepository, IUserManagmentService userManagmentService)
     {
         _shoppingCartRepository = shoppingCartRepository;
+        _userManagmentService = userManagmentService;
     }
     public ListShoppingCartVm GetShoppingCart(string userId)
     {
@@ -57,6 +59,43 @@ public class ShoppingCartService : IShoppingCartService
     public void AddToCart(int productId, string productType, string userName)
     {
         _shoppingCartRepository.AddToCart(productId, productType, userName);
+
+    }
+
+    public OrderVm MakeOrder(string userName)
+    {
+        var userShoppingCart = _shoppingCartRepository.GetShoppingCart(userName);
+        var userDetails = _userManagmentService.GetUserByUserName(userName);
+
+        var price = userShoppingCart.Sum(p => p.Price);
+
+        var orderVm = new OrderVm()
+        {
+            FirstName = userDetails.FirstName,
+            LastName = userDetails.LastName,
+            City = userDetails.City,
+            Street = userDetails.Street,
+            HomeNumber = userDetails.HomeNumber,
+            ApartmentNumber = userDetails.ApartmentNumber,
+            Total = price,
+            OrderDetailVms = userShoppingCart
+                .Select(o => new OrderDetailVm()
+                {
+                    OrderId = o.CartId,
+                    UserName = o.UserId,
+                    ProductId = o.ProductId,
+                    ProductName = o.ProductName,
+                    ProductSize = o.ProductSize,
+                    ProductCount = o.ProductCount,
+                    ProductType = o.ProductType,
+                    UnitPrice = o.UnitPrice,
+                    Price = o.Price,
+                    CreatedAt = o.CreatedAt
+                }).ToList()
+
+        };
+
+        return orderVm;
 
     }
 }

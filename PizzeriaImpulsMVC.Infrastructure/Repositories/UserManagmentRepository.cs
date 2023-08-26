@@ -53,6 +53,16 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         }
 
+        public UserAccount GetUserByUserName(string userName)
+        {
+            var user = _context.Users
+                .Include(u => u.UserAddress)
+                .FirstOrDefault(us => us.UserName == userName);
+
+            return user;
+
+        }
+
         public void DeleteUser(string userId)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == userId);
