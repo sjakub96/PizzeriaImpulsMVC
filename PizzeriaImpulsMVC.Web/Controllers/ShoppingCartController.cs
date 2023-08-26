@@ -27,11 +27,11 @@ public class ShoppingCartController : Controller
     //[HttpPost]
     public IActionResult AddAdditionToCart(int additionId)
     {
-        //var userId = HttpContext.User.Identity.Name;
+        var userName = HttpContext.User.Identity.Name;
 
-        var userId = "test";
+        //var userId = "test";
 
-        _shoppingCartService.AddToCart(additionId, ProductType.Addition.ToString(), userId);
+        _shoppingCartService.AddToCart(additionId, ProductType.Addition.ToString(), userName);
 
         return RedirectToAction("Index");
     }

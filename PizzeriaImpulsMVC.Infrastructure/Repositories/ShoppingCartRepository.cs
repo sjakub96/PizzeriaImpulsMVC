@@ -9,7 +9,7 @@ public class ShoppingCartRepository : IShoppingCartRepository
     
     public ShoppingCartRepository(Context context)
     {
-        context = _context;
+        _context = context;
     }
     
     public List<ShoppingCart> GetShoppingCart(string userId)
@@ -24,7 +24,7 @@ public class ShoppingCartRepository : IShoppingCartRepository
         
     }
 
-    public int AddToCart(int productId, string productType, string userId)
+    public int AddToCart(int productId, string productType, string userName)
     {
         if (productType == "Pizza")
         {
@@ -37,27 +37,17 @@ public class ShoppingCartRepository : IShoppingCartRepository
         else if(productType == "Addition")
         {
 
-            var cartId = 0;
-            var cart = _context.ShoppingCarts.Where(sc => sc.UserId == userId)
-                                                .FirstOrDefault();
-
-            if (cart != null)
-            {
-                cartId = cart.CartId;
-            }
-
-            /*
-            var cartId = _context.ShoppingCarts.Where(sc => sc.UserId == userId)
+            var cartId = _context.ShoppingCarts.Where(sc => sc.UserId == userName)
                                                 .Select(c => c.CartId)
                                                 .FirstOrDefault();
-            */
+            
             var addition = _context.Additions.FirstOrDefault(a => a.Id == productId);
 
             if (cartId == 0)
             {
                 var shoppingCart = new ShoppingCart()
                 {
-                    UserId = userId,
+                    UserId = userName,
                     ProductId = productId,
                     ProductCount = 1,
                     ProductType = productType,
@@ -66,8 +56,9 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 };
 
                 _context.ShoppingCarts.Add(shoppingCart);
-                
-                var shoppingCartForUpdate = _context.ShoppingCarts.FirstOrDefault(u => u.UserId == userId);
+                _context.SaveChanges();
+
+                var shoppingCartForUpdate = _context.ShoppingCarts.FirstOrDefault(u => u.UserId == userName);
                 var id = shoppingCart.RecordId;
 
                 shoppingCartForUpdate.CartId = id;
@@ -101,13 +92,13 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 {
                     var shoppingCart = new ShoppingCart()
                     {
-                        CartId = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userId).CartId,
-                        UserId = userId,
+                        CartId = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userName).CartId,
+                        UserId = userName,
                         ProductId = productId,
                         ProductCount = 1,
                         ProductType = productType,
                         Price = addition.Price,
-                        CreatedAt = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userId).CreatedAt
+                        CreatedAt = shoppingCartProducts.FirstOrDefault(scp => scp.UserId == userName).CreatedAt
                     };
 
                     _context.ShoppingCarts.Add(shoppingCart);

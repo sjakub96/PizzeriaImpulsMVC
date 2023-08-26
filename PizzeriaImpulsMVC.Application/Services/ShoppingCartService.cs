@@ -27,9 +27,9 @@ public class ShoppingCartService : IShoppingCartService
         
     }
 
-    public int AddToCart(int productId, string productType, string userId)
+    public int AddToCart(int productId, string productType, string userName)
     {
-        var id = _shoppingCartRepository.AddToCart(productId, productType, userId);
+        var id = _shoppingCartRepository.AddToCart(productId, productType, userName);
 
         return id;
     }
