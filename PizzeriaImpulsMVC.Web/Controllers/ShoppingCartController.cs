@@ -75,4 +75,18 @@ public class ShoppingCartController : Controller
 
         return View(makeOrderVm);
     }
+
+    [HttpPost]
+    [Route("shoppingCart/makeOrder")]
+    [Authorize(Roles = "User")]
+    public IActionResult Pay(OrderVm orderVm)
+    {
+        var userName = HttpContext.User.Identity.Name;
+
+        orderVm.UserName = userName;
+
+        _shoppingCartService.Pay(orderVm);
+
+        return RedirectToAction("Index");
+    }
 }

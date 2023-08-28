@@ -255,6 +255,17 @@ public class ShoppingCartRepository : IShoppingCartRepository
         
     }
 
+    public void Pay(Order order)
+    {
+        _context.Orders.Add(order);
+
+        var userShoppingCart = _context.ShoppingCarts.Where(u => u.UserId == order.UserName).ToList();
+        _context.ShoppingCarts.RemoveRange(userShoppingCart);
+
+        _context.SaveChanges();
+
+    }
+
     /*
 
     //TODO:

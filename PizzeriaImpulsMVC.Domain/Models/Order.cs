@@ -8,9 +8,9 @@ public class Order
     public string LastName { get; set; }
     public string City { get; set; }
     public string Street { get; set; }
-    public string HomeNumber { get; set; }
-    public string ApartmentNumber { get; set; }
-    public string PhoneNumber { get; set; }
+    public int HomeNumber { get; set; }
+    public int ApartmentNumber { get; set; }
+    public string? PhoneNumber { get; set; }
     public decimal Total { get; set; }
     public DateTime OrderDate { get; set; }
     public List<OrderDetail> OrderDetails { get; set; }

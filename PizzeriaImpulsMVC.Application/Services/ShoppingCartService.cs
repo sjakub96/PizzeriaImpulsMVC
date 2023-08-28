@@ -4,6 +4,7 @@ using PizzeriaImpulsMVC.Application.Helpers;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.ShoppingCart;
 using PizzeriaImpulsMVC.Domain.Interfaces;
+using PizzeriaImpulsMVC.Domain.Models;
 
 namespace PizzeriaImpulsMVC.Application.Services;
 
@@ -97,5 +98,47 @@ public class ShoppingCartService : IShoppingCartService
 
         return orderVm;
 
+    }
+
+    public void Pay(OrderVm orderVm)
+    {
+
+        var orderFromDb = MakeOrder(orderVm.UserName);
+
+        List<OrderDetail> orderDetails = new List<OrderDetail>();
+
+        foreach (var item in orderFromDb.OrderDetailVms)
+        {
+            OrderDetail orderDetailVm = new OrderDetail()
+            {
+                ProductCount = item.ProductCount,
+                ProductId = item.ProductId,
+                UnitPrice = item.UnitPrice,
+                CreatedAt = item.CreatedAt,
+                Price = item.Price,
+                ProductName = item.ProductName,
+                ProductSize = item.ProductSize,
+                ProductType = item.ProductType
+            };
+
+            orderDetails.Add(orderDetailVm);
+        }
+
+        Order order = new Order()
+        {
+            UserName = orderVm.UserName,
+            FirstName = orderVm.FirstName,
+            LastName = orderVm.LastName,
+            City = orderVm.City,
+            Street = orderVm.Street,
+            HomeNumber = orderVm.HomeNumber,
+            ApartmentNumber = orderVm.ApartmentNumber,
+            Total = orderDetails.Sum(p => p.Price),
+            OrderDate = DateTime.Now,
+            OrderDetails = orderDetails
+
+        };
+
+        _shoppingCartRepository.Pay(order);
     }
 }

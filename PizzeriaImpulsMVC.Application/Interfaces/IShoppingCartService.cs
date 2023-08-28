@@ -9,4 +9,5 @@ public interface IShoppingCartService
     void DeleteRecord(int recordId);
     void AddToCart(int productId, string productType, string userName);
     OrderVm MakeOrder(string userName);
+    void Pay(OrderVm orderVm);
 }
