@@ -1,0 +1,15 @@
+﻿<h1>
+    Reports
+</h1>
+
+<h3>
+    Select report type
+</h3>
+
+@if (User.IsInRole("Manager"))
+{
+    <p>
+            <a asp-controller="Report" asp-action="GenerateSalesReport">Sales Report</a>
+            <a asp-controller="Report" asp-action="GenerateDetailedReport">Detailed Report</a>
+    </p>
+}
