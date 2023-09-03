@@ -36,7 +36,16 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             var generatedReport = _reportService.GenerateSalesReport(generateSalesReportVm.DateFrom, generateSalesReportVm.DateTo);
 
+            var test = generatedReport.Rows.Select(r => r.OrderDate).Min();
+
             return View(generatedReport);
+        }
+
+        
+        [Authorize(Roles = "Manager")]
+        public IActionResult GeneratePDF(DateTime dateFrom, DateTime dateTo)
+        {
+            return View();
         }
     }
 }

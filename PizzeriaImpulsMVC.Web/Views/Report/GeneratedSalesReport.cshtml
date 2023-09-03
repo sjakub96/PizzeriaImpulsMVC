@@ -6,10 +6,38 @@
 
 <br />
 
-<a asp-controller="Report" asp-action="GenerateXLSX" class="btn btn-success">Generate XLSX</a>
-<a asp-controller="Report" asp-action="GenerateCSV" class="btn btn-success">Generate CSV</a>
-<a asp-controller="Report" asp-action="GeneratePDF" class="btn btn-danger">Generate PDF</a>
-<br />
+@Html.ActionLink(
+    "Generate XLSX",             // linkText
+    "GeneratePDF",                   // actionName
+    "Report",                    // controllerName
+    new {                      // routeValues
+        dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max()
+    },
+    new{@class = "btn btn-success"}                     // htmlAttributes
+)
+
+@Html.ActionLink(
+    "Generate CSV",             // linkText
+    "GenerateCSV",                   // actionName
+    "Report",                    // controllerName
+    new {                      // routeValues
+        dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max() 
+    },
+    new{@class = "btn btn-success"}                        // htmlAttributes
+)
+
+@Html.ActionLink(
+    "Generate PDF",             // linkText
+    "GeneratePDF",                   // actionName
+    "Report",                    // controllerName
+    new {                      // routeValues
+        dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max()
+    },
+    new{@class = "btn btn-danger"}                        // htmlAttributes
+)
 
 <div class="row">
         <table class="table">
@@ -29,17 +57,17 @@
             <tbody>
             @foreach (var item in Model.Rows)
             {
-                    <tr>
-                        <td>
-                        @Html.DisplayFor(modelItem => item.OrderDate)
-                        </td>
-                        <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                        @Html.DisplayFor(modelItem => item.TotalPrice)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                </tr>
             }
             </tbody>
         </table>

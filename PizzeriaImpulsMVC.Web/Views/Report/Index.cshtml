@@ -9,7 +9,7 @@
 @if (User.IsInRole("Manager"))
 {
     <p>
-            <a asp-controller="Report" asp-action="GenerateSalesReport">Sales Report</a>
-            <a asp-controller="Report" asp-action="GenerateDetailedReport">Detailed Report</a>
+                <a asp-controller="Report" asp-action="GenerateSalesReport" class="btn btn-secondary">Sales Report</a>
+                <a asp-controller="Report" asp-action="GenerateDetailedReport" class="btn btn-secondary">Detailed Report</a>
     </p>
 }
