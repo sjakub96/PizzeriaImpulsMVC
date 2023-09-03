@@ -22,6 +22,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return View();
         }
 
+        
         [HttpGet]
         [Authorize(Roles = "Manager")]
         public IActionResult GenerateSalesReport()
@@ -31,9 +32,9 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Manager")]
-        public IActionResult GenerateSalesReport(GenerateSalesReportVm generateSalesReportVm)
+        public IActionResult GeneratedSalesReport(GenerateSalesReportVm generateSalesReportVm)
         {
-            var generatedReport = _reportService.GenerateSalesReport(generateSalesReportVm);
+            var generatedReport = _reportService.GenerateSalesReport(generateSalesReportVm.DateFrom, generateSalesReportVm.DateTo);
 
             return View(generatedReport);
         }

@@ -9,6 +9,6 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
 {
     public interface IReportService
     {
-        ListGeneratedSalesReportVm GenerateSalesReport(GenerateSalesReportVm generateSalesReportVm);
+        ListGeneratedSalesReportVm GenerateSalesReport(DateTime datefrom, DateTime dateTo);
     }
 }

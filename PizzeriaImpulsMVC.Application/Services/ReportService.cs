@@ -19,9 +19,9 @@ namespace PizzeriaImpulsMVC.Application.Services
             _reportRepository = reportRepository;
         }
 
-        public ListGeneratedSalesReportVm GenerateSalesReport(GenerateSalesReportVm generateSalesReportVm)
+        public ListGeneratedSalesReportVm GenerateSalesReport(DateTime datefrom, DateTime dateTo)
         {
-            var generatedSalesReport = _reportRepository.GenerateSalesReport(generateSalesReportVm.DateFrom, generateSalesReportVm.DateTo);
+            var generatedSalesReport = _reportRepository.GenerateSalesReport(datefrom, dateTo);
 
             var rowList = new List<GeneratedSalesReportVm>();
 
