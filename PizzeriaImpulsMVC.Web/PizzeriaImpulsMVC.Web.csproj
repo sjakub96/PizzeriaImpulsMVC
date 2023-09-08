@@ -30,5 +30,10 @@
     <ProjectReference Include="..\PizzeriaImpulsMVC.Infrastructure\PizzeriaImpulsMVC.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reports\XLSXs\" />
+    <Folder Include="Reports\PDFs\" />
+  </ItemGroup>
+
 
 </Project>

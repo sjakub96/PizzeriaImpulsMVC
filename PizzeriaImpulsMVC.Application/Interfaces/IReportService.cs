@@ -10,5 +10,7 @@ namespace PizzeriaImpulsMVC.Application.Interfaces
     public interface IReportService
     {
         ListGeneratedSalesReportVm GenerateSalesReport(DateTime datefrom, DateTime dateTo);
+        void GeneratePDF(DateTime dateFrom, DateTime dateTo);
+        string GenerateCSV(DateTime dateFrom, DateTime dateTo);
     }
 }

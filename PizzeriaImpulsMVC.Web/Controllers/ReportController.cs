@@ -45,7 +45,21 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Authorize(Roles = "Manager")]
         public IActionResult GeneratePDF(DateTime dateFrom, DateTime dateTo)
         {
+            _reportService.GeneratePDF(dateFrom, dateTo);
+            
             return View();
+        }
+
+        [Authorize(Roles = "Manager")]
+        public IActionResult GenerateCSV(DateTime dateFrom, DateTime dateTo)
+        {
+            var path = _reportService.GenerateCSV(dateFrom, dateTo);
+
+            var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
+                $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.csv";
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }

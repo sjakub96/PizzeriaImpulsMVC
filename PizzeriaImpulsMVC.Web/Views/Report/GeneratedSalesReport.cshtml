@@ -12,7 +12,7 @@
     "Report",                    // controllerName
     new {                      // routeValues
         dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
-        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max()
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max().AddSeconds(5)
     },
     new{@class = "btn btn-success"}                     // htmlAttributes
 )
@@ -23,7 +23,7 @@
     "Report",                    // controllerName
     new {                      // routeValues
         dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
-        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max() 
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max().AddSeconds(5) 
     },
     new{@class = "btn btn-success"}                        // htmlAttributes
 )
@@ -34,7 +34,7 @@
     "Report",                    // controllerName
     new {                      // routeValues
         dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 
-        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max()
+        dateTo = @Model.Rows.Select(x=> x.OrderDate).Max().AddSeconds(5)
     },
     new{@class = "btn btn-danger"}                        // htmlAttributes
 )
