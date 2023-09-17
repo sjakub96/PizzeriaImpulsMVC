@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Report;
@@ -8,8 +10,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Document = iTextSharp.text.Document;
 
 namespace PizzeriaImpulsMVC.Application.Services
 {
@@ -53,7 +57,30 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public void GeneratePDF(DateTime dateFrom, DateTime dateTo)
         {
-           
+            var reportData = GenerateSalesReport(dateFrom, dateTo);
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter pdfWriter = PdfWriter.GetInstance(document, memoryStream);
+                document.Open();
+
+                Paragraph titleParagraph = new Paragraph($"Sales report from {dateFrom} to {dateTo} generated from PizzeriaImpulsMVC Web Application",
+                                                            new Font(Font.FontFamily.COURIER, 20));
+                document.Add(titleParagraph);
+
+                PdfPTable tableWithReportData = new PdfPTable(3);
+
+                PdfPCell pdfDateCell = new PdfPCell(new Phrase("Date", new Font(Font.FontFamily.COURIER, 10)));
+                pdfDateCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                pdfDateCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER 
+
+                PdfPCell pdfUserNameCell = new PdfPCell(new Phrase("UserName", new Font(Font.FontFamily.COURIER, 10)));
+                PdfPCell pdfPriceCell = new PdfPCell(new Phrase("Price", new Font(Font.FontFamily.COURIER, 10)));
+
+
+
+            }
         }
 
         
