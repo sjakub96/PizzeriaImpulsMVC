@@ -45,9 +45,13 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         [Authorize(Roles = "Manager")]
         public IActionResult GeneratePDF(DateTime dateFrom, DateTime dateTo)
         {
-            _reportService.GeneratePDF(dateFrom, dateTo);
-            
-            return View();
+            var ms = _reportService.GeneratePDF(dateFrom, dateTo);
+
+            var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
+                $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.pdf";
+
+            return File(ms, "application/vnd", fileName);
+
         }
 
         [Authorize(Roles = "Manager")]

@@ -55,7 +55,7 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         }
 
-        public void GeneratePDF(DateTime dateFrom, DateTime dateTo)
+        public byte[] GeneratePDF(DateTime dateFrom, DateTime dateTo)
         {
             var reportData = GenerateSalesReport(dateFrom, dateTo);
 
@@ -66,20 +66,71 @@ namespace PizzeriaImpulsMVC.Application.Services
                 document.Open();
 
                 Paragraph titleParagraph = new Paragraph($"Sales report from {dateFrom} to {dateTo} generated from PizzeriaImpulsMVC Web Application",
-                                                            new Font(Font.FontFamily.COURIER, 20));
+                                                            new Font(Font.FontFamily.COURIER, 15));
+                
                 document.Add(titleParagraph);
+
+                Paragraph brakeParagraph = new Paragraph("   ", new Font(Font.FontFamily.COURIER, 15));
+                document.Add(brakeParagraph);
 
                 PdfPTable tableWithReportData = new PdfPTable(3);
 
                 PdfPCell pdfDateCell = new PdfPCell(new Phrase("Date", new Font(Font.FontFamily.COURIER, 10)));
                 pdfDateCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-                pdfDateCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER 
+                pdfDateCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER | iTextSharp.text.Rectangle.TOP_BORDER | iTextSharp.text.Rectangle.LEFT_BORDER | iTextSharp.text.Rectangle.RIGHT_BORDER;
+                pdfDateCell.BorderWidthBottom = 1f;
+                pdfDateCell.BorderWidthTop = 1f;
+                pdfDateCell.BorderWidthLeft = 1f;
+                pdfDateCell.BorderWidthRight = 1f;
+                pdfDateCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfDateCell.VerticalAlignment = Element.ALIGN_CENTER;
+                tableWithReportData.AddCell(pdfDateCell);
 
                 PdfPCell pdfUserNameCell = new PdfPCell(new Phrase("UserName", new Font(Font.FontFamily.COURIER, 10)));
-                PdfPCell pdfPriceCell = new PdfPCell(new Phrase("Price", new Font(Font.FontFamily.COURIER, 10)));
+                pdfUserNameCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                pdfUserNameCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER | iTextSharp.text.Rectangle.TOP_BORDER | iTextSharp.text.Rectangle.LEFT_BORDER | iTextSharp.text.Rectangle.RIGHT_BORDER;
+                pdfUserNameCell.BorderWidthBottom = 1f;
+                pdfUserNameCell.BorderWidthTop = 1f;
+                pdfUserNameCell.BorderWidthLeft = 1f;
+                pdfUserNameCell.BorderWidthRight = 1f;
+                pdfUserNameCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfUserNameCell.VerticalAlignment = Element.ALIGN_CENTER;
+                tableWithReportData.AddCell(pdfUserNameCell);
 
+                PdfPCell pdfPriceCell = new PdfPCell(new Phrase("Price[$]", new Font(Font.FontFamily.COURIER, 10)));
+                pdfPriceCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                pdfPriceCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER | iTextSharp.text.Rectangle.TOP_BORDER | iTextSharp.text.Rectangle.LEFT_BORDER | iTextSharp.text.Rectangle.RIGHT_BORDER;
+                pdfPriceCell.BorderWidthBottom = 1f;
+                pdfPriceCell.BorderWidthTop = 1f;
+                pdfPriceCell.BorderWidthLeft = 1f;
+                pdfPriceCell.BorderWidthRight = 1f;
+                pdfPriceCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfPriceCell.VerticalAlignment = Element.ALIGN_CENTER;
+                tableWithReportData.AddCell(pdfPriceCell);
 
+                for (int i = 0; i < reportData.Rows.Count; i++)
+                {
+                    PdfPCell pdfDateCellWithData = new PdfPCell(new Phrase(reportData.Rows[i].OrderDate.ToString()));
+                    PdfPCell pdfUserNameCellWithData = new PdfPCell(new Phrase(reportData.Rows[i].UserName));
+                    PdfPCell pdfPriceCellWithData = new PdfPCell(new Phrase(reportData.Rows[i].TotalPrice.ToString()));
 
+                    pdfDateCellWithData.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfUserNameCellWithData.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfPriceCellWithData.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    tableWithReportData.AddCell(pdfDateCellWithData);
+                    tableWithReportData.AddCell(pdfUserNameCellWithData);
+                    tableWithReportData.AddCell(pdfPriceCellWithData);
+
+                }
+
+                document.Add(tableWithReportData);
+                document.Close();
+                pdfWriter.Close();
+
+                var memoryS = memoryStream.ToArray();
+
+                return memoryS;
             }
         }
 
