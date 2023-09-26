@@ -8,7 +8,7 @@
 
 @Html.ActionLink(
     "Generate XLSX",             // linkText
-    "GeneratePDF",                   // actionName
+    "GenerateXLSX",                   // actionName
     "Report",                    // controllerName
     new {                      // routeValues
         dateFrom = @Model.Rows.Select(x=> x.OrderDate).Min(), 

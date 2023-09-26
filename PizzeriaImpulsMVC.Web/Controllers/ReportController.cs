@@ -65,5 +65,17 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
+
+        [Authorize(Roles = "Manager")]
+        public IActionResult GenerateXLSX(DateTime dateFrom, DateTime dateTo)
+        {
+            var path = _reportService.GenerateXLSX(dateFrom, dateTo);
+
+            var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
+                $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.xlsx";
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
     }
 }

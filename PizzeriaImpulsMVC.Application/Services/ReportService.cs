@@ -1,18 +1,10 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Report;
 using PizzeriaImpulsMVC.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using Document = iTextSharp.text.Document;
 
 namespace PizzeriaImpulsMVC.Application.Services
@@ -156,6 +148,53 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return path;
             
+        }
+
+        public string GenerateXLSX(DateTime dateFrom, DateTime dateTo)
+        {
+            var reportData = GenerateSalesReport(dateFrom, dateTo);
+
+            ExcelPackage excelFile = new ExcelPackage();
+
+            var workSheet = excelFile.Workbook.Worksheets.Add("Sales report");
+
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+            workSheet.Cells[1, 1].Value = "Date";
+            workSheet.Cells[1, 2].Value = "UserName";
+            workSheet.Cells[1, 3].Value = "Price [$]";
+
+            var recordIndex = 2;
+
+            foreach (var row in reportData.Rows)
+            {
+                workSheet.Cells[recordIndex, 1].Value = row.OrderDate.ToString();
+                workSheet.Cells[recordIndex, 2].Value = row.UserName;
+                workSheet.Cells[recordIndex, 3].Value = row.TotalPrice;
+                recordIndex++;
+            }
+
+            workSheet.Column(1).AutoFit();
+            workSheet.Column(2).AutoFit();
+            workSheet.Column(3).AutoFit();
+
+            var path = $"../PizzeriaImpulsMVC.Web/Reports/XLSXs/SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}" +
+                $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.xlsx";
+
+            FileStream objFileStrm = File.Create(path);
+            objFileStrm.Close();
+
+            File.WriteAllBytes(path, excelFile.GetAsByteArray());
+            excelFile.Dispose();
+
+            return path;
+
+
         }
         
     }
