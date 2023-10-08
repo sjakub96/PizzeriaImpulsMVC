@@ -50,8 +50,8 @@
                     <td>
                         @if(User.IsInRole("Manager"))
                         {
-                            <a asp-controller="Addition" asp-action="GetAdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
                             <a asp-controller="Addition" asp-action="EditAddition" asp-route-additionId="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Addition" asp-action="GetAdditionDetails" asp-route-additionId="@item.Id" class="btn btn-info">Details</a>
                             <a asp-controller="Addition" asp-action="DeleteAddition" asp-route-additionId="@item.Id" class="btn btn-danger">Delete</a>
 
                         }
