@@ -20,5 +20,8 @@ namespace PizzeriaImpulsMVC.Domain.Models
 
         [Required]
         public decimal Size { get; set; }
+
+        [MaxLength(50)]
+        public string? ImgPath { get; set; }
     }
 }

@@ -17,5 +17,8 @@ namespace PizzeriaImpulsMVC.Domain.Models
 
         [Required]
         public int Price { get; set; }
+
+        [MaxLength(50)]
+        public string? ImgPath { get; set; }
     }
 }

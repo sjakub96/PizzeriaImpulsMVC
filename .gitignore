@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Images
-IMG/
+PizzeriaImpulsMVC.Web/wwwroot/img/
 
 #Procedures
 SP/

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="Reports\XLSXs\" />
     <Folder Include="Reports\PDFs\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 

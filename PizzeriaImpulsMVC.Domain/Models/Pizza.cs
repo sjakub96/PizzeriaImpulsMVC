@@ -25,6 +25,9 @@ namespace PizzeriaImpulsMVC.Domain.Models
         [Required]
         public bool IsMeat { get; set; }
 
+        [MaxLength(50)]
+        public string? ImgPath { get; set; }
+
         public ICollection<ComponentPizza>? ComponentPizzas { get; set; }
     }
 }
