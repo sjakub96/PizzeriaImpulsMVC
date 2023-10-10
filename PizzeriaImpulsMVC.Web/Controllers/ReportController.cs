@@ -22,13 +22,14 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return View();
         }
 
-        
+        /*
         [HttpGet]
         [Authorize(Roles = "Manager")]
         public IActionResult GenerateSalesReport()
         {
             return View(new GenerateSalesReportVm());
         }
+        */
 
         [HttpPost]
         [Authorize(Roles = "Manager")]

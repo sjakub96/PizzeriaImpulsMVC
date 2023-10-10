@@ -58,7 +58,7 @@
         {
             <div>
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                <a asp-controller="ShoppingCart" asp-action="AddAdditionToCart" asp-route-additionId="@item.Id" class="btn btn-warning">Add To Cart</a>
+                <a asp-controller="ShoppingCart" asp-action="AddAdditionToCart" asp-route-additionId="@Model.Id" class="btn btn-warning">Add To Cart</a>
             </div>
         }
         
