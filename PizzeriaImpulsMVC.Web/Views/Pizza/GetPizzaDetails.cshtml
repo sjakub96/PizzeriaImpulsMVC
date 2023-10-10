@@ -2,17 +2,12 @@
 
 <style>
     .col1{
-        width:30%;
+        width:45%;
         float:left;
         margin-right:3%;
     }
     .col2{
-        width:30%;
-        float:left;
-        margin-right:3%;
-    }
-    .col3{
-        width:30%;
+        width:45%;
         float:left;
         margin-right:3%;
     }
@@ -63,18 +58,22 @@
                 </dd>
             </dl>
         </div>
-        <div>
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-        </div>
+        @if(User.IsInRole("Manager"))
+        {
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-controller="ShoppingCart" asp-action="AddPizzaToCart" asp-route-pizzaId="@Model.Id" class="btn btn-warning">Add To Cart</a>
+            </div>
+        }
+        
     </div>
     <div class="col2">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    </div>
-    <div class="col3">
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
