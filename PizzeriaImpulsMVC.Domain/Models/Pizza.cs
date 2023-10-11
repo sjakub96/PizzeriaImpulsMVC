@@ -31,3 +31,6 @@ namespace PizzeriaImpulsMVC.Domain.Models
         public ICollection<ComponentPizza>? ComponentPizzas { get; set; }
     }
 }
+
+//Dodać imgpath przy pobieraniu obiektu i wrzucić go do tagu img w widoku
+//Dodać dodawanie obrazka przy tworzeniu obiektu

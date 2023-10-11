@@ -15,6 +15,7 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Pizza
         public string? Name { get; set; }
         public int Price { get; set; }
         public bool IsMeat { get; set; }
+        public string? ImgPath { get; set; }
 
         public ICollection<ComponentForListVm> Components { get; set; }
 

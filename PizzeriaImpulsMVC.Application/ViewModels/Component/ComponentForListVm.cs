@@ -15,6 +15,7 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Component
         public int Price { get; set; }
         public bool IsMeat { get; set; }
         public bool IsChecked { get; set; }
+        public string? ImgPath { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -13,6 +13,7 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Addition
         public int Id { get; set; }
         public string? Name { get; set; }
         public int Price { get; set; }
+        public string? ImgPath { get; set; }
 
         public void Mapping(Profile profile)
         {
