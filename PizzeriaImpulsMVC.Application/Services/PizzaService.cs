@@ -222,6 +222,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                 Price = pizza.TotalPrice,
                 Name = pizza.Name,
                 IsMeat = pizza.IsMeat,
+                ImgPath = pizza.ImgPath,
                 Components = pizza.ComponentPizzas
                     .Select(c => new ComponentForListVm()
                     {
