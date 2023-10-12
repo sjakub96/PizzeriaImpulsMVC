@@ -35,7 +35,6 @@ namespace PizzeriaImpulsMVC.Application.Services
                 };
 
                 rowList.Add(row);
-
             }
 
             var generatedSalesReportVm = new ListGeneratedSalesReportVm()
@@ -44,7 +43,6 @@ namespace PizzeriaImpulsMVC.Application.Services
             };
 
             return generatedSalesReportVm;
-
         }
 
         public byte[] GeneratePDF(DateTime dateFrom, DateTime dateTo)
@@ -113,7 +111,6 @@ namespace PizzeriaImpulsMVC.Application.Services
                     tableWithReportData.AddCell(pdfDateCellWithData);
                     tableWithReportData.AddCell(pdfUserNameCellWithData);
                     tableWithReportData.AddCell(pdfPriceCellWithData);
-
                 }
 
                 document.Add(tableWithReportData);
@@ -147,7 +144,6 @@ namespace PizzeriaImpulsMVC.Application.Services
             }
 
             return path;
-            
         }
 
         public string GenerateXLSX(DateTime dateFrom, DateTime dateTo)
@@ -193,9 +189,6 @@ namespace PizzeriaImpulsMVC.Application.Services
             excelFile.Dispose();
 
             return path;
-
-
         }
-        
     }
 }

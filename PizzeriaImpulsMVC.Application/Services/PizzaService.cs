@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.Pizza;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.Services
 {
@@ -50,7 +43,6 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             var pizzas = _pizzaRepository.GetAllPizzas().Where(p => p.Name.Contains(filterString.ToLower()));
             
-
             var pizzasList = new List<PizzaForListVm>();
 
             foreach (var item in pizzas)
@@ -79,6 +71,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                         ComponentId = newPizzaVm.ComponentPizzas[i].Id,
 
                     };
+
                     componentPizzaList.Add(componentPizza);
                 }
             }
@@ -94,6 +87,7 @@ namespace PizzeriaImpulsMVC.Application.Services
                         ComponentId = newPizzaVm.ComponentPizzas[i].Id,
 
                     };
+
                     componentPizzaList.Add(componentPizza);
                 }
             }
@@ -150,9 +144,8 @@ namespace PizzeriaImpulsMVC.Application.Services
 
                  _pizzaRepository.EditPizza(pizza);
             }
+
             return 0;
-  
-            
         }
 
         public List<ComponentForListVm> GetCheckedComponents(NewPizzaVm newPizzaVm)
@@ -179,8 +172,6 @@ namespace PizzeriaImpulsMVC.Application.Services
         {
             var pizza = _pizzaRepository.GetPizzaById(pizzaId);
 
-
-
             var pizzaForEdit = new NewPizzaVm()
             {
                 Id = pizza.Id,
@@ -202,9 +193,7 @@ namespace PizzeriaImpulsMVC.Application.Services
 
         public void EditPizza(NewPizzaVm editPizzaVm, int pizzaId)
         {
-
             AddPizza(editPizzaVm, pizzaId);
-
         }
 
         public PizzaForListVm GetPizzaDetails(int pizzaId)
@@ -250,7 +239,5 @@ namespace PizzeriaImpulsMVC.Application.Services
 
             return components;
         }
-
-
     }
 }

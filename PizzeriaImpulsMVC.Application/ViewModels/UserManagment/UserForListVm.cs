@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Mapping;
-using PizzeriaImpulsMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
 {
@@ -17,13 +11,13 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.UserManagment
         public string LastName { get; set; }
         public bool IsActive { get; set; }
         public string DateOfBirth { get; set; }
-        
         public DateTime RegistrationDate { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public int HomeNumber { get; set; }
         public int ApartmentNumber { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<PizzeriaImpulsMVC.Domain.Models.UserAccount, UserForListVm>();

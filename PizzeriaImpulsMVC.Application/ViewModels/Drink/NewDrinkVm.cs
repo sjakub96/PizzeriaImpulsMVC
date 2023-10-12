@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using PizzeriaImpulsMVC.Application.Mapping;
-using PizzeriaImpulsMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
 {
@@ -16,14 +10,10 @@ namespace PizzeriaImpulsMVC.Application.ViewModels.Drink
         public int Price { get; set; }
         public decimal Size { get; set; }
 
-
         public void Mapping(Profile profile)
         {
             profile.CreateMap<NewDrinkVm, PizzeriaImpulsMVC.Domain.Models.Drink>()
                 .ReverseMap();
-
         }
-
-
     }
 }

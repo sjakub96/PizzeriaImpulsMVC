@@ -1,7 +1,4 @@
-﻿
-
-using PizzeriaImpulsMVC.Application.Helpers;
-using PizzeriaImpulsMVC.Application.Interfaces;
+﻿using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.ShoppingCart;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
@@ -41,7 +38,6 @@ public class ShoppingCartService : IShoppingCartService
             };
 
             shoppingCartRows.Add(shoppingCartVm);
-
         }
 
         var listShoppingCartVm = new ListShoppingCartVm();
@@ -60,7 +56,6 @@ public class ShoppingCartService : IShoppingCartService
     public void AddToCart(int productId, string productType, string userName)
     {
         _shoppingCartRepository.AddToCart(productId, productType, userName);
-
     }
 
     public OrderVm MakeOrder(string userName)
@@ -93,16 +88,13 @@ public class ShoppingCartService : IShoppingCartService
                     Price = o.Price,
                     CreatedAt = o.CreatedAt
                 }).ToList()
-
         };
 
         return orderVm;
-
     }
 
     public void Pay(OrderVm orderVm)
     {
-
         var orderFromDb = MakeOrder(orderVm.UserName);
 
         List<OrderDetail> orderDetails = new List<OrderDetail>();

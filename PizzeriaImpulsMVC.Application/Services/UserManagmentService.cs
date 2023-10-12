@@ -4,11 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.UserManagment;
 using PizzeriaImpulsMVC.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Application.Services
 {
@@ -29,14 +24,12 @@ namespace PizzeriaImpulsMVC.Application.Services
                 .ProjectTo<UserForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
-           
             var userList = new ListUserForListVm()
             {
                 Users = users
             };
 
             return userList;
-
         }
 
         public UserForListVm GetUserDetails(string userId)
@@ -198,7 +191,6 @@ namespace PizzeriaImpulsMVC.Application.Services
 
                 userRolesList.Add(userRole);
             }
-
 
             _userManagmentRepository.UpdateUserRoles(userId, userRolesList);
         }
