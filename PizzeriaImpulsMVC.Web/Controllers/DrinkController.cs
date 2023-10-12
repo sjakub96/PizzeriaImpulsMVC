@@ -27,18 +27,20 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Index(int pageSize, int? pageNumber, string filterString)
+        public IActionResult Index(int pageSize, int? pageNumber, string filterString, string ordering)
         {
             if(!pageNumber.HasValue)
             {
                 pageNumber = 1;
             }
+
             if(filterString is null)
             {
                 filterString = String.Empty;
             }
 
             var drinks = _drinkService.GetAllDrinksForList(pageSize, pageNumber.Value, filterString);
+
             return View(drinks);
         }
 
