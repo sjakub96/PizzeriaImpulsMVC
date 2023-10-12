@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PizzeriaImpulsMVC.Domain.Models
 {
@@ -28,6 +23,7 @@ namespace PizzeriaImpulsMVC.Domain.Models
 
         [Required]
         public int ApartmentNumber { get; set; }
+
         public UserAccount UserAccount { get; set; }
     }
 }

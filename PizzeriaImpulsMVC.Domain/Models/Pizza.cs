@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PizzeriaImpulsMVC.Domain.Models
 {
@@ -14,6 +9,7 @@ namespace PizzeriaImpulsMVC.Domain.Models
         [Required]
         [MaxLength(50)]
         public string? Name { get; set; }
+
         public int UserPrice { get; set; }
 
         [Required]
@@ -32,5 +28,3 @@ namespace PizzeriaImpulsMVC.Domain.Models
     }
 }
 
-//Dodać imgpath przy pobieraniu obiektu i wrzucić go do tagu img w widoku
-//Dodać dodawanie obrazka przy tworzeniu obiektu

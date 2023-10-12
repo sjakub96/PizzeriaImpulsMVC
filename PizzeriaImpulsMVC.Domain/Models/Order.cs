@@ -31,6 +31,7 @@ public class Order
     
     [Required]
     public int ApartmentNumber { get; set; }
+
     public string? PhoneNumber { get; set; }
 
     [Required]
@@ -38,6 +39,7 @@ public class Order
 
     [Required]
     public DateTime OrderDate { get; set; }
+
     public List<OrderDetail> OrderDetails { get; set; }
 
 }

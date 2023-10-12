@@ -6,6 +6,7 @@ public class ShoppingCart
 {
     [Key]
     public int RecordId { get; set; }
+
     public int CartId { get; set; }
     [Required]
     public string UserId { get; set; }
