@@ -50,6 +50,10 @@
 
 ![Delete component](IMG/delete_component.PNG)
 
+- **Item details** - additionally all items have details page which contains some more information about them.
+
+![Details](IMG/details.PNG)
+
 > Each table contains pagination and input text field to filter the results.
 
 ## ShoppingCart
@@ -73,7 +77,8 @@
 
 ![Generate report](IMG/generate_report.PNG)
 
-> Example of generated report. Files are available in this repository PizzeriaImpulsMVC.Web/Reports
+> Example of generated report. Files are available in this repository 
+[PizzeriaImpulsMVC.Web/Reports](https://github.com/sjakub96/PizzeriaImpulsMVC/tree/master/PizzeriaImpulsMVC.Web/Reports)
 
 ![Generated report](IMG/generated_report.PNG)
 
