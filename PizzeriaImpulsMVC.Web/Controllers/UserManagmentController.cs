@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
-using PizzeriaImpulsMVC.Application.Services;
-using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.UserManagment;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
@@ -30,7 +28,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult GetUserDetails(string userId)
         {
             var user = _userManagmentService.GetUserDetails(userId);
-
 
             return View(user);
         }

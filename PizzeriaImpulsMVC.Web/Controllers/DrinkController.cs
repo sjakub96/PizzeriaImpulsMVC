@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using PizzeriaImpulsMVC.Application.Interfaces;
 using PizzeriaImpulsMVC.Application.ViewModels.Drink;
-using PizzeriaImpulsMVC.Domain.Models;
-using System.Web;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
@@ -78,6 +75,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult EditDrink(int drinkId)
         {
             var drink = _drinkService.GetDrinkForEdit(drinkId);
+
             return View(drink);
         }
 
@@ -98,7 +96,5 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(drink);
         }
-
-
     }
 }

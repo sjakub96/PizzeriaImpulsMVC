@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PizzeriaImpulsMVC.Application.Interfaces;
-using PizzeriaImpulsMVC.Application.ViewModels.Component;
 using PizzeriaImpulsMVC.Application.ViewModels.Pizza;
-using PizzeriaImpulsMVC.Domain.Models;
 
 namespace PizzeriaImpulsMVC.Web.Controllers
 {
@@ -88,7 +86,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         {
             var pizza = _pizzaService.GetPizzaForEdit(pizzaId);
             var components = _componentService.GetAllComponents();
-
             var checkedComponents = _pizzaService.UpdateIsCheckStatus(pizza, components);
 
             pizza.ComponentPizzas = checkedComponents;

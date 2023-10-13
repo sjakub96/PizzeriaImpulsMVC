@@ -25,7 +25,6 @@ public class ShoppingCartController : Controller
         return View(shoppingCartVm);
     }
 
-    //[HttpPost]
     [Authorize(Roles = "User")]
     public IActionResult AddAdditionToCart(int additionId)
     {

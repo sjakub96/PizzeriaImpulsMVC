@@ -55,6 +55,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult AddAddition(NewAdditionVm newAdditionVm)
         {
             var id = _additionService.AddNewAddition(newAdditionVm);
+
             return RedirectToAction("Index");
         }
 
@@ -71,6 +72,7 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult EditAddition(int additionId)
         {
             var addition = _additionService.GetAdditionForEdit(additionId);
+
             return View(addition);
         }
 
@@ -91,8 +93,5 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(additionDetails);
         }
-
-
-
     }
 }

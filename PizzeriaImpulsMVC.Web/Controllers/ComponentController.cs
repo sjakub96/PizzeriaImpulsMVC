@@ -94,6 +94,5 @@ namespace PizzeriaImpulsMVC.Web.Controllers
 
             return View(componentDetails);
         }
-
     }
 }

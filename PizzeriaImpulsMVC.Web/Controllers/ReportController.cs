@@ -22,21 +22,11 @@ namespace PizzeriaImpulsMVC.Web.Controllers
             return View();
         }
 
-        /*
-        [HttpGet]
-        [Authorize(Roles = "Manager")]
-        public IActionResult GenerateSalesReport()
-        {
-            return View(new GenerateSalesReportVm());
-        }
-        */
-
         [HttpPost]
         [Authorize(Roles = "Manager")]
         public IActionResult GeneratedSalesReport(GenerateSalesReportVm generateSalesReportVm)
         {
             var generatedReport = _reportService.GenerateSalesReport(generateSalesReportVm.DateFrom, generateSalesReportVm.DateTo);
-
             var test = generatedReport.Rows.Select(r => r.OrderDate).Min();
 
             return View(generatedReport);
@@ -47,7 +37,6 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult GeneratePDF(DateTime dateFrom, DateTime dateTo)
         {
             var ms = _reportService.GeneratePDF(dateFrom, dateTo);
-
             var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
                 $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.pdf";
 
@@ -59,11 +48,10 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult GenerateCSV(DateTime dateFrom, DateTime dateTo)
         {
             var path = _reportService.GenerateCSV(dateFrom, dateTo);
-
             var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
                 $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.csv";
-
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
@@ -71,11 +59,10 @@ namespace PizzeriaImpulsMVC.Web.Controllers
         public IActionResult GenerateXLSX(DateTime dateFrom, DateTime dateTo)
         {
             var path = _reportService.GenerateXLSX(dateFrom, dateTo);
-
             var fileName = $"SalesReport{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_" +
                 $"{DateTime.Now.Hour}_{DateTime.Now.Minute}.xlsx";
-
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
