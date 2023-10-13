@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Domain.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace PizzeriaImpulsMVC.Infrastructure
 {
@@ -29,7 +23,6 @@ namespace PizzeriaImpulsMVC.Infrastructure
         {
             base.OnModelCreating(builder);
             
-
             builder.Entity<ComponentPizza>()
             .HasKey(t => new { t.PizzaId, t.ComponentId });
 
@@ -42,10 +35,6 @@ namespace PizzeriaImpulsMVC.Infrastructure
                 .HasOne<Component>(pt => pt.Component)
                 .WithMany(t => t.ComponentPizzas)
                 .HasForeignKey(pt => pt.ComponentId);
-
-            //builder.Entity<UserAddress>()
-               // .Property(x => x.UserAccountId).HasColumnType("nvarchar(450)");
         }
-
     }
 }

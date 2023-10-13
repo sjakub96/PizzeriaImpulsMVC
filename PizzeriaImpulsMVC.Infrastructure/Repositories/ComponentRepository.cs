@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PizzeriaImpulsMVC.Domain.Interfaces;
 
 namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 {
@@ -46,6 +41,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         public Component GetComponent(int componentId)
         {
             var component = _context.Components.FirstOrDefault(c => c.Id == componentId);
+
             return component;
         }
 

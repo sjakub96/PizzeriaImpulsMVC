@@ -48,6 +48,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         public Drink GetDrink(int drinkId)
         {
             var drink = _context.Drinks.FirstOrDefault(d => d.Id == drinkId);
+
             return drink;
         }
 
@@ -63,6 +64,5 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
             return drink;
         }
-
     }
 }

@@ -2,11 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 {
@@ -25,6 +20,7 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .Include(u => u.UserAddress)
                 .OrderBy(e => e.Email)
                 .OrderByDescending(a => a.IsActive);
+
             return users;
         }
 
@@ -40,7 +36,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
             {
                 return true;
             }
-            
         }
 
         public UserAccount GetUserById(string userId)
@@ -50,7 +45,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .FirstOrDefault(us => us.Id == userId);
             
             return user;
-
         }
 
         public UserAccount GetUserByUserName(string userName)
@@ -60,7 +54,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .FirstOrDefault(us => us.UserName == userName);
 
             return user;
-
         }
 
         public void DeleteUser(string userId)
@@ -106,10 +99,10 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
         public void UpdateUserRoles(string userId, List<IdentityUserRole<string>> userRolesList)
         {
             var userRoles = _context.UserRoles.Where(u => u.UserId == userId);
+           
             _context.UserRoles.RemoveRange(userRoles);
             _context.AddRange(userRolesList);
             _context.SaveChanges();
-
         }
     }
 }

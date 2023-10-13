@@ -1,13 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PizzeriaImpulsMVC.Domain.Interfaces;
 using PizzeriaImpulsMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Data.Sql;
-using Microsoft.Data.SqlClient;
 
 namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 {
@@ -55,7 +48,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 .FirstOrDefault(x => x.Id == pizzaId);
                 
             return pizza;
-            
         }
 
         public IQueryable<ComponentPizza> GetComponentPizzasByComponentId(int componentId)
@@ -100,7 +92,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
 
         public void UpdatePizzaPrice(List<int> pizzaIds, Component component)
         {
-
             foreach (var item in pizzaIds)
             {
                 var pizza = _context.Pizzas.FirstOrDefault(x => x.Id == item);
@@ -111,11 +102,6 @@ namespace PizzeriaImpulsMVC.Infrastructure.Repositories
                 _context.Pizzas.Update(pizza);
                 _context.SaveChanges();
             }
-            
-
         }
-
-
-
     }
 }
